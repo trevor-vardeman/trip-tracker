@@ -81,6 +81,4 @@ test:
 #
 production:
   <<: *default
-  database: travel_production
-  username: travel
-  password: <%= ENV["TRAVEL_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
