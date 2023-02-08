@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import Login from './Login'
 import Nav from './Nav'
@@ -7,12 +7,13 @@ import NewTrip from './NewTrip'
 import Drafts from './Drafts'
 import Plans from './Plans'
 import Cities from './Cities'
+import { UserProvider } from './UserContext'
+
+export const UserContext = React.createContext()
 
 function App() {
-  const [user, setUser] = useState(null)
-
   return (
-    <div className="App">
+    <UserProvider className="App">
       <Nav />
       <Switch>
         <Route path="/login">
@@ -37,7 +38,7 @@ function App() {
           <h1>Base</h1>
         </Route>
       </Switch>
-    </div>
+    </UserProvider>
   )
 }
 
