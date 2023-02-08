@@ -1,15 +1,20 @@
+import { useState, useEffect } from 'react'
 import { BrowserRouter, Switch, Route } from "react-router-dom"
+import Auth from './Auth'
+import Nav from './Nav'
 
 function App() {
+  const [user, setUser] = useState(null)
+
   return (
     <BrowserRouter>
       <div className="App">
         <Switch>
-          <Route path="/testing">
-            <h1>Test Route</h1>
+          <Route path="/auth">
+            <Auth />
           </Route>
           <Route path="/">
-            <h1>Main Page</h1>
+            <Nav />
           </Route>
         </Switch>
       </div>
