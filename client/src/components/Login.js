@@ -5,9 +5,10 @@ function Login() {
   const handleLogout = useUserLogoutUpdate()
   const userLoggedIn = useUserContext()
 
+  console.log(`User Logged In? ${userLoggedIn}`)
+
   return (
     <div>
-      <p>User Logged In? {userLoggedIn}</p>
       <button onClick={handleLogin}>Login</button>
       <button onClick={handleLogout}>Logout</button>
     </div>

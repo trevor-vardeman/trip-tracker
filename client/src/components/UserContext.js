@@ -17,14 +17,14 @@ export function useUserLogoutUpdate() {
 }
 
 export function UserProvider({ children }) {
-  const [userLoggedIn, setUserLoggedIn] = useState(false)
+  const [userLoggedIn, setUserLoggedIn] = useState("false", false)
 
   function handleLogin() {
-    setUserLoggedIn(true)
+    setUserLoggedIn("true", true)
   }
 
   function handleLogout() {
-    setUserLoggedIn(false)
+    setUserLoggedIn("false", false)
   }
 
   return (
