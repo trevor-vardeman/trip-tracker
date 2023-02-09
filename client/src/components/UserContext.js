@@ -30,11 +30,10 @@ export function UserProvider({ children }) {
   return (
     <UserContext.Provider value={userLoggedIn}>
       <UserLoginUpdate.Provider value={handleLogin}>
-        {children}
+        <UserLogoutUpdate.Provider value={handleLogout}>
+          {children}
+        </UserLogoutUpdate.Provider>
       </UserLoginUpdate.Provider>
-      <UserLogoutUpdate.Provider value={handleLogout}>
-        {children}
-      </UserLogoutUpdate.Provider>
     </UserContext.Provider>
   )
 }
