@@ -35,7 +35,7 @@ function App() {
           <Cities />
         </route>
         <Route path="/">
-          <h1>Base</h1>
+          <h1>App.js</h1>
         </Route>
       </Switch>
     </UserProvider>

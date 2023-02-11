@@ -1,13 +1,15 @@
 import { NavLink } from 'react-router-dom'
-import { useUserContext } from './UserContext'
+import { useUserContext, useUserLogoutUpdate } from './UserContext'
 
 function Nav() {
   const userLoggedIn = useUserContext()
+  const logout = useUserLogoutUpdate()
+
   return (
     <div>
       {userLoggedIn
         ? <div>
-            <h1>logout</h1>
+            <button onClick={logout}>logout</button>
             <NavLink to="/profile">Profile</NavLink>
             <NavLink to="/new-trip">New Trip</NavLink>
             <NavLink to="/drafts">Drafts</NavLink>

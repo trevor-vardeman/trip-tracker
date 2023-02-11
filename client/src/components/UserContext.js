@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 
 const UserContext = React.createContext()
 const UserLoginUpdate = React.createContext()
@@ -18,13 +18,43 @@ export function useUserLogoutUpdate() {
 
 export function UserProvider({ children }) {
   const [userLoggedIn, setUserLoggedIn] = useState(false)
+  const [userId, setUserId] = useState(null)
+  const [username, setUsername] = useState(null)
 
-  function login() {
+  useEffect(() => {
+    fetch("/me")
+    .then((r) => {
+      if (r.ok) {
+        r.json().then(user => {
+          console.log(user)
+          setUserId(user.id)
+          setUsername(user.username)
+          setUserLoggedIn(true)
+        })
+      } else {
+        console.log("User not logged in.")
+      }
+    })}
+  )
+
+  function login(user) {
     setUserLoggedIn(true)
+    console.log(user, "UserContext")
   }
 
   function logout() {
-    setUserLoggedIn(false)
+    fetch("/logout", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      }})
+      // .then(r => r.json())
+      .then(() => {
+        setUserLoggedIn(false)
+        setUserId(null)
+        setUsername(null)
+      })
+      .catch(err => alert(err.message))
   }
 
   return (
