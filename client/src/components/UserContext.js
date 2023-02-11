@@ -17,20 +17,20 @@ export function useUserLogoutUpdate() {
 }
 
 export function UserProvider({ children }) {
-  const [userLoggedIn, setUserLoggedIn] = useState("false", false)
+  const [userLoggedIn, setUserLoggedIn] = useState(false)
 
-  function handleLogin() {
-    setUserLoggedIn("true", true)
+  function login() {
+    setUserLoggedIn(true)
   }
 
-  function handleLogout() {
-    setUserLoggedIn("false", false)
+  function logout() {
+    setUserLoggedIn(false)
   }
 
   return (
     <UserContext.Provider value={userLoggedIn}>
-      <UserLoginUpdate.Provider value={handleLogin}>
-        <UserLogoutUpdate.Provider value={handleLogout}>
+      <UserLoginUpdate.Provider value={login}>
+        <UserLogoutUpdate.Provider value={logout}>
           {children}
         </UserLogoutUpdate.Provider>
       </UserLoginUpdate.Provider>
