@@ -1,7 +1,8 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import Login from './Login'
 import Nav from './Nav'
+import Register from './Register'
+import Login from './Login'
 import Profile from './Profile'
 import NewTrip from './NewTrip'
 import Drafts from './Drafts'
@@ -16,6 +17,9 @@ function App() {
     <UserProvider className="App">
       <Nav />
       <Switch>
+        <Route path="/register">
+          <Register />
+        </Route>
         <Route path="/login">
           <Login />
         </Route>

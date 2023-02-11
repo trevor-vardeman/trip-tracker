@@ -1,25 +1,26 @@
 import { NavLink } from 'react-router-dom'
 import { useUserContext, useUserLogout } from './UserContext'
+import Stack from 'react-bootstrap/Stack'
 
 function Nav() {
   const userLoggedIn = useUserContext()
   const logout = useUserLogout()
 
   return (
-    <div>
+    <Stack gap={3}>
       {userLoggedIn
-        ? <div>
+        ? <Stack gap={3}>
             <button onClick={logout}>logout</button>
             <NavLink to="/profile">Profile</NavLink>
             <NavLink to="/new-trip">New Trip</NavLink>
             <NavLink to="/drafts">Drafts</NavLink>
             <NavLink to="/plans">Plans</NavLink>
             <NavLink to="/cities">Cities</NavLink>
-          </div>
-      :   <div>
-            <NavLink to="/login">Login</NavLink>
-          </div>}
-    </div>
+          </Stack>
+      :   <Stack>
+            <NavLink to="/register">Sign in</NavLink>
+          </Stack>}
+    </Stack>
   )
 }
 
