@@ -1,69 +1,120 @@
 import React, { useContext, useState, useEffect } from 'react'
 
 const UserContext = React.createContext()
-const UserLoginUpdate = React.createContext()
-const UserLogoutUpdate = React.createContext()
+const UserLogin = React.createContext()
+const UserLogout = React.createContext()
+const UserRegister = React.createContext()
 
 export function useUserContext() {
   return useContext(UserContext)
 }
 
-export function useUserLoginUpdate() {
-  return useContext(UserLoginUpdate)
+export function useUserRegister() {
+  return useContext(UserRegister)
 }
 
-export function useUserLogoutUpdate() {
-  return useContext(UserLogoutUpdate)
+export function useUserLogin() {
+  return useContext(UserLogin)
+}
+
+export function useUserLogout() {
+  return useContext(UserLogout)
 }
 
 export function UserProvider({ children }) {
   const [userLoggedIn, setUserLoggedIn] = useState(false)
-  const [userId, setUserId] = useState(null)
-  const [username, setUsername] = useState(null)
+  const [user, setUser] = useState(null)
 
   useEffect(() => {
+    console.log("UserContext component - useEffect `me` function")
     fetch("/me")
     .then((r) => {
       if (r.ok) {
         r.json().then(user => {
           console.log(user)
-          setUserId(user.id)
-          setUsername(user.username)
+          setUser(user)
           setUserLoggedIn(true)
         })
       } else {
         console.log("User not logged in.")
       }
-    })}
-  )
+  })},[userLoggedIn])
 
-  function login(user) {
-    setUserLoggedIn(true)
-    console.log(user, "UserContext")
+  function register(username, password, passwordConfirmation) {
+    console.log("UserContext component - register function")
+    fetch("/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username,
+        password,
+        password_confirmation: passwordConfirmation
+      }),
+    })
+      .then((r) => {
+        if (r.ok) {
+          r.json().then(user => {
+            console.log(user)
+            setUser(user)
+            setUserLoggedIn(true)
+          })
+        } else {
+          r.json().then(data => alert(`${Object.keys(data.error)[0]} ${Object.values(data.error)[0][0]}`))
+        }
+      })
+      .catch(e => alert(e))
+  }
+
+  function login(username, password) {
+    console.log("UserContext component - login function")
+    fetch("/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username,
+        password
+      }),
+    })
+      .then((r) => {
+        if (r.ok) {
+          r.json().then(user => {
+            setUserLoggedIn(true)
+            console.log(user)
+          })
+        } else {
+          r.json().then(data => alert(data.error))
+        }
+      })
+      .catch(e => alert(e))
   }
 
   function logout() {
+    console.log("UserContext component - logout function")
     fetch("/logout", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       }})
-      // .then(r => r.json())
       .then(() => {
+        setUser(null)
         setUserLoggedIn(false)
-        setUserId(null)
-        setUsername(null)
       })
       .catch(err => alert(err.message))
   }
 
   return (
     <UserContext.Provider value={userLoggedIn}>
-      <UserLoginUpdate.Provider value={login}>
-        <UserLogoutUpdate.Provider value={logout}>
-          {children}
-        </UserLogoutUpdate.Provider>
-      </UserLoginUpdate.Provider>
+      <UserRegister.Provider value={register}>
+        <UserLogin.Provider value={login}>
+          <UserLogout.Provider value={logout}>
+            {children}
+          </UserLogout.Provider>
+        </UserLogin.Provider>
+      </UserRegister.Provider>
     </UserContext.Provider>
   )
 }
