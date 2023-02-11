@@ -9,20 +9,15 @@ function Login() {
   const login = useUserLogin()
   const register = useUserRegister()
   const [signIn, setSignIn] = useState(false)
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
-  const [passwordConfirmation, setPasswordConfirmation] = useState("")
-
-  console.log("Do you need state here for username/password, or just send it when the form is submitted?")
 
   const handleLogin = e => {
     e.preventDefault()
-    login(username, password)
+    login(e.target.form[0].value, e.target.form[1].value)
   }
 
   const handleSignUp = e => {
     e.preventDefault()
-    register(username, password, passwordConfirmation)
+    register(e.target.form[0].value, e.target.form[1].value, e.target.form[2].value)
   }
 
   return (
@@ -33,15 +28,15 @@ function Login() {
             <Form>
               <Form.Group controlId="usernameForm">
                 <Form.Label>Username</Form.Label>
-                <Form.Control type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+                <Form.Control type="text" placeholder="Username"/>
               </Form.Group>
 
               <Form.Group controlId="passwordForm">
                 <Form.Label>Password</Form.Label>
-                <Form.Control type="password" autoComplete="on" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                <Form.Control type="password" placeholder="Password" autoComplete="on"/>
               </Form.Group>
+              <Button variant="dark" type="submit" onClick={(e) => handleLogin(e)}>Sign In</Button>
             </Form>
-            <Button variant="dark" type="submit" onClick={(handleLogin)}>Sign In</Button>
             <p>New to Travel? <Alert.Link onClick={() => setSignIn(false)}>Register</Alert.Link></p>
           </Stack>
         : <Stack gap={3}>
@@ -49,20 +44,20 @@ function Login() {
             <Form>
               <Form.Group controlId="usernameForm">
                 <Form.Label>Username</Form.Label>
-                <Form.Control type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+                <Form.Control type="text" placeholder="Username"/>
               </Form.Group>
 
               <Form.Group controlId="passwordForm">
                 <Form.Label>Password</Form.Label>
-                <Form.Control type="password" autoComplete="on" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                <Form.Control type="password" autoComplete="on" placeholder="Password"/>
               </Form.Group>
 
               <Form.Group controlId="passwordConfirmationForm">
                 <Form.Label>Password Confirmation</Form.Label>
-                <Form.Control type="password" autoComplete="on" placeholder="Password" value={passwordConfirmation} onChange={(e) => setPasswordConfirmation(e.target.value)} />
+                <Form.Control type="password" autoComplete="on" placeholder="Password"/>
               </Form.Group>
+              <Button variant="dark" type="submit" onClick={handleSignUp}>Sign Up</Button>
             </Form>
-            <Button variant="dark" type="submit" onClick={handleSignUp}>Sign Up</Button>
             <p>Already have an account? <Alert.Link onClick={() => setSignIn(true)}>Sign in</Alert.Link></p>
           </Stack>
       }

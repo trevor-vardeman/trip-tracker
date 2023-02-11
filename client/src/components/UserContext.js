@@ -26,7 +26,6 @@ export function UserProvider({ children }) {
   const [user, setUser] = useState(null)
 
   useEffect(() => {
-    console.log("UserContext component - useEffect `me` function")
     fetch("/me")
     .then((r) => {
       if (r.ok) {
@@ -41,7 +40,6 @@ export function UserProvider({ children }) {
   })},[userLoggedIn])
 
   function register(username, password, passwordConfirmation) {
-    console.log("UserContext component - register function")
     fetch("/signup", {
       method: "POST",
       headers: {
@@ -68,7 +66,6 @@ export function UserProvider({ children }) {
   }
 
   function login(username, password) {
-    console.log("UserContext component - login function")
     fetch("/login", {
       method: "POST",
       headers: {
@@ -93,7 +90,6 @@ export function UserProvider({ children }) {
   }
 
   function logout() {
-    console.log("UserContext component - logout function")
     fetch("/logout", {
       method: "DELETE",
       headers: {
