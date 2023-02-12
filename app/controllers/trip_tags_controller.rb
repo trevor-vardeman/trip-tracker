@@ -1,0 +1,2 @@
+class TripTagsController < ApplicationController
+end

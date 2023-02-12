@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :trip_tags
+  resources :tags
   resources :activities
   resources :accommodations
   resources :transportations
