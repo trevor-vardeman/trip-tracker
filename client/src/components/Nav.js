@@ -3,12 +3,12 @@ import { useUserContext, useUserLogout } from './UserContext'
 import Stack from 'react-bootstrap/Stack'
 
 function Nav() {
-  const userLoggedIn = useUserContext()
+  const user = useUserContext()
   const logout = useUserLogout()
 
   return (
     <Stack gap={3}>
-      {userLoggedIn
+      {user
         ? <Stack gap={3}>
             <button onClick={logout}>logout</button>
             <NavLink to="/profile">Profile</NavLink>

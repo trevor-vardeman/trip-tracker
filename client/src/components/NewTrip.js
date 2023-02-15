@@ -1,11 +1,15 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import Stack from 'react-bootstrap/Stack'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
+import { useUserUpdate } from './UserContext'
 
 function NewTrip() {
-  const [show, setShow] = useState(true)
+  const [showModal, setShowModal] = useState(true)
+  const [trip, setTrip] = useState(null)
+  const user = useUserUpdate()
+
   const handleSubmit = (e) => {
     e.preventDefault()
     const cityCountry = {
@@ -20,18 +24,19 @@ function NewTrip() {
     .then(r => r.json())
     .then(data => {
       console.log(data)
-      setShow(false)
+      // setTrip(data)
+      setShowModal(false)
     })
     .catch(e => alert(e))
   }
-  const handleClose = () => setShow(false)
+  const handleClose = () => setShowModal(false)
 
   return (
     <Stack>
-      {show 
+      {showModal 
         ?
           <Modal
-            show={show}
+            show={showModal}
             onHide={handleClose}
             backdrop="static"
             keyboard={false}
@@ -56,7 +61,7 @@ function NewTrip() {
           </Modal>
         :
           <Stack>
-            <p>Underlying page</p>
+            <p>{trip.cities[0].city}, {trip.cities[0].country}</p>
           </Stack>
       }
     </Stack>

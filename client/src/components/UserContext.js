@@ -4,6 +4,7 @@ const UserContext = React.createContext()
 const UserLogin = React.createContext()
 const UserLogout = React.createContext()
 const UserRegister = React.createContext()
+const UserUpdate = React.createContext()
 
 export function useUserContext() {
   return useContext(UserContext)
@@ -19,6 +20,10 @@ export function useUserLogin() {
 
 export function useUserLogout() {
   return useContext(UserLogout)
+}
+
+export function useUserUpdate() {
+  return useContext(UserUpdate)
 }
 
 export function UserProvider({ children }) {
@@ -102,12 +107,19 @@ export function UserProvider({ children }) {
       .catch(err => alert(err.message))
   }
 
+  function update(user) {
+    setUser(user)
+    console.log("update in context", user)
+  }
+
   return (
-    <UserContext.Provider value={userLoggedIn}>
+    <UserContext.Provider value={user}>
       <UserRegister.Provider value={register}>
         <UserLogin.Provider value={login}>
           <UserLogout.Provider value={logout}>
-            {children}
+            <UserUpdate.Provider value={update}>
+              {children}
+            </UserUpdate.Provider>
           </UserLogout.Provider>
         </UserLogin.Provider>
       </UserRegister.Provider>

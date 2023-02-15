@@ -9,7 +9,7 @@ class TripsController < ApplicationController
     )
 
     if trip.valid? && city.valid?
-      render json: trip, status: :ok
+      render json: current_user, status: :ok
     else
       render json: { error: trip.errors.full_messages }, status: :unprocessable_entity
     end
@@ -17,8 +17,8 @@ class TripsController < ApplicationController
 
   private
 
-  # def trips_params
-  #   params.permit(:name, :plan?, :published?, :notes)
-  # end
+  def trips_params
+    params.permit(:name, :plan?, :published?, :notes)
+  end
 
 end
