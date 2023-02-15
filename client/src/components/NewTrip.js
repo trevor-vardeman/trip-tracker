@@ -8,6 +8,7 @@ function NewTrip() {
   const [show, setShow] = useState(true)
   const handleSubmit = (e) => {
     console.log(e.target.form[1].value)
+    console.log(e.target.form[2].value)
     setShow(false)
   }
   const handleClose = () => setShow(false)
@@ -29,6 +30,9 @@ function NewTrip() {
 
               <Form.Group controlId="formForCity">
                 <Form.Control type="text" placeholder="Enter a city name..."></Form.Control>
+              </Form.Group>
+              <Form.Group controlId="formForCountry">
+                <Form.Control type="text" placeholder="Enter a country name..."></Form.Control>
               </Form.Group>
 
               <Modal.Footer>
