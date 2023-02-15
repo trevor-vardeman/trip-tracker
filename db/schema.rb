@@ -73,8 +73,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_12_051013) do
   create_table "trips", force: :cascade do |t|
     t.integer "user_id"
     t.string "name"
-    t.boolean "plan?"
-    t.boolean "published?"
+    t.boolean "plan"
+    t.boolean "published"
     t.string "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -4,11 +4,12 @@ class TripsController < ApplicationController
     trip = Trip.create(user_id: current_user.id)
     city = City.create(
       city: params[:city],
-      country: params[:country]
+      country: params[:country],
+      trip_id: trip.id
     )
-    
+
     if trip.valid? && city.valid?
-      render json: {trip, city}, status: :ok
+      render json: trip, status: :ok
     else
       render json: { error: trip.errors.full_messages }, status: :unprocessable_entity
     end
@@ -16,8 +17,8 @@ class TripsController < ApplicationController
 
   private
 
-  def trips_params
-    params.permit(:name, :plan?, :published?, :notes)
-  end
+  # def trips_params
+  #   params.permit(:name, :plan?, :published?, :notes)
+  # end
 
 end

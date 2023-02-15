@@ -7,9 +7,22 @@ import Modal from 'react-bootstrap/Modal'
 function NewTrip() {
   const [show, setShow] = useState(true)
   const handleSubmit = (e) => {
-    console.log(e.target.form[1].value)
-    console.log(e.target.form[2].value)
-    setShow(false)
+    e.preventDefault()
+    const cityCountry = {
+      city: e.target.form[1].value,
+      country: e.target.form[2].value
+    }
+    fetch("/trip", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", },
+      body: JSON.stringify(cityCountry)
+    })
+    .then(r => r.json())
+    .then(data => {
+      console.log(data)
+      setShow(false)
+    })
+    .catch(e => alert(e))
   }
   const handleClose = () => setShow(false)
 
