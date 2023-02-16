@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState } from 'react'
 import Stack from 'react-bootstrap/Stack'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -7,7 +7,6 @@ import { useUserUpdate } from './UserContext'
 
 function NewTrip() {
   const [showModal, setShowModal] = useState(true)
-  const [trip, setTrip] = useState(null)
   const user = useUserUpdate()
 
   const handleSubmit = (e) => {
@@ -24,7 +23,7 @@ function NewTrip() {
     .then(r => r.json())
     .then(data => {
       console.log(data)
-      // setTrip(data)
+      user(data)
       setShowModal(false)
     })
     .catch(e => alert(e))
