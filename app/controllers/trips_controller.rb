@@ -9,7 +9,7 @@ class TripsController < ApplicationController
     )
 
     if trip.valid? && city.valid?
-      render json: current_user, status: :ok
+      render json: current_user, include: ["trips", "trips.accommodations", "trips.activities", "trips.cities", "trips.tags", "trips.transportations", "trips.trip_tags", "cities"], status: :ok
     else
       render json: { error: trip.errors.full_messages }, status: :unprocessable_entity
     end
