@@ -107,6 +107,7 @@ export function UserProvider({ children }) {
       .then(() => {
         setUser(null)
         setUserLoggedIn(false)
+        history.push("/")
       })
       .catch(err => alert(err.message))
   }

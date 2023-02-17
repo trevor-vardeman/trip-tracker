@@ -8,7 +8,7 @@ function Home() {
     <Stack gap={3}>
       {user 
         ? <Stack gap={3}>
-            <h1>Welcome to [Trip!]</h1>
+            <h1>Welcome to Trip!</h1>
             <p>To create a new trip, click New Trip!</p>
             <p>With Drafts, you can compare multiple trips!</p>
             <p>In Plans, you can see which plans you've already finalized.</p>

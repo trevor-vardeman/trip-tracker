@@ -1,12 +1,14 @@
 import { useState } from 'react'
+import { useUserContext, useUserUpdate } from './UserContext'
+import Trip from './Trip'
 import Stack from 'react-bootstrap/Stack'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
-import { useUserContext, useUserUpdate } from './UserContext'
 
 function NewTrip() {
   const [showModal, setShowModal] = useState(true)
+  const [currentTrip, setCurrentTrip] = useState(null)
   const user = useUserContext()
   const userUpdate = useUserUpdate()
 
@@ -25,11 +27,12 @@ function NewTrip() {
     .then(data => {
       console.log(data)
       userUpdate(data)
+      setCurrentTrip(data.trips[data.trips.length - 1])
+      console.log(data.trips[data.trips.length - 1])
       setShowModal(false)
     })
     .catch(e => alert(e))
   }
-  const handleClose = () => setShowModal(false)
 
   return (
     <Stack>
@@ -37,7 +40,7 @@ function NewTrip() {
         ?
           <Modal
             show={showModal}
-            onHide={handleClose}
+            onHide={() => setShowModal(false)}
             backdrop="static"
             keyboard={false}
           >
@@ -54,16 +57,13 @@ function NewTrip() {
               </Form.Group>
 
               <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>Close</Button>
+                <Button variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
                 <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>
               </Modal.Footer>
             </Form>
           </Modal>
         :
-          <Stack>
-            {!showModal ? <p>{user.username}</p> : <p>test</p>}
-            <p>test</p>
-          </Stack>
+          <Trip currentTrip={currentTrip} />
       }
     </Stack>
   )
