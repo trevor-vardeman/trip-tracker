@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
+import { useHistory } from "react-router-dom"
 
 const UserContext = React.createContext()
 const UserLogin = React.createContext()
@@ -29,6 +30,7 @@ export function useUserUpdate() {
 export function UserProvider({ children }) {
   const [userLoggedIn, setUserLoggedIn] = useState(false)
   const [user, setUser] = useState(null)
+  const history = useHistory()
 
   useEffect(() => {
     fetch("/me")
@@ -62,6 +64,7 @@ export function UserProvider({ children }) {
             console.log(user)
             setUser(user)
             setUserLoggedIn(true)
+            history.push("/")
           })
         } else {
           r.json().then(data => alert(`${Object.keys(data.error)[0]} ${Object.values(data.error)[0][0]}`))
@@ -84,8 +87,9 @@ export function UserProvider({ children }) {
       .then((r) => {
         if (r.ok) {
           r.json().then(user => {
-            setUserLoggedIn(true)
             console.log(user)
+            setUserLoggedIn(true)
+            history.push("/")
           })
         } else {
           r.json().then(data => alert(data.error))

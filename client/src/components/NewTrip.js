@@ -3,11 +3,12 @@ import Stack from 'react-bootstrap/Stack'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
-import { useUserUpdate } from './UserContext'
+import { useUserContext, useUserUpdate } from './UserContext'
 
 function NewTrip() {
   const [showModal, setShowModal] = useState(true)
-  const user = useUserUpdate()
+  const user = useUserContext()
+  const userUpdate = useUserUpdate()
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -23,7 +24,7 @@ function NewTrip() {
     .then(r => r.json())
     .then(data => {
       console.log(data)
-      user(data)
+      userUpdate(data)
       setShowModal(false)
     })
     .catch(e => alert(e))
@@ -32,7 +33,7 @@ function NewTrip() {
 
   return (
     <Stack>
-      {showModal 
+      {showModal && user
         ?
           <Modal
             show={showModal}
@@ -60,7 +61,8 @@ function NewTrip() {
           </Modal>
         :
           <Stack>
-            <p>{trip.cities[0].city}, {trip.cities[0].country}</p>
+            {!showModal ? <p>{user.username}</p> : <p>test</p>}
+            <p>test</p>
           </Stack>
       }
     </Stack>

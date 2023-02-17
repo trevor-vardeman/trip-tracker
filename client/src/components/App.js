@@ -1,5 +1,6 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
+import Home from './Home'
 import Nav from './Nav'
 import Register from './Register'
 import Login from './Login'
@@ -39,7 +40,7 @@ function App() {
           <Cities />
         </route>
         <Route path="/">
-          <h1>App.js</h1>
+          <Home />
         </Route>
       </Switch>
     </UserProvider>
