@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useHistory } from "react-router-dom"
 import { useUserContext, useUserUpdate } from './UserContext'
 import Trip from './Trip'
 import Stack from 'react-bootstrap/Stack'
@@ -11,6 +12,7 @@ function NewTrip() {
   const [currentTrip, setCurrentTrip] = useState(null)
   const user = useUserContext()
   const userUpdate = useUserUpdate()
+  const history = useHistory()
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -40,7 +42,10 @@ function NewTrip() {
         ?
           <Modal
             show={showModal}
-            onHide={() => setShowModal(false)}
+            onHide={() => {
+              setShowModal(false)
+              history.push("/")
+            }}
             backdrop="static"
             keyboard={false}
           >
@@ -57,7 +62,13 @@ function NewTrip() {
               </Form.Group>
 
               <Modal.Footer>
-                <Button variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
+                <Button 
+                  variant="secondary" 
+                  onClick={() => {
+                    setShowModal(false)
+                    history.push("/")
+                  }}
+                >Close</Button>
                 <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>
               </Modal.Footer>
             </Form>
