@@ -2,7 +2,7 @@ import TripName from './TripName'
 import TripData from './TripData'
 import TripSummary from './TripSummary'
 import TripButtons from './TripButtons'
-import TripAddCity from './TripAddCity'
+import TripAdditions from './TripAdditions'
 import Stack from 'react-bootstrap/Stack'
 
 function Trip({ currentTrip }) {
@@ -16,7 +16,7 @@ function Trip({ currentTrip }) {
             <TripData />
             <TripSummary />
             <TripButtons />
-            <TripAddCity />
+            <TripAdditions />
           </Stack>
         : null
       }

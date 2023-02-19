@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { useHistory } from "react-router-dom"
 import { useUserContext, useUserUpdate } from './UserContext'
 import Trip from './Trip'
@@ -6,13 +6,18 @@ import Stack from 'react-bootstrap/Stack'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
+import { useTripContext } from './CurrentTripContext'
 
 function NewTrip() {
   const [showModal, setShowModal] = useState(true)
-  const [currentTrip, setCurrentTrip] = useState(null)
+  // const [currentTrip, setCurrentTrip] = useState(null)
   const user = useUserContext()
   const userUpdate = useUserUpdate()
   const history = useHistory()
+  const {
+    currentTrip, 
+    setCurrentTrip
+  } = useTripContext()
 
   const handleSubmit = (e) => {
     e.preventDefault()

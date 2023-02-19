@@ -10,39 +10,43 @@ import Drafts from './Drafts'
 import Plans from './Plans'
 import Cities from './Cities'
 import { UserProvider } from './UserContext'
+import { TripProvider } from './CurrentTripContext'
 
 export const UserContext = React.createContext()
+export const CurrentTripContext = React.createContext()
 
 function App() {
   return (
     <UserProvider className="App">
-      <Nav />
-      <Switch>
-        <Route path="/register">
-          <Register />
-        </Route>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/profile">
-          <Profile />
-        </Route>
-        <Route path="/new-trip">
-          <NewTrip />
-        </Route>
-        <Route path="/drafts">
-          <Drafts />
-        </Route>
-        <Route path="/plans">
-          <Plans />
-        </Route>
-        <route path="/cities">
-          <Cities />
-        </route>
-        <Route path="/">
-          <Home />
-        </Route>
-      </Switch>
+      <TripProvider>
+        <Nav />
+        <Switch>
+          <Route path="/register">
+            <Register />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/profile">
+            <Profile />
+          </Route>
+          <Route path="/new-trip">
+            <NewTrip />
+          </Route>
+          <Route path="/drafts">
+            <Drafts />
+          </Route>
+          <Route path="/plans">
+            <Plans />
+          </Route>
+          <route path="/cities">
+            <Cities />
+          </route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </TripProvider>
     </UserProvider>
   )
 }
