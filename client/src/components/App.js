@@ -1,5 +1,6 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
+import Stack from 'react-bootstrap/Stack'
 import Home from './Home'
 import Nav from './Nav'
 import Register from './Register'
@@ -17,37 +18,39 @@ export const CurrentTripContext = React.createContext()
 
 function App() {
   return (
-    <UserProvider className="App">
-      <TripProvider>
-        <Nav />
-        <Switch>
-          <Route path="/register">
-            <Register />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/profile">
-            <Profile />
-          </Route>
-          <Route path="/new-trip">
-            <NewTrip />
-          </Route>
-          <Route path="/drafts">
-            <Drafts />
-          </Route>
-          <Route path="/plans">
-            <Plans />
-          </Route>
-          <route path="/cities">
-            <Cities />
-          </route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </TripProvider>
-    </UserProvider>
+    <Stack direction="horizontal">
+      <UserProvider className="App">
+        <TripProvider>
+          <Nav />
+          <Switch>
+            <Route path="/register">
+              <Register />
+            </Route>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="/profile">
+              <Profile />
+            </Route>
+            <Route path="/new-trip">
+              <NewTrip />
+            </Route>
+            <Route path="/drafts">
+              <Drafts />
+            </Route>
+            <Route path="/plans">
+              <Plans />
+            </Route>
+            <route path="/cities">
+              <Cities />
+            </route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+        </TripProvider>
+      </UserProvider>
+    </Stack>
   )
 }
 

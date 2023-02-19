@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState } from 'react'
 import { useHistory } from "react-router-dom"
 import { useUserContext, useUserUpdate } from './UserContext'
 import Trip from './Trip'
@@ -10,7 +10,6 @@ import { useTripContext } from './CurrentTripContext'
 
 function NewTrip() {
   const [showModal, setShowModal] = useState(true)
-  // const [currentTrip, setCurrentTrip] = useState(null)
   const user = useUserContext()
   const userUpdate = useUserUpdate()
   const history = useHistory()
@@ -31,11 +30,11 @@ function NewTrip() {
       body: JSON.stringify(cityCountry)
     })
     .then(r => r.json())
-    .then(data => {
-      console.log(data)
-      userUpdate(data)
-      setCurrentTrip(data.trips[data.trips.length - 1])
-      console.log(data.trips[data.trips.length - 1])
+    .then(user => {
+      console.log(user)
+      userUpdate(user)
+      setCurrentTrip(user.trips[user.trips.length - 1])
+      console.log(user.trips[user.trips.length - 1])
       setShowModal(false)
     })
     .catch(e => alert(e))

@@ -23,7 +23,12 @@ class TripsController < ApplicationController
     else
       render json: { error: trip.errors.full_messages }, status: :unprocessable_entity
     end
+  end
 
+  def destroy
+    trip = Trip.find(params[:id])
+    trip.destroy
+    render json: current_user, include: ["trips", "trips.accommodations", "trips.activities", "trips.cities", "trips.tags", "trips.transportations", "trips.trip_tags", "cities"], status: :ok
   end
 
   private

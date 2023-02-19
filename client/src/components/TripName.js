@@ -1,39 +1,40 @@
+import { useState } from 'react'
 import { useTripContext } from './CurrentTripContext'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import Stack from 'react-bootstrap/Stack'
 
 function TripName() {
+  const [tripName, setTripName] = useState("")
   const {
     currentTrip, 
     setCurrentTrip
   } = useTripContext()
   
   const handleSubmit = (e) => {
-    const tripName = {
-      name: e.target.form[0].value
-    }
     e.preventDefault()
     fetch(`/trips/${currentTrip.id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json", },
-      body: JSON.stringify(tripName)
+      body: JSON.stringify({ name: tripName })
     })
     .then(r => r.json())
-    .then(data => setCurrentTrip(data))
+    .then(trip => setCurrentTrip(trip))
     .catch(e => alert(e))
   }
 
   return (
-    <div>{currentTrip.name === null 
-      ? <Form>
-          <Form.Group controlId="formTripName">
-            <Form.Label>Trip Name</Form.Label>
-            <Form.Control type="text" placeholder="Enter a trip name..."></Form.Control>
-          </Form.Group>
-          <Button type="submit" onClick={handleSubmit}>Submit</Button>
-        </Form>
+    <Stack>{currentTrip.name === null 
+      ? <Stack direction="horizontal" gap={1}>
+          <Form>
+            <Form.Group controlId="formTripName">
+              <Form.Control type="text" placeholder="Enter a trip name..." value={tripName} onChange={(e) => setTripName(e.target.value)}></Form.Control>
+            </Form.Group>
+          </Form>
+          <Button variant="dark" type="submit" onClick={handleSubmit}>Submit</Button>
+        </Stack>
       : <h1>Trip | {currentTrip.name}</h1>
-    }</div>
+    }</Stack>
   )
 }
 
