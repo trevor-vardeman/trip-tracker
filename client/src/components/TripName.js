@@ -1,7 +1,13 @@
+import { useTripContext } from './CurrentTripContext'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-function TripName({ currentTrip }) {
+function TripName() {
+  const {
+    currentTrip, 
+    setCurrentTrip
+  } = useTripContext()
+  
   const handleSubmit = (e) => {
     const tripName = {
       name: e.target.form[0].value
@@ -13,9 +19,7 @@ function TripName({ currentTrip }) {
       body: JSON.stringify(tripName)
     })
     .then(r => r.json())
-    .then(data => {
-      console.log(data)
-    })
+    .then(data => setCurrentTrip(data))
     .catch(e => alert(e))
   }
 
@@ -28,7 +32,7 @@ function TripName({ currentTrip }) {
           </Form.Group>
           <Button type="submit" onClick={handleSubmit}>Submit</Button>
         </Form>
-      : <h1>Trip | currentTrip.name</h1>
+      : <h1>Trip | {currentTrip.name}</h1>
     }</div>
   )
 }
