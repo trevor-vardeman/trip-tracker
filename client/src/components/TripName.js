@@ -19,7 +19,7 @@ function TripName() {
       body: JSON.stringify({ name: tripName })
     })
     .then(r => r.json())
-    .then(trip => setCurrentTrip(trip))
+    .then(user => setCurrentTrip(user.trips[user.trips.length - 1]))
     .catch(e => alert(e))
   }
 

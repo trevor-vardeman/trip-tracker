@@ -7,9 +7,8 @@ class TripsController < ApplicationController
       country: params[:country],
       trip_id: trip.id
     )
-
     if trip.valid? && city.valid?
-      render json: current_user, include: ["trips", "trips.accommodations", "trips.activities", "trips.cities", "trips.tags", "trips.transportations", "trips.trip_tags", "cities"], status: :ok
+      render json: current_user, include: ["trips", "trips.accommodations", "trips.activities", "trips.cities", "trips.tags", "trips.transportations", "trips.trip_tags", "cities"], status: :accepted
     else
       render json: { error: trip.errors.full_messages }, status: :unprocessable_entity
     end
@@ -19,7 +18,7 @@ class TripsController < ApplicationController
     trip = Trip.find(params[:id]) 
     trip.update(trips_params)
     if trip.valid?
-      render json: trip, status: :accepted
+      render json: current_user, include: ["trips", "trips.accommodations", "trips.activities", "trips.cities", "trips.tags", "trips.transportations", "trips.trip_tags", "cities"], status: :accepted
     else
       render json: { error: trip.errors.full_messages }, status: :unprocessable_entity
     end
@@ -28,13 +27,13 @@ class TripsController < ApplicationController
   def destroy
     trip = Trip.find(params[:id])
     trip.destroy
-    render json: current_user, include: ["trips", "trips.accommodations", "trips.activities", "trips.cities", "trips.tags", "trips.transportations", "trips.trip_tags", "cities"], status: :ok
+    render json: current_user, include: ["trips", "trips.accommodations", "trips.activities", "trips.cities", "trips.tags", "trips.transportations", "trips.trip_tags", "cities"], status: :accepted
   end
 
   private
 
   def trips_params
-    params.permit(:id, :name, :plan?, :published?, :notes)
+    params.permit(:id, :name, :plan, :published, :notes)
   end
 
 end

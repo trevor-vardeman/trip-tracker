@@ -24,7 +24,7 @@ function NewTrip() {
       city: e.target.form[1].value,
       country: e.target.form[2].value
     }
-    fetch("/trip", {
+    fetch("/trips", {
       method: "POST",
       headers: { "Content-Type": "application/json", },
       body: JSON.stringify(cityCountry)
