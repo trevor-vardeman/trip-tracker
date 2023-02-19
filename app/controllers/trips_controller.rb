@@ -15,10 +15,21 @@ class TripsController < ApplicationController
     end
   end
 
+  def update
+    trip = Trip.find(params[:id]) 
+    trip.update(trips_params)
+    if trip.valid?
+      render json: trip, status: :accepted
+    else
+      render json: { error: trip.errors.full_messages }, status: :unprocessable_entity
+    end
+
+  end
+
   private
 
   def trips_params
-    params.permit(:name, :plan?, :published?, :notes)
+    params.permit(:id, :name, :plan?, :published?, :notes)
   end
 
 end
