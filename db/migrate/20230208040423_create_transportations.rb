@@ -1,7 +1,6 @@
 class CreateTransportations < ActiveRecord::Migration[7.0]
   def change
     create_table :transportations do |t|
-      t.integer :trip_id
       t.string :information
       t.integer :start_location
       t.datetime :start_datetime

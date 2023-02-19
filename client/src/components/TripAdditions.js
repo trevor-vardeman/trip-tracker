@@ -1,6 +1,11 @@
-function TripAdditions() {
+import Stack from 'react-bootstrap/Stack'
+import Button from 'react-bootstrap/Button'
+
+function TripAdditions({ citySelected }) {
   return (
-    <div>TripAdditions</div>
+    <Stack>
+      <Button>Add City</Button>
+    </Stack>
   )
 }
 

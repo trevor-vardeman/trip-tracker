@@ -1,6 +1,6 @@
 import { useHistory } from "react-router-dom"
 import { useTripContext } from './CurrentTripContext'
-import { useUserContext, useUserUpdate } from './UserContext'
+import { useUserUpdate } from './UserContext'
 import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
 

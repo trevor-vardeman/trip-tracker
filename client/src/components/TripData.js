@@ -2,11 +2,12 @@ import { useTripContext } from './CurrentTripContext'
 import { ArcherContainer, ArcherElement } from "react-archer"
 import Stack from 'react-bootstrap/Stack'
 
-function TripData() {
+function TripData({ citySelected }) {
   const {
     currentTrip, 
     setCurrentTrip
   } = useTripContext()
+  // const citySelection = (e) => {citySelected}
 
   return (
     <Stack className="trip-data">

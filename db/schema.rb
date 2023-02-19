@@ -51,7 +51,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_12_051013) do
   end
 
   create_table "transportations", force: :cascade do |t|
-    t.integer "trip_id"
     t.string "information"
     t.integer "start_location"
     t.datetime "start_datetime"
