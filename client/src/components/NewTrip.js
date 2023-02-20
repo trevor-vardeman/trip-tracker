@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { useHistory } from "react-router-dom"
 import { useUserContext, useUserUpdate } from './UserContext'
+import { useTripContext } from './CurrentTripContext'
 import Trip from './Trip'
 import Stack from 'react-bootstrap/Stack'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
-import { useTripContext } from './CurrentTripContext'
 
 function NewTrip() {
   const [showModal, setShowModal] = useState(true)
