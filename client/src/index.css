@@ -12,17 +12,26 @@ body {
   transform: translate(-50%, -50%);
 }
 
-.trip-data {
-  display: flex;
-  flex-direction: column;
+.small-button {
+  width: fit-content;
 }
 
 .trip {
-  align-items: space-between;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}
+
+.trip-data {
+  justify-content: center;
   border-color: black;
   border-style: solid;
   width: 50vw;
-  height: 80vw;
+  height: 65vw;
   background-color: lightblue;
   display: flex;
+}
+
+.selected-city {
+  outline: 2px solid orange;
 }

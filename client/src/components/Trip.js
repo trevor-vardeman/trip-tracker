@@ -4,31 +4,35 @@ import TripName from './TripName'
 import TripData from './TripData'
 import TripSummary from './TripSummary'
 import TripButtons from './TripButtons'
-import TripAdditions from './TripAdditions'
+import TripAddCity from './TripAddCity'
+import TripAddTransportation from './TripAddTransportation'
+import TripAddAccommodation from './TripAddAccommodation'
+import TripAddActivity from './TripAddActivity'
 import Stack from 'react-bootstrap/Stack'
 
 function Trip() {
-  // const [citySelected, setCitySelected] = useState(false)
-  // const selectCity (city) {
-  //   setCitySelected(true)
-  // }
+  const {currentTrip, setCurrentTrip} = useTripContext()
+  const [selectedCity, setSelectedCity] = useState(null)
 
-  const {
-    currentTrip, 
-    setCurrentTrip
-  } = useTripContext()
+  const handleCitySelection = city => {
+    setSelectedCity(city)
+    console.log("trip", city)
+  }
 
   return (
     <Stack>
       {currentTrip !== null 
-        ? <Stack>
+        ? <Stack className="trip">
             <TripName />
-            {/* <TripData citySelected={citySelected} /> */}
-            <TripData />
+              <Stack direction="horizontal">
+                <TripAddCity handleCitySelection={handleCitySelection} />
+                <TripAddTransportation />
+                <TripAddAccommodation />
+                <TripAddActivity />
+              </Stack>
+            <TripData handleCitySelection={handleCitySelection} />
             <TripSummary />
             <TripButtons />
-            {/* <TripAdditions citySelected={citySelected} /> */}
-            <TripAdditions />
           </Stack>
         : null
       }

@@ -44,8 +44,8 @@ function TripButtons() {
 
   return (
     <Stack direction="horizontal" gap={3}>
-      <Button variant="danger" onClick={handleDelete}>Delete</Button>
-      <Button variant="dark" type="submit" onClick={handleFinalize}>Finalize</Button>
+      <Button size="sm" variant="danger" onClick={handleDelete}>Delete</Button>
+      <Button size="sm" variant="dark" type="submit" onClick={handleFinalize}>Finalize</Button>
     </Stack>
   )
 }

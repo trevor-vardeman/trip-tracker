@@ -31,7 +31,7 @@ function TripName() {
               <Form.Control type="text" placeholder="Enter a trip name..." value={tripName} onChange={(e) => setTripName(e.target.value)}></Form.Control>
             </Form.Group>
           </Form>
-          <Button variant="dark" type="submit" onClick={handleSubmit}>Submit</Button>
+          <Button size="sm" variant="dark" type="submit" onClick={handleSubmit}>Submit</Button>
         </Stack>
       : <h1>Trip | {currentTrip.name}</h1>
     }</Stack>

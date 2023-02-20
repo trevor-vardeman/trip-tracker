@@ -10,7 +10,7 @@ function Nav() {
     <Stack gap={3}>
       {user
         ? <Stack gap={3}>
-            <button onClick={logout}>logout</button>
+            <button className="small-button" onClick={logout}>logout</button>
             <NavLink to="/profile">Profile</NavLink>
             <NavLink to="/new-trip">New Trip</NavLink>
             <NavLink to="/drafts">Drafts</NavLink>

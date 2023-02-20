@@ -6,13 +6,10 @@ import Form from 'react-bootstrap/Form'
 import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
 
-function TripAdditions({ citySelected }) {
-  const [showModal, setShowModal] = useState(false)
+function TripAddCity({ handleCitySelection }) {
+  const {currentTrip, setCurrentTrip} = useTripContext()
   const userUpdate = useUserUpdate()
-  const {
-    currentTrip, 
-    setCurrentTrip
-  } = useTripContext()
+  const [showModal, setShowModal] = useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -58,19 +55,16 @@ function TripAdditions({ citySelected }) {
               </Form.Group>
 
               <Modal.Footer>
-                <Button 
-                  variant="secondary" 
-                  onClick={() => setShowModal(false)}
-                >Close</Button>
-                <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>
+                <Button size="sm" variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
+                <Button size="sm" variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>
               </Modal.Footer>
             </Form>
           </Modal>
         :
-          <Button onClick={() => setShowModal(true)}>Add City</Button>
+          <Button size="sm" onClick={() => setShowModal(true)}>Add City</Button>
       }
     </Stack>
   )
 }
 
-export default TripAdditions
+export default TripAddCity
