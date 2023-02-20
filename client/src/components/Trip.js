@@ -25,10 +25,10 @@ function Trip() {
         ? <Stack className="trip">
             <TripName />
               <Stack direction="horizontal">
-                <TripAddCity handleCitySelection={handleCitySelection} />
-                <TripAddTransportation />
-                <TripAddAccommodation />
-                <TripAddActivity />
+                <TripAddCity />
+                <TripAddTransportation selectedCity={selectedCity} />
+                <TripAddAccommodation selectedCity={selectedCity} />
+                <TripAddActivity selectedCity={selectedCity} />
               </Stack>
             <TripData handleCitySelection={handleCitySelection} />
             <TripSummary />

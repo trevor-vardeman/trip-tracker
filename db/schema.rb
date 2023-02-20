@@ -16,11 +16,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_12_051013) do
 
   create_table "accommodations", force: :cascade do |t|
     t.integer "city_id"
-    t.string "information"
     t.datetime "start_datetime"
     t.datetime "end_datetime"
     t.float "cost"
-    t.string "notes"
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -31,7 +30,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_12_051013) do
     t.datetime "start_datetime"
     t.datetime "end_datetime"
     t.float "cost"
-    t.string "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -51,13 +49,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_12_051013) do
   end
 
   create_table "transportations", force: :cascade do |t|
-    t.string "information"
     t.integer "start_location"
     t.datetime "start_datetime"
     t.integer "end_location"
     t.datetime "end_datetime"
     t.float "cost"
-    t.string "notes"
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

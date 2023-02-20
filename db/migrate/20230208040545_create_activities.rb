@@ -6,7 +6,6 @@ class CreateActivities < ActiveRecord::Migration[7.0]
       t.datetime :start_datetime
       t.datetime :end_datetime
       t.float :cost
-      t.string :notes
 
       t.timestamps
     end

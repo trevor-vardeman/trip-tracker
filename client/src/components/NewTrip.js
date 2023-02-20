@@ -13,31 +13,36 @@ function NewTrip() {
   const user = useUserContext()
   const userUpdate = useUserUpdate()
   const history = useHistory()
-  const {
-    currentTrip, 
-    setCurrentTrip
-  } = useTripContext()
+  const {currentTrip, setCurrentTrip} = useTripContext()
+  const [city, setCity] = useState("")
+  const [country, setCountry] = useState("")
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const cityCountry = {
-      city: e.target.form[1].value,
-      country: e.target.form[2].value
+    if (!city || !country) {
+      alert("Please enter a city and country name.")
+    } else {
+      const cityCountry = {
+        city: city,
+        country: country
+      }
+      fetch("/trips", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", },
+        body: JSON.stringify(cityCountry)
+      })
+      .then(r => r.json())
+      .then(user => {
+        console.log(user)
+        userUpdate(user)
+        setCurrentTrip(user.trips[user.trips.length - 1])
+        console.log(user.trips[user.trips.length - 1])
+        setCity("")
+        setCountry("")
+        setShowModal(false)
+      })
+      .catch(e => alert(e))
     }
-    fetch("/trips", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", },
-      body: JSON.stringify(cityCountry)
-    })
-    .then(r => r.json())
-    .then(user => {
-      console.log(user)
-      userUpdate(user)
-      setCurrentTrip(user.trips[user.trips.length - 1])
-      console.log(user.trips[user.trips.length - 1])
-      setShowModal(false)
-    })
-    .catch(e => alert(e))
   }
 
   return (
@@ -59,10 +64,10 @@ function NewTrip() {
               </Modal.Header>
 
               <Form.Group controlId="formForCity">
-                <Form.Control type="text" placeholder="Enter a city name..."></Form.Control>
+                <Form.Control value={city} type="text" placeholder="Enter a city name..." onChange={e => setCity(e.target.value)}></Form.Control>
               </Form.Group>
               <Form.Group controlId="formForCountry">
-                <Form.Control type="text" placeholder="Enter a country name..."></Form.Control>
+                <Form.Control value={country} type="text" placeholder="Enter a country name..." onChange={e => setCountry(e.target.value)}></Form.Control>
               </Form.Group>
 
               <Modal.Footer>

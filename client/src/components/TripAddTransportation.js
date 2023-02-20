@@ -3,8 +3,9 @@ import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
 import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
+import Dropdown from 'react-bootstrap/Dropdown'
 
-function TripAddTransportation() {
+function TripAddTransportation({ selectedCity }) {
   const [showModal, setShowModal] = useState(false)
   const handleSubmit = e => {
     e.preventDefault()
@@ -21,23 +22,21 @@ function TripAddTransportation() {
           backdrop="static"
           keyboard={false}
         >
+          <Modal.Header closeButton>
+            <Modal.Title>Add Transportation</Modal.Title>
+          </Modal.Header>
           <Form>
-            <Modal.Header closeButton>
-              <Modal.Title>What city to next?</Modal.Title>
-            </Modal.Header>
-
-            <Form.Group controlId="formForCity">
+            <Form.Group controlId="formForType">
               <Form.Control type="text" placeholder="Enter a city name..."></Form.Control>
             </Form.Group>
             <Form.Group controlId="formForCountry">
               <Form.Control type="text" placeholder="Enter a country name..."></Form.Control>
             </Form.Group>
-
+          </Form>
             <Modal.Footer>
               <Button size="sm" variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
               <Button size="sm" variant="primary" type="submit" onClick={e => handleSubmit(e)}>Submit</Button>
             </Modal.Footer>
-          </Form>
         </Modal>
       :
         <Button size="sm" onClick={() => setShowModal(true)}>Add Transportation</Button>

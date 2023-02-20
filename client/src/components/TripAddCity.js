@@ -6,30 +6,38 @@ import Form from 'react-bootstrap/Form'
 import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
 
-function TripAddCity({ handleCitySelection }) {
+function TripAddCity() {
   const {currentTrip, setCurrentTrip} = useTripContext()
   const userUpdate = useUserUpdate()
   const [showModal, setShowModal] = useState(false)
+  const [city, setCity] = useState("")
+  const [country, setCountry] = useState("")
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const cityCountry = {
-      trip_id: currentTrip.id,
-      city: e.target.form[1].value,
-      country: e.target.form[2].value
+  const handleSubmit = e => {
+    if (!city || !country) {
+      alert("Please enter a city and country name.")
+    } else {
+      e.preventDefault()
+      const cityCountry = {
+        trip_id: currentTrip.id,
+        city: city,
+        country: country
+      }
+      fetch("/cities", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", },
+        body: JSON.stringify(cityCountry)
+      })
+      .then(r => r.json())
+      .then(user => {
+        userUpdate(user)
+        setCurrentTrip(user.trips[user.trips.length - 1])
+        setCity("")
+        setCountry("")
+        setShowModal(false)
+      })
+      .catch(e => alert(e))
     }
-    fetch("/cities", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", },
-      body: JSON.stringify(cityCountry)
-    })
-    .then(r => r.json())
-    .then(user => {
-      userUpdate(user)
-      setCurrentTrip(user.trips[user.trips.length - 1])
-      setShowModal(false)
-    })
-    .catch(e => alert(e))
   }
 
   return (
@@ -42,23 +50,21 @@ function TripAddCity({ handleCitySelection }) {
             backdrop="static"
             keyboard={false}
           >
+            <Modal.Header closeButton>
+              <Modal.Title>What city to next?</Modal.Title>
+            </Modal.Header>
             <Form>
-              <Modal.Header closeButton>
-                <Modal.Title>What city to next?</Modal.Title>
-              </Modal.Header>
-
               <Form.Group controlId="formForCity">
-                <Form.Control type="text" placeholder="Enter a city name..."></Form.Control>
+                <Form.Control value={city} type="text" placeholder="Enter a city name..." onChange={e => setCity(e.target.value)}></Form.Control>
               </Form.Group>
               <Form.Group controlId="formForCountry">
-                <Form.Control type="text" placeholder="Enter a country name..."></Form.Control>
+                <Form.Control value={country} type="text" placeholder="Enter a country name..." onChange={e => setCountry(e.target.value)}></Form.Control>
               </Form.Group>
-
-              <Modal.Footer>
-                <Button size="sm" variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
-                <Button size="sm" variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>
-              </Modal.Footer>
             </Form>
+            <Modal.Footer>
+              <Button size="sm" variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
+              <Button size="sm" variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>
+            </Modal.Footer>
           </Modal>
         :
           <Button size="sm" onClick={() => setShowModal(true)}>Add City</Button>

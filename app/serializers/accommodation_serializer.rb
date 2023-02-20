@@ -1,5 +1,5 @@
 class AccommodationSerializer < ActiveModel::Serializer
-  attributes :id, :city_id, :information, :start_datetime, :end_datetime, :cost, :notes
+  attributes :id, :city_id, :start_datetime, :end_datetime, :cost, :description
 
   belongs_to :city
 end
