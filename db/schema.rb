@@ -49,9 +49,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_12_051013) do
   end
 
   create_table "transportations", force: :cascade do |t|
-    t.integer "start_location"
+    t.integer "start_location_id"
     t.datetime "start_datetime"
-    t.integer "end_location"
+    t.integer "end_location_id"
     t.datetime "end_datetime"
     t.float "cost"
     t.string "description"
@@ -83,4 +83,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_12_051013) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "transportations", "cities", column: "end_location_id"
+  add_foreign_key "transportations", "cities", column: "start_location_id"
 end
