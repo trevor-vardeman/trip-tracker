@@ -42,7 +42,7 @@ function TripAddCity() {
 
   return (
     <Stack>
-      <Button size="sm" onClick={() => setShowModal(true)}>Add City</Button>
+      <Button className="small-button" size="sm" onClick={() => setShowModal(true)}>Add City</Button>
       <Modal
         show={showModal}
         onHide={() => setShowModal(false)}

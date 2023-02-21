@@ -24,8 +24,8 @@ function Trip() {
       {currentTrip !== null 
         ? <Stack className="trip">
             <TripName />
-              <Stack direction="horizontal">
-                <TripAddCity />
+            <TripAddCity />
+              <Stack className="small-button" direction="horizontal">
                 <TripAddTransportation selectedCity={selectedCity} />
                 <TripAddAccommodation selectedCity={selectedCity} />
                 <TripAddActivity selectedCity={selectedCity} />

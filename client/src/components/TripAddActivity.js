@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useUserContext, useUserUpdate } from './UserContext'
+import { useUserUpdate } from './UserContext'
 import { useTripContext } from './CurrentTripContext'
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
@@ -8,9 +8,8 @@ import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
 
 function TripAddActivity({ selectedCity }) {
-  const user = useUserContext()
   const userUpdate = useUserUpdate()
-  const {currentTrip, setCurrentTrip} = useTripContext()
+  const {setCurrentTrip} = useTripContext()
   const [showModal, setShowModal] = useState(false)
   const [description, setDescription] = useState("")
   const [startDateTime, setStartDateTime] = useState("")
