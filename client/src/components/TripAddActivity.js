@@ -1,47 +1,84 @@
 import { useState } from 'react'
+import { useUserContext, useUserUpdate } from './UserContext'
+import { useTripContext } from './CurrentTripContext'
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
+import InputGroup from 'react-bootstrap/InputGroup'
 import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
 
 function TripAddActivity({ selectedCity }) {
+  const user = useUserContext()
+  const userUpdate = useUserUpdate()
+  const {currentTrip, setCurrentTrip} = useTripContext()
   const [showModal, setShowModal] = useState(false)
+  const [description, setDescription] = useState("")
+  const [startDateTime, setStartDateTime] = useState("")
+  const [endDateTime, setEndDateTime] = useState("")
+  const [cost, setCost] = useState("")
+
   const handleSubmit = e => {
     e.preventDefault()
-    console.log(e)
+    if (!description || !startDateTime || !endDateTime) {
+      alert("Please add a description, start date/time, and end date/time.")
+    } else {
+      const activity = {
+        city_id: selectedCity.id,
+        description: description,
+        start_datetime: startDateTime,
+        end_datetime: endDateTime,
+        cost: cost
+      }
+      fetch("/activities", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", },
+        body: JSON.stringify(activity)
+      })
+      .then(r => r.json())
+      .then(user => {
+        console.log(user)
+        userUpdate(user)
+        setCurrentTrip(user.trips[user.trips.length - 1])
+        setDescription("")
+        setStartDateTime("")
+        setEndDateTime("")
+        setCost("")
+        setShowModal(false)
+      })
+      .catch(e => alert(e))
+    }
   }
 
   return (
     <Stack>
-    {showModal
-      ?
-        <Modal
-          show={showModal}
-          onHide={() => setShowModal(false)}
-          backdrop="static"
-          keyboard={false}
-        >
-          <Form>
-            <Modal.Header closeButton>
-              <Modal.Title>What city to next?</Modal.Title>
-            </Modal.Header>
+      {!selectedCity ? <Button size="sm" disabled onClick={() => alert("Please select a city first.")}>Add Activity</Button> : <Button size="sm" onClick={() => setShowModal(true)}>Add Activity</Button>}
 
-            <Form.Group controlId="formForCity">
-              <Form.Control type="text" placeholder="Enter a city name..."></Form.Control>
-            </Form.Group>
-            <Form.Group controlId="formForCountry">
-              <Form.Control type="text" placeholder="Enter a country name..."></Form.Control>
-            </Form.Group>
+      <Modal show={showModal} backdrop="static" keyboard={false} onHide={() => setShowModal(false)}>
+        <Modal.Header closeButton>
+          {!selectedCity ? null : <Modal.Title>Add an Activity in {selectedCity.city}</Modal.Title>}
+        </Modal.Header>
 
-            <Modal.Footer>
-              <Button size="sm" variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
-              <Button size="sm" variant="primary" type="submit" onClick={e => handleSubmit(e)}>Submit</Button>
-            </Modal.Footer>
-          </Form>
-        </Modal>
-      :
-        <Button size="sm" onClick={() => setShowModal(true)}>Add Activity</Button>
-    }
+        <Form>
+          <Form.Group controlId="formForDescription">
+            <Form.Control value={description} type="text" placeholder="Enter a description..." onChange={e => setDescription(e.target.value)}></Form.Control>
+          </Form.Group>
+          <Form.Group controlId="formForStartDateTime">
+            <Form.Control value={startDateTime} type="datetime-local" placeholder="Select the start date/time" onChange={e => setStartDateTime(e.target.value)}></Form.Control>
+          </Form.Group>
+          <Form.Group controlId="formForEndDateTime">
+            <Form.Control value={endDateTime} type="datetime-local" placeholder="Select the end date/time" onChange={e => setEndDateTime(e.target.value)}></Form.Control>
+          </Form.Group>
+          <InputGroup id="formForCost">
+            <InputGroup.Text>$</InputGroup.Text>
+            <Form.Control value={cost} type="number" placeholder={!cost ? "How much does this activity cost? (Optional)" : `$${cost}`} onChange={e => setCost(e.target.value)} />
+          </InputGroup>
+        </Form>
+
+        <Modal.Footer>
+          <Button size="sm" variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
+          <Button size="sm" variant="primary" type="submit" onClick={e => handleSubmit(e)}>Submit</Button>
+        </Modal.Footer>
+      </Modal>
   </Stack>
   )
 }

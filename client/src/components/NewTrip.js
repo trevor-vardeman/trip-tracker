@@ -9,11 +9,11 @@ import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 
 function NewTrip() {
-  const [showModal, setShowModal] = useState(true)
   const user = useUserContext()
   const userUpdate = useUserUpdate()
-  const history = useHistory()
   const {currentTrip, setCurrentTrip} = useTripContext()
+  const history = useHistory()
+  const [showModal, setShowModal] = useState(true)
   const [city, setCity] = useState("")
   const [country, setCountry] = useState("")
 

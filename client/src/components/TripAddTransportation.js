@@ -14,33 +14,29 @@ function TripAddTransportation({ selectedCity }) {
 
   return (
     <Stack>
-    {showModal
-      ?
-        <Modal
-          show={showModal}
-          onHide={() => setShowModal(false)}
-          backdrop="static"
-          keyboard={false}
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>Add Transportation</Modal.Title>
-          </Modal.Header>
-          <Form>
-            <Form.Group controlId="formForType">
-              <Form.Control type="text" placeholder="Enter a city name..."></Form.Control>
-            </Form.Group>
-            <Form.Group controlId="formForCountry">
-              <Form.Control type="text" placeholder="Enter a country name..."></Form.Control>
-            </Form.Group>
-          </Form>
-            <Modal.Footer>
-              <Button size="sm" variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
-              <Button size="sm" variant="primary" type="submit" onClick={e => handleSubmit(e)}>Submit</Button>
-            </Modal.Footer>
-        </Modal>
-      :
-        <Button size="sm" onClick={() => setShowModal(true)}>Add Transportation</Button>
-    }
+      <Button size="sm" onClick={() => setShowModal(true)}>Add Transportation</Button>
+      <Modal
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Add Transportation</Modal.Title>
+        </Modal.Header>
+        <Form>
+          <Form.Group controlId="formForType">
+            <Form.Control type="text" placeholder="Enter a city name..."></Form.Control>
+          </Form.Group>
+          <Form.Group controlId="formForCountry">
+            <Form.Control type="text" placeholder="Enter a country name..."></Form.Control>
+          </Form.Group>
+        </Form>
+          <Modal.Footer>
+            <Button size="sm" variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
+            <Button size="sm" variant="primary" type="submit" onClick={e => handleSubmit(e)}>Submit</Button>
+          </Modal.Footer>
+      </Modal>
   </Stack>
   )
 }

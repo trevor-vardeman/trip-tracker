@@ -6,10 +6,7 @@ import Stack from 'react-bootstrap/Stack'
 
 function TripName() {
   const [tripName, setTripName] = useState("")
-  const {
-    currentTrip, 
-    setCurrentTrip
-  } = useTripContext()
+  const {currentTrip, setCurrentTrip} = useTripContext()
   
   const handleSubmit = (e) => {
     e.preventDefault()

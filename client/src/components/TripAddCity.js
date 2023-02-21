@@ -14,10 +14,10 @@ function TripAddCity() {
   const [country, setCountry] = useState("")
 
   const handleSubmit = e => {
+    e.preventDefault()
     if (!city || !country) {
       alert("Please enter a city and country name.")
     } else {
-      e.preventDefault()
       const cityCountry = {
         trip_id: currentTrip.id,
         city: city,
@@ -42,33 +42,29 @@ function TripAddCity() {
 
   return (
     <Stack>
-      {showModal
-        ?
-          <Modal
-            show={showModal}
-            onHide={() => setShowModal(false)}
-            backdrop="static"
-            keyboard={false}
-          >
-            <Modal.Header closeButton>
-              <Modal.Title>What city to next?</Modal.Title>
-            </Modal.Header>
-            <Form>
-              <Form.Group controlId="formForCity">
-                <Form.Control value={city} type="text" placeholder="Enter a city name..." onChange={e => setCity(e.target.value)}></Form.Control>
-              </Form.Group>
-              <Form.Group controlId="formForCountry">
-                <Form.Control value={country} type="text" placeholder="Enter a country name..." onChange={e => setCountry(e.target.value)}></Form.Control>
-              </Form.Group>
-            </Form>
-            <Modal.Footer>
-              <Button size="sm" variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
-              <Button size="sm" variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>
-            </Modal.Footer>
-          </Modal>
-        :
-          <Button size="sm" onClick={() => setShowModal(true)}>Add City</Button>
-      }
+      <Button size="sm" onClick={() => setShowModal(true)}>Add City</Button>
+      <Modal
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>What city to next?</Modal.Title>
+        </Modal.Header>
+        <Form>
+          <Form.Group controlId="formForCity">
+            <Form.Control value={city} type="text" placeholder="Enter a city name..." onChange={e => setCity(e.target.value)}></Form.Control>
+          </Form.Group>
+          <Form.Group controlId="formForCountry">
+            <Form.Control value={country} type="text" placeholder="Enter a country name..." onChange={e => setCountry(e.target.value)}></Form.Control>
+          </Form.Group>
+        </Form>
+        <Modal.Footer>
+          <Button size="sm" variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
+          <Button size="sm" variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>
+        </Modal.Footer>
+      </Modal>
     </Stack>
   )
 }
