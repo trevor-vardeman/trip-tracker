@@ -35,3 +35,7 @@ body {
 .selected-city {
   outline: 2px solid orange;
 }
+
+.trip-start-end {
+  font-weight: bold;
+}
