@@ -32,6 +32,10 @@ body {
   display: flex;
 }
 
+.city {
+  cursor: pointer;
+}
+
 .selected-city {
   outline: 2px solid orange;
 }

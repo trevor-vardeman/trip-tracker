@@ -2,7 +2,7 @@ class TransportationsController < ApplicationController
   def create
     transportation = Transportation.create(transportation_params)
     if transportation.valid?
-      render json: current_user, include: ["trips", "trips.tags", "trips.cities", "trips.cities.activities", "trips.cities.accommodations", "trips.cities.transportations", "trips.trip_tags", "cities", "transportations"], status: :accepted
+      render json: current_user, include: ["trips", "trips.tags", "trips.cities", "trips.cities.activities", "trips.cities.accommodations", "trips.cities.start_locations", "trips.cities.end_locations", "trips.trip_tags", "cities"], status: :accepted
     else
       render json: { error: transportation.errors.full_messages }, status: :unprocessable_entity
     end

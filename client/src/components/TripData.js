@@ -23,7 +23,6 @@ function TripData({ handleCitySelection }) {
             id={index.toString()}
             relations={[
               {
-                // targetId: (index + 1).toString(),
                 targetId: (index + 1).toString(),
                 targetAnchor: 'top',
                 sourceAnchor: 'bottom',
@@ -33,9 +32,9 @@ function TripData({ handleCitySelection }) {
           >
             <p 
               key={city.id} 
-              className={`${city.id === selectedCityStyle ? "selected-city" : "null"}`}
+              className={`${city.id === selectedCityStyle ? "selected-city" : "null"} city`}
               onClick={() => citySelection(city)}
-            >{city.city}, {city.country}, {index.toString()}, {typeof index.toString()}</p>
+            >{city.city}, {city.country}</p>
           </ArcherElement>
         ))}
       </ArcherContainer>
