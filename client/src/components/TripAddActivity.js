@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup'
 import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
+import FileUpload from './FileUpload'
 
 function TripAddActivity({ selectedCity }) {
   const userUpdate = useUserUpdate()
@@ -15,38 +16,37 @@ function TripAddActivity({ selectedCity }) {
   const [startDateTime, setStartDateTime] = useState("")
   const [endDateTime, setEndDateTime] = useState("")
   const [cost, setCost] = useState("")
+  const [file, setFile] = useState(null)
+  const handleFileUpload = (e, newFile) => {
+    e.preventDefault()
+    console.log(newFile)
+    // setFile(newFile)
+  }
 
   const handleSubmit = e => {
     e.preventDefault()
-    if (!description || !startDateTime || !endDateTime) {
-      alert("Please add a description, start date/time, and end date/time.")
-    } else {
-      const activity = {
-        city_id: selectedCity.id,
-        description: description,
-        start_datetime: startDateTime,
-        end_datetime: endDateTime,
-        cost: cost
-      }
-      fetch("/activities", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", },
-        body: JSON.stringify(activity)
-      })
-      .then(r => r.json())
-      .then(user => {
-        console.log(user)
-        userUpdate(user)
-        setCurrentTrip(user.trips[user.trips.length - 1])
-        setDescription("")
-        setStartDateTime("")
-        setEndDateTime("")
-        setCost("")
-        setShowModal(false)
-      })
-      .catch(e => alert(e))
+
+    const activity = {
+      city_id: selectedCity.id,
+      description: description,
+      start_datetime: startDateTime,
+      end_datetime: endDateTime,
+      cost: cost
     }
-  }
+
+    fetch("/activities", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", },
+      body: JSON.stringify(activity)
+    })
+    .then(r => r.json())
+    .then(user => {
+      const newestTrip = user.trips[user.trips.length - 1]
+      const newestCity = newestTrip.cities[newestTrip.cities.length - 1]
+      const newestActivity = newestCity.activities[newestCity.activities.length - 1]
+      setShowModal(false)
+      console.log("user", user)
+  })}
 
   return (
     <Stack>
@@ -72,6 +72,7 @@ function TripAddActivity({ selectedCity }) {
             <Form.Control value={cost} type="number" placeholder={!cost ? "How much does this activity cost? (Optional)" : `$${cost}`} onChange={e => setCost(e.target.value)} />
           </InputGroup>
         </Form>
+        <FileUpload file={file} handleFileUpload={handleFileUpload} />
 
         <Modal.Footer>
           <Button size="sm" variant="secondary" onClick={() => setShowModal(false)}>Close</Button>

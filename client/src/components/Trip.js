@@ -25,6 +25,7 @@ function Trip() {
         ? <Stack className="trip">
             <TripName />
             <TripAddCity />
+            <p>Select a city to add...</p>
               <Stack className="small-button" direction="horizontal">
                 <TripAddTransportation selectedCity={selectedCity} />
                 <TripAddAccommodation selectedCity={selectedCity} />

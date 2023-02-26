@@ -11,6 +11,6 @@ class AccommodationsController < ApplicationController
   private
 
   def accommodation_params
-    params.permit(:city_id, :description, :start_datetime, :end_datetime, :cost)
+    params.permit(:city_id, :description, :start_datetime, :end_datetime, :cost, :image)
   end
 end

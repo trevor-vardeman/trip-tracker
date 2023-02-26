@@ -23,7 +23,8 @@ body {
 }
 
 .trip-data {
-  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
   border-color: black;
   border-style: solid;
   width: 50vw;
@@ -42,4 +43,10 @@ body {
 
 .trip-start-end {
   font-weight: bold;
+}
+
+.img {
+  height: auto;
+  width: 100%;
+  align-self: center;
 }

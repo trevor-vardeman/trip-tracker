@@ -113,7 +113,7 @@ function TripAddActivity({ selectedCity }) {
               <Dropdown.Toggle as={CustomToggle} id="dropdownForStartLocation">Starting Location</Dropdown.Toggle>
                 <Dropdown.Menu as={CustomMenu}>
                   {sortedCities.map(city => (
-                    <Dropdown.Item key={city.id} size="sm" value={startLocation} onClick={() => setStartLocation([city])} href={`#/action-${city.id}`}>{city.city}, {city.country}</Dropdown.Item>
+                    <Dropdown.Item key={city.id} size="sm" value={startLocation} onClick={() => setStartLocation([city])}>{city.city}, {city.country}</Dropdown.Item>
                   ))}
                   <Dropdown.Divider />
                   <Dropdown.Item eventKey="noCity">Don't see your city? Create it first.</Dropdown.Item>
@@ -131,7 +131,7 @@ function TripAddActivity({ selectedCity }) {
               <Dropdown.Toggle as={CustomToggle} id="dropdownForStartLocation">Destination</Dropdown.Toggle>
                 <Dropdown.Menu as={CustomMenu}>
                   {sortedCities.map(city => (
-                    <Dropdown.Item key={city.id} size="sm" value={endLocation} onClick={() => setEndLocation([city])} href={`#/action-${city.id}`}>{city.city}, {city.country}</Dropdown.Item>
+                    <Dropdown.Item key={city.id} size="sm" value={endLocation} onClick={() => setEndLocation([city])}>{city.city}, {city.country}</Dropdown.Item>
                   ))}
                   <Dropdown.Divider />
                   <Dropdown.Item eventKey="noCity">Don't see your city? Create it first.</Dropdown.Item>

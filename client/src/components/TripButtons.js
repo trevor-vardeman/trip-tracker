@@ -5,10 +5,7 @@ import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
 
 function TripButtons() {
-  const {
-    currentTrip, 
-    setCurrentTrip
-  } = useTripContext()
+  const {currentTrip, setCurrentTrip} = useTripContext()
   const history = useHistory()
   const userUpdate = useUserUpdate()
 
@@ -37,7 +34,10 @@ function TripButtons() {
         body: JSON.stringify({plan: true})
       })
       .then(r => r.json())
-      .then(user => userUpdate(user))
+      .then(user => {
+        userUpdate(user)
+        alert("Trip finalized!")
+      })
       .catch(e => alert(e))
     }
   }

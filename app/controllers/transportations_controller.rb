@@ -11,6 +11,6 @@ class TransportationsController < ApplicationController
   private
 
   def transportation_params
-    params.permit(:id, :start_location_id, :start_datetime, :end_location_id, :end_datetime, :cost, :description)
+    params.permit(:id, :start_location_id, :start_datetime, :end_location_id, :end_datetime, :cost, :description, :image)
   end
 end
