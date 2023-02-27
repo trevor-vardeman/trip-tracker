@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   post "/accommodation-image", to: "accommodation#add_image"
   post "/activity-images", to: "activities#add_file"
   post "/transportation-image", to: "transportation#add_image"
+  post "/user-avatar", to: "users#avatar"
   get '*path', to: 'fallback#index', constraints: ->(req) { !req.xhr? && req.format.html }
   # req.path.exclude?('rails/active_storage')}
 end

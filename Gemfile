@@ -33,7 +33,11 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 1.2"
 
-gem "aws-sdk-s3"
+# gem "aws-sdk-s3"
+
+gem "google-cloud-storage", "~> 1.11", require: false
+
+gem "dotenv-rails", "~> 2.7"
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem "rack-cors"
@@ -49,6 +53,7 @@ group :development do
 end
 
 gem "active_model_serializers", "~> 0.10.13"
+
 gem "byebug", "~> 11.1", :groups => [:development, :test]
 
 gem "net-http"

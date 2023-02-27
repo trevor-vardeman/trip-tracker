@@ -6,34 +6,38 @@
 #   service: Disk
 #   root: <%= Rails.root.join("storage") %>
 
+# # Use bin/rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
+# amazon:
+#   service: S3
+#   access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>
+#   secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
+#   region: us-east-1
+#   bucket: your_own_bucket
+
+# Remember not to checkin your GCS keyfile to a repository
 test:
-  service: S3
-  access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>
-  secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
-  region: us-west-1
+  service: GCS
+  project: spry-guru-379123
+  credentials: <%= Rails.application.credentials.gcskey.to_json %>
   bucket: flatiron-travel-app
 
 local:
-  service: S3
-  access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>
-  secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
-  region: us-west-1
+  service: GCS
+  project: spry-guru-379123
+  credentials: <%= Rails.application.credentials.gcskey.to_json %>
   bucket: flatiron-travel-app
 
-# Use bin/rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
-amazon:
-  service: S3
-  access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>
-  secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
-  region: us-west-1
+google_dev:
+  service: GCS
+  project: spry-guru-379123
+  credentials: <%= Rails.application.credentials.gcskey.to_json %>
   bucket: flatiron-travel-app
 
-# Remember not to checkin your GCS keyfile to a repository
-# google:
-#   service: GCS
-#   project: your_project
-#   credentials: <%= Rails.root.join("path/to/gcs.keyfile") %>
-#   bucket: your_own_bucket-<%= Rails.env %>
+google:
+  service: GCS
+  project: spry-guru-379123
+  credentials: <%= Rails.application.credentials.gcskey.to_json %>
+  bucket: flatiron-travel-app
 
 # Use bin/rails credentials:edit to set the Azure Storage secret (as azure_storage:storage_access_key)
 # microsoft:

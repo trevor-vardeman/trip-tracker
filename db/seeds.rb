@@ -9,7 +9,13 @@
 puts "Seeding..."
 
 User.create({username: "admin", password: "admin", password_confirmation: "admin"})
-User.create({username: "test", password: "test", password_confirmation: "test"})
+test = User.create({username: "test", password: "test", password_confirmation: "test"})
+test.avatar.attach(
+  io: File.open('./public/avatars/user.png'),
+  filename: 'user.png',
+  content_type: 'application/png'
+)
+
 
 Trip.create({user_id: 1, name: "Alaska Trip", plan: false, published: false, notes: "Hoping to go on this one."})
 Trip.create({user_id: 1, name: "Mexico Trip", plan: true, published: false, notes: "This is my second choice.."})

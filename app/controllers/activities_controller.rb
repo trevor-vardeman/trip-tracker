@@ -17,7 +17,7 @@ class ActivitiesController < ApplicationController
     # byebug
     activity.file.attach(params[:file])
     if activity.valid?
-      render json: activty, status: :accepted
+      render json: activity, status: :accepted
     else
       render json: { error: activity.errors.full_messages }, status: :unprocessable_entity
     end

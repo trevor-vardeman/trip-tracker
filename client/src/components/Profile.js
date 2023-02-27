@@ -1,10 +1,44 @@
-import { useUserContext } from './UserContext'
+import { useState } from 'react'
+import { useUserContext, useUserUpdate } from './UserContext'
+import Stack from 'react-bootstrap/Stack'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 
 function Profile() {
   const user = useUserContext()
+  const userUpdate = useUserUpdate()
+  const [avatar, setAvatar] = useState(null)
+
+  const submitAvatar = e => {
+    e.preventDefault()
+    const formData = new FormData()
+    formData.append("avatar", avatar)
+    console.log("formData", formData)
+
+    fetch("/user-avatar", {
+      method: "POST",
+      body: formData,
+    })
+      .then(r => r.json())
+      .then(data => console.log(data))
+  }
 
   return (
-    <div>Profile</div>
+    <div>
+      {user 
+        ? <Stack gap={3}>
+            <Form>
+              <Form.Group controlId="formAvatarUpload">
+                <Form.Label>Upload an Avatar</Form.Label>
+                <Form.Control type="file" accept="image/*" onChange={e => setAvatar(e.target.files[0])}></Form.Control>
+              </Form.Group>
+            </Form>
+            {user.avatar ? <img className="img" src={`https://storage.cloud.google.com/flatiron-travel-app/${user.avatar.toString()}`} alt="userAvatar"></img> : null}
+            <Button className="small-button" onClick={e => submitAvatar(e)}>Submit</Button>
+          </Stack>
+        : <p>You are not signed in. Click here to get signed in before editing your profile.</p>
+      }
+    </div>
   )
 }
 
