@@ -2,7 +2,6 @@ class UsersController < ApplicationController
 
   def show
     user = User.find_by(id: session[:user_id])
-    puts user.avatar.attached?
     # avatar = rails_blob_path(user.avatar)
     if user && user.avatar.attached? == true
       render json: {user: :user, avatar: user.avatar.key}, status: :ok
@@ -31,6 +30,7 @@ class UsersController < ApplicationController
   def avatar
     user = User.find_by(id: session[:user_id])
     user.avatar.attach(params[:avatar])
+    render json: {user: current_user, include: ["trips", "trips.tags", "trips.cities", "trips.cities.activities", "trips.cities.accommodations", "trips.cities.start_locations", "trips.cities.end_locations", "trips.trip_tags", "cities"], avatar: user.avatar.key}, status: :accepted
   end
 
   private
