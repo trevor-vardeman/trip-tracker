@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup'
 import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
-import FileUpload from './FileUpload'
+// import FileUpload from './FileUpload'
 
 function TripAddActivity({ selectedCity }) {
   const userUpdate = useUserUpdate()
@@ -16,12 +16,12 @@ function TripAddActivity({ selectedCity }) {
   const [startDateTime, setStartDateTime] = useState("")
   const [endDateTime, setEndDateTime] = useState("")
   const [cost, setCost] = useState("")
-  const [file, setFile] = useState(null)
-  const handleFileUpload = (e, newFile) => {
-    e.preventDefault()
-    console.log(newFile)
-    // setFile(newFile)
-  }
+  // const [file, setFile] = useState(null)
+  // const handleFileUpload = (e, newFile) => {
+  //   e.preventDefault()
+  //   console.log(newFile)
+  //   // setFile(newFile)
+  // }
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -72,7 +72,7 @@ function TripAddActivity({ selectedCity }) {
             <Form.Control value={cost} type="number" placeholder={!cost ? "How much does this activity cost? (Optional)" : `$${cost}`} onChange={e => setCost(e.target.value)} />
           </InputGroup>
         </Form>
-        <FileUpload file={file} handleFileUpload={handleFileUpload} />
+        {/* <FileUpload file={file} handleFileUpload={handleFileUpload} /> */}
 
         <Modal.Footer>
           <Button size="sm" variant="secondary" onClick={() => setShowModal(false)}>Close</Button>

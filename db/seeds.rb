@@ -10,11 +10,11 @@ puts "Seeding..."
 
 User.create({username: "admin", password: "admin", password_confirmation: "admin"})
 test = User.create({username: "test", password: "test", password_confirmation: "test"})
-test.avatar.attach(
-  io: File.open('./public/avatars/user.png'),
-  filename: 'user.png',
-  content_type: 'application/png'
-)
+# test.avatar.attach(
+#   io: File.open('./public/avatars/user.png'),
+#   filename: 'user.png',
+#   content_type: 'application/png'
+# )
 
 
 Trip.create({user_id: 1, name: "Alaska Trip", plan: false, published: false, notes: "Hoping to go on this one."})

@@ -41,9 +41,9 @@ function App() {
             <Route path="/plans">
               <Plans />
             </Route>
-            <route path="/cities">
+            <Route path="/cities">
               <Cities />
-            </route>
+            </Route>
             <Route path="/">
               <Home />
             </Route>
