@@ -8,7 +8,7 @@ import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
 // import FileUpload from './FileUpload'
 
-function TripAddActivity({ selectedCity }) {
+function TripAddActivity({ selectedCity, handleCitySelection }) {
   const userUpdate = useUserUpdate()
   const {setCurrentTrip} = useTripContext()
   const [showModal, setShowModal] = useState(false)
@@ -44,8 +44,9 @@ function TripAddActivity({ selectedCity }) {
       const newestTrip = user.trips[user.trips.length - 1]
       const newestCity = newestTrip.cities[newestTrip.cities.length - 1]
       const newestActivity = newestCity.activities[newestCity.activities.length - 1]
+      setCurrentTrip(newestTrip)
       setShowModal(false)
-      console.log("user", user)
+      console.log(user)
   })}
 
   return (

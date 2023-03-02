@@ -7,6 +7,7 @@ import Register from './Register'
 import Login from './Login'
 import Profile from './Profile'
 import NewTrip from './NewTrip'
+import Trip from './Trip'
 import Drafts from './Drafts'
 import Plans from './Plans'
 import Cities from './Cities'
@@ -34,6 +35,9 @@ function App() {
             </Route>
             <Route path="/new-trip">
               <NewTrip />
+            </Route>
+            <Route path="/drafts/:id">
+              <Trip />
             </Route>
             <Route path="/drafts">
               <Drafts />

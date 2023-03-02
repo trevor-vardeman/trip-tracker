@@ -8,7 +8,7 @@ import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
 import Dropdown from 'react-bootstrap/Dropdown'
 
-function TripAddActivity({ selectedCity }) {
+function TripAddActivity({ selectedCity, handleCitySelection }) {
   const userUpdate = useUserUpdate()
   const {currentTrip, setCurrentTrip} = useTripContext()
   const [showModal, setShowModal] = useState(false)

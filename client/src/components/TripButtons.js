@@ -5,7 +5,7 @@ import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
 
 function TripButtons() {
-  const {currentTrip, setCurrentTrip} = useTripContext()
+  const { currentTrip } = useTripContext()
   const history = useHistory()
   const userUpdate = useUserUpdate()
 

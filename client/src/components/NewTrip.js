@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useHistory } from "react-router-dom"
 import { useUserContext, useUserUpdate } from './UserContext'
 import { useTripContext } from './CurrentTripContext'
+import TripContainer from './TripContainer'
 import Trip from './Trip'
 import Stack from 'react-bootstrap/Stack'
 import Form from 'react-bootstrap/Form'
@@ -83,7 +84,7 @@ function NewTrip() {
             </Form>
           </Modal>
         :
-          <Trip currentTrip={currentTrip} />
+          <TripContainer />
       }
     </Stack>
   )

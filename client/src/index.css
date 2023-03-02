@@ -34,6 +34,19 @@ body {
   display: flex;
 }
 
+.city-details {
+  transform: translate(50px, 40%);
+  align-items: center;
+  place-self: center;
+  justify-content: space-between;
+  border-color: black;
+  border-style: solid;
+  width: 50vw;
+  height: 50vw;
+  background-color: lightgrey;
+  display: flex;
+}
+
 .city {
   cursor: pointer;
 }

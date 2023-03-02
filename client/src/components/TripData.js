@@ -4,7 +4,7 @@ import { ArcherContainer, ArcherElement } from "react-archer"
 import Stack from 'react-bootstrap/Stack'
 
 function TripData({ handleCitySelection }) {
-  const { currentTrip, setCurrentTrip } = useTripContext()
+  const { currentTrip } = useTripContext()
   const [selectedCityStyle, setSelectedCityStyle] = useState("")
   const citySelection = (city) => {
     console.log("city", city)

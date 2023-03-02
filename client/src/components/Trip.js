@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useTripContext } from './CurrentTripContext'
 import TripName from './TripName'
 import TripData from './TripData'
@@ -10,26 +9,20 @@ import TripAddAccommodation from './TripAddAccommodation'
 import TripAddActivity from './TripAddActivity'
 import Stack from 'react-bootstrap/Stack'
 
-function Trip() {
-  const {currentTrip, setCurrentTrip} = useTripContext()
-  const [selectedCity, setSelectedCity] = useState(null)
-
-  const handleCitySelection = city => {
-    setSelectedCity(city)
-    console.log("trip", city)
-  }
+function Trip({ selectedCity, handleCitySelection }) {
+  const { currentTrip } = useTripContext()
 
   return (
     <Stack>
-      {currentTrip !== null 
+      {currentTrip !== null
         ? <Stack className="trip">
             <TripName />
             <TripAddCity />
             <p>Select a city to add...</p>
               <Stack className="small-button" direction="horizontal">
-                <TripAddTransportation selectedCity={selectedCity} />
-                <TripAddAccommodation selectedCity={selectedCity} />
-                <TripAddActivity selectedCity={selectedCity} />
+                <TripAddTransportation selectedCity={selectedCity} handleCitySelection={handleCitySelection} />
+                <TripAddAccommodation selectedCity={selectedCity} handleCitySelection={handleCitySelection} />
+                <TripAddActivity selectedCity={selectedCity} handleCitySelection={handleCitySelection} />
               </Stack>
             <TripData handleCitySelection={handleCitySelection} />
             <TripSummary />

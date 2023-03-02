@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :transportations
   resources :cities
   resources :trips
-  resources :users, only: [:create, :show, :index]
+  resources :users, only: [:create, :show]
   
   get "/me", to: "users#show"
   post "/signup", to: "users#create"
