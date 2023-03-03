@@ -43,12 +43,16 @@ function TripAddActivity() {
     })
     .then(r => r.json())
     .then(user => {
+      setShowModal(false)
+      userUpdate(user)
       const updatedTrip = user.trips.filter(trip => trip.id === currentTrip.id)[0]
       setCurrentTrip(updatedTrip)
       const updatedCity = updatedTrip.cities.filter(city => city.id === currentCity.id)[0]
       setCurrentCity(updatedCity)
-      userUpdate(user)
-      setShowModal(false)
+      setDescription("")
+      setStartDateTime("")
+      setEndDateTime("")
+      setCost("")
   })}
 
   return (

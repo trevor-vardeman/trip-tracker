@@ -30,11 +30,11 @@ function TripAddCity() {
       })
       .then(r => r.json())
       .then(user => {
+        setShowModal(false)
         userUpdate(user)
         setCurrentTrip(user.trips[user.trips.length - 1])
         setCity("")
         setCountry("")
-        setShowModal(false)
       })
       .catch(e => alert(e))
     }

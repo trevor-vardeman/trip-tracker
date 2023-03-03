@@ -15,7 +15,7 @@ function Trip() {
   return (
     <Stack>
       {currentTrip !== null
-        ? <Stack className="trip">
+        ? <Stack>
             <TripName />
             <TripAddCity />
             <p>Select a city to add...</p>

@@ -15,7 +15,7 @@ function TripData() {
 
   return (
     <Stack className="trip-data">
-      <p className="trip-start-end">Trip Start</p>
+      <p className="box-header-footer">Trip Start</p>
       <ArcherContainer>
         {currentTrip.cities.map((city, index) => (
           <ArcherElement 
@@ -38,7 +38,7 @@ function TripData() {
           </ArcherElement>
         ))}
       </ArcherContainer>
-      <p className="trip-start-end">Trip End</p>
+      <p className="box-header-footer">Trip End</p>
     </Stack>
   )
 }

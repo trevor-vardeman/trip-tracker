@@ -11,8 +11,8 @@ import Dropdown from 'react-bootstrap/Dropdown'
 
 function TripAddActivity() {
   const userUpdate = useUserUpdate()
-  const {currentTrip, setCurrentTrip} = useTripContext()
-  const { currentCity } = useCityContext()
+  const { currentTrip, setCurrentTrip } = useTripContext()
+  const { currentCity, setCurrentCity } = useCityContext()
   const [showModal, setShowModal] = useState(false)
   const [description, setDescription] = useState("")
   const [startLocation, setStartLocation] = useState(null)
@@ -42,14 +42,16 @@ function TripAddActivity() {
       })
       .then(r => r.json())
       .then(user => {
-        console.log(user)
+        setShowModal(false)
         userUpdate(user)
-        setCurrentTrip(user.trips[user.trips.length - 1])
+        const updatedTrip = user.trips.filter(trip => trip.id === currentTrip.id)[0]
+        setCurrentTrip(updatedTrip)
+        const updatedCity = updatedTrip.cities.filter(city => city.id === currentCity.id)[0]
+        setCurrentCity(updatedCity)
         setDescription("")
         setStartDateTime("")
         setEndDateTime("")
         setCost("")
-        setShowModal(false)
       })
       .catch(e => alert(e))
     }

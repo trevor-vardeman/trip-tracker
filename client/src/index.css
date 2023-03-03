@@ -17,12 +17,6 @@ body {
   size: "sm";
 }
 
-.trip {
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
-}
-
 .trip-data {
   align-items: center;
   justify-content: space-between;
@@ -35,10 +29,9 @@ body {
 }
 
 .city-details {
-  transform: translate(50px, 40%);
   align-items: center;
-  place-self: center;
   justify-content: space-between;
+  transform: translate(50px, 40%);
   border-color: black;
   border-style: solid;
   width: 50vw;
@@ -55,7 +48,7 @@ body {
   outline: 2px solid orange;
 }
 
-.trip-start-end {
+.box-header-footer {
   font-weight: bold;
 }
 
@@ -72,4 +65,12 @@ body {
   height: 50px;
   overflow: hidden;
   border-radius: 50%;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.xsmall {
+  font-size: xx-small;
 }
