@@ -1,17 +1,20 @@
 import { useState } from 'react'
+import { useTripContext } from './CurrentTripContext'
 import Stack from 'react-bootstrap/Stack'
 import Trip from './Trip'
 import CityDetails from './CityDetails'
 
 function TripContainer() {
+  const { currentTrip } = useTripContext()
   const [selectedCity, setSelectedCity] = useState(null)
   const handleCitySelection = city => {
-    // if (selectedCity === null) {
+    if (selectedCity === null) {
       setSelectedCity(city)
-      console.log("city", city)
-    // } else {
-    //   console.log(selectedCity)
-    // }
+    } else {
+      const updateExistingCity = currentTrip.cities.filter(city => city.id === selectedCity.id)
+      setSelectedCity(updateExistingCity)
+    }
+    console.log("selectedCity", selectedCity)
   }
 
   return (

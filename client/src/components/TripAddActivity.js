@@ -46,7 +46,7 @@ function TripAddActivity({ selectedCity, handleCitySelection }) {
       const newestActivity = newestCity.activities[newestCity.activities.length - 1]
       setCurrentTrip(newestTrip)
       setShowModal(false)
-      console.log(user)
+      userUpdate(user)
   })}
 
   return (

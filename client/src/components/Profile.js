@@ -37,7 +37,7 @@ function Profile() {
               </Form.Group>
               <Button className="small-button" onClick={e => submitAvatar(e)}>Submit</Button>
             </Form>
-            {user.avatar ? <img className="img" src={`https://storage.cloud.google.com/flatiron-travel-app/${user.avatar.toString()}`} alt="userAvatar"></img> : null}
+            {user.avatar ? <img className="img" src={`https://storage.cloud.google.com/flatiron-travel-app/${user.avatar.toString()}`} alt="userAvatar"/> : null}
           </Stack>
         : <p>You are not signed in. Click here to get signed in before editing your profile.</p>
       }

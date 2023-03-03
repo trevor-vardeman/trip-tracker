@@ -6,10 +6,10 @@ function CityDetails({ selectedCity }) {
   if (selectedCity) {
     return (
       <Stack className="city-details">
+        <p className="trip-start-end">City Details</p>
         {selectedCity.activities.map((activity) => (
-          <p>{activity.description}</p>
+          <p key={activity.id}>{activity.description}</p>
         ))}
-        <p>test</p>
       </Stack>
     )
   } else return null

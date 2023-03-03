@@ -10,12 +10,12 @@ function Nav() {
     <Stack gap={3}>
       {user
         ? <Stack gap={3}>
-            <button className="small-button" onClick={logout}>logout</button>
-            <NavLink to="/profile">Profile</NavLink>
+            <NavLink to="/profile"><img href="" className="circle" src={`https://storage.cloud.google.com/flatiron-travel-app/${user.avatar.toString()}`} alt="userAvatar"/></NavLink>
             <NavLink to="/new-trip">New Trip</NavLink>
             <NavLink to="/drafts">Drafts</NavLink>
             <NavLink to="/plans">Plans</NavLink>
             <NavLink to="/cities">Cities</NavLink>
+            <button className="small-button" onClick={logout}>logout</button>
           </Stack>
       :   <Stack>
             <NavLink to="/register">Sign in</NavLink>
