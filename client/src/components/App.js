@@ -11,8 +11,8 @@ import Trip from './Trip'
 import Drafts from './Drafts'
 import Plans from './Plans'
 import Cities from './Cities'
-import { UserProvider } from './UserContext'
-import { TripProvider } from './CurrentTripContext'
+import { UserProvider } from './context/UserContext'
+import { TripProvider } from './context/CurrentTripContext'
 
 export const UserContext = React.createContext()
 export const CurrentTripContext = React.createContext()

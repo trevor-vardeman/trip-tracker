@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useTripContext } from './CurrentTripContext'
+import { useTripContext } from './context/CurrentTripContext'
 import Stack from 'react-bootstrap/Stack'
 import Trip from './Trip'
 import CityDetails from './CityDetails'

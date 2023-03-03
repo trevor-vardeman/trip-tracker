@@ -1,4 +1,4 @@
-import { useTripContext } from './CurrentTripContext'
+import { useTripContext } from './context/CurrentTripContext'
 import TripName from './TripName'
 import TripData from './TripData'
 import TripSummary from './TripSummary'

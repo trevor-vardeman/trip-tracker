@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { useUserUpdate } from './UserContext'
-import { useTripContext } from './CurrentTripContext'
+import { useUserUpdate } from './context/UserContext'
+import { useTripContext } from './context/CurrentTripContext'
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup'

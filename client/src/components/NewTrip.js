@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useHistory } from "react-router-dom"
-import { useUserContext, useUserUpdate } from './UserContext'
-import { useTripContext } from './CurrentTripContext'
+import { useUserContext, useUserUpdate } from './context/UserContext'
+import { useTripContext } from './context/CurrentTripContext'
 import TripContainer from './TripContainer'
 import Trip from './Trip'
 import Stack from 'react-bootstrap/Stack'

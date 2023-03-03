@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useTripContext } from './CurrentTripContext'
+import { useTripContext } from './context/CurrentTripContext'
 import { ArcherContainer, ArcherElement } from "react-archer"
 import Stack from 'react-bootstrap/Stack'
 
