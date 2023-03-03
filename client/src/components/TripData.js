@@ -1,16 +1,16 @@
 import { useState } from 'react'
-import { useTripContext } from './context/CurrentTripContext'
+import { useTripContext } from '../context/CurrentTripContext'
+import { useCityContext } from '../context/CurrentCityContext'
 import { ArcherContainer, ArcherElement } from "react-archer"
 import Stack from 'react-bootstrap/Stack'
 
-function TripData({ handleCitySelection }) {
+function TripData() {
   const { currentTrip } = useTripContext()
+  const { setCurrentCity } = useCityContext()
   const [selectedCityStyle, setSelectedCityStyle] = useState("")
-  const citySelection = (city) => {
-    console.log("city", city)
+  const citySelection = city => {
     setSelectedCityStyle(city.id)
-    console.log(selectedCityStyle, "selectedCityStyle")
-    handleCitySelection(city)
+    setCurrentCity(city)
   }
 
   return (

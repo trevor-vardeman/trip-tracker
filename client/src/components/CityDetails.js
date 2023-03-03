@@ -1,13 +1,15 @@
+import { useCityContext } from '../context/CurrentCityContext'
 import Stack from 'react-bootstrap/Stack'
 
-function CityDetails({ selectedCity }) {
-  console.log("selectedCity", selectedCity)
+function CityDetails() {
+  const { currentCity } = useCityContext()
+  console.log(currentCity)
 
-  if (selectedCity) {
+  if (currentCity) {
     return (
       <Stack className="city-details">
         <p className="trip-start-end">City Details</p>
-        {selectedCity.activities.map((activity) => (
+        {currentCity.activities.map((activity) => (
           <p key={activity.id}>{activity.description}</p>
         ))}
       </Stack>

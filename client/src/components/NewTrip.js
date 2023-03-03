@@ -1,9 +1,8 @@
 import { useState } from 'react'
 import { useHistory } from "react-router-dom"
-import { useUserContext, useUserUpdate } from './context/UserContext'
-import { useTripContext } from './context/CurrentTripContext'
+import { useUserContext, useUserUpdate } from '../context/UserContext'
+import { useTripContext } from '../context/CurrentTripContext'
 import TripContainer from './TripContainer'
-import Trip from './Trip'
 import Stack from 'react-bootstrap/Stack'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -12,7 +11,7 @@ import Modal from 'react-bootstrap/Modal'
 function NewTrip() {
   const user = useUserContext()
   const userUpdate = useUserUpdate()
-  const {currentTrip, setCurrentTrip} = useTripContext()
+  const { setCurrentTrip } = useTripContext()
   const history = useHistory()
   const [showModal, setShowModal] = useState(true)
   const [city, setCity] = useState("")
@@ -34,10 +33,8 @@ function NewTrip() {
       })
       .then(r => r.json())
       .then(user => {
-        console.log(user)
         userUpdate(user)
         setCurrentTrip(user.trips[user.trips.length - 1])
-        console.log(user.trips[user.trips.length - 1])
         setCity("")
         setCountry("")
         setShowModal(false)

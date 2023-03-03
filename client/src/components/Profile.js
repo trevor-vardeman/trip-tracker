@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useUserContext, useUserUpdate } from './context/UserContext'
+import { useUserContext, useUserUpdate } from '../context/UserContext'
 import Stack from 'react-bootstrap/Stack'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'

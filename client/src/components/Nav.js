@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import { useUserContext, useUserLogout } from './context/UserContext'
+import { useUserContext, useUserLogout } from '../context/UserContext'
 import Stack from 'react-bootstrap/Stack'
 
 function Nav() {

@@ -8,6 +8,7 @@ export function useCityContext() {
 
 export function CityProvider({ children }){
   const [currentCity, setCurrentCity] = useState(null)
+  
   return (
     <CurrentCityContext.Provider value={{ currentCity, setCurrentCity }}>
       {children}

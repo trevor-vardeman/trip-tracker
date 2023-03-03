@@ -37,16 +37,15 @@ export function UserProvider({ children }) {
     .then((r) => {
       if (r.ok) {
         r.json().then(user => {
-          console.log(user)
           setUser(user)
           setUserLoggedIn(true)
         })
       } else {
-        console.log("User not logged in.")
+        return
       }
   })},[userLoggedIn])
 
-  function register(username, password, passwordConfirmation) {
+  const register = (username, password, passwordConfirmation) => {
     fetch("/signup", {
       method: "POST",
       headers: {
@@ -61,7 +60,6 @@ export function UserProvider({ children }) {
       .then((r) => {
         if (r.ok) {
           r.json().then(user => {
-            console.log(user)
             setUser(user)
             setUserLoggedIn(true)
             history.push("/")
@@ -73,7 +71,7 @@ export function UserProvider({ children }) {
       .catch(e => alert(e))
   }
 
-  function login(username, password) {
+  const login = (username, password) => {
     fetch("/login", {
       method: "POST",
       headers: {
@@ -86,8 +84,7 @@ export function UserProvider({ children }) {
     })
       .then((r) => {
         if (r.ok) {
-          r.json().then(user => {
-            console.log(user)
+          r.json().then(() => {
             setUserLoggedIn(true)
             history.push("/")
           })
@@ -98,7 +95,7 @@ export function UserProvider({ children }) {
       .catch(e => alert(e))
   }
 
-  function logout() {
+  const logout = () => {
     fetch("/logout", {
       method: "DELETE",
       headers: {
@@ -112,9 +109,9 @@ export function UserProvider({ children }) {
       .catch(err => alert(err.message))
   }
 
-  function update(user) {
+  const update = user => {
+    console.log("updated user from context", user)
     setUser(user)
-    console.log("update in context", user)
   }
 
   return (

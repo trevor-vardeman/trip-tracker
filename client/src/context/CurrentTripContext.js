@@ -8,6 +8,7 @@ export function useTripContext() {
 
 export function TripProvider({ children }){
   const [currentTrip, setCurrentTrip] = useState(null)
+  
   return (
     <CurrentTripContext.Provider value={{ currentTrip, setCurrentTrip }}>
       {children}

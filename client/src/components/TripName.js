@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useTripContext } from './context/CurrentTripContext'
+import { useTripContext } from '../context/CurrentTripContext'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Stack from 'react-bootstrap/Stack'

@@ -1,5 +1,5 @@
 class CitySerializer < ActiveModel::Serializer
-  attributes :id, :city, :country
+  attributes :id, :city, :country, :trip_id
 
   belongs_to :trip
   has_many :accommodations

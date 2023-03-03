@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { useUserUpdate } from './context/UserContext'
-import { useTripContext } from './context/CurrentTripContext'
+import { useUserUpdate } from '../context/UserContext'
+import { useTripContext } from '../context/CurrentTripContext'
+import { useCityContext } from '../context/CurrentCityContext'
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup'
@@ -8,9 +9,10 @@ import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
 import Dropdown from 'react-bootstrap/Dropdown'
 
-function TripAddActivity({ selectedCity, handleCitySelection }) {
+function TripAddActivity() {
   const userUpdate = useUserUpdate()
   const {currentTrip, setCurrentTrip} = useTripContext()
+  const { currentCity } = useCityContext()
   const [showModal, setShowModal] = useState(false)
   const [description, setDescription] = useState("")
   const [startLocation, setStartLocation] = useState(null)
@@ -96,7 +98,7 @@ function TripAddActivity({ selectedCity, handleCitySelection }) {
 
   return (
     <Stack>
-      {!selectedCity ? <Button size="sm" disabled onClick={() => alert("Please select a city first.")}>Add Transportation</Button> : <Button size="sm" onClick={() => setShowModal(true)}>Add Transportation</Button>}
+      {!currentCity ? <Button size="sm" disabled onClick={() => alert("Please select a city first.")}>Add Transportation</Button> : <Button size="sm" onClick={() => setShowModal(true)}>Add Transportation</Button>}
 
       <Modal show={showModal} backdrop="static" keyboard={false} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>

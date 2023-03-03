@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import { useUserUpdate } from './context/UserContext'
-import { useTripContext } from './context/CurrentTripContext'
+import { useUserUpdate } from '../context/UserContext'
+import { useTripContext } from '../context/CurrentTripContext'
+import { useCityContext } from '../context/CurrentCityContext'
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup'
@@ -8,9 +9,10 @@ import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
 // import FileUpload from './FileUpload'
 
-function TripAddActivity({ selectedCity, handleCitySelection }) {
+function TripAddActivity() {
   const userUpdate = useUserUpdate()
-  const {setCurrentTrip} = useTripContext()
+  const { currentTrip, setCurrentTrip } = useTripContext()
+  const { currentCity, setCurrentCity } = useCityContext()
   const [showModal, setShowModal] = useState(false)
   const [description, setDescription] = useState("")
   const [startDateTime, setStartDateTime] = useState("")
@@ -27,7 +29,7 @@ function TripAddActivity({ selectedCity, handleCitySelection }) {
     e.preventDefault()
 
     const activity = {
-      city_id: selectedCity.id,
+      city_id: currentCity.id,
       description: description,
       start_datetime: startDateTime,
       end_datetime: endDateTime,
@@ -41,21 +43,21 @@ function TripAddActivity({ selectedCity, handleCitySelection }) {
     })
     .then(r => r.json())
     .then(user => {
-      const newestTrip = user.trips[user.trips.length - 1]
-      const newestCity = newestTrip.cities[newestTrip.cities.length - 1]
-      const newestActivity = newestCity.activities[newestCity.activities.length - 1]
-      setCurrentTrip(newestTrip)
-      setShowModal(false)
+      const updatedTrip = user.trips.filter(trip => trip.id === currentTrip.id)[0]
+      setCurrentTrip(updatedTrip)
+      const updatedCity = updatedTrip.cities.filter(city => city.id === currentCity.id)[0]
+      setCurrentCity(updatedCity)
       userUpdate(user)
+      setShowModal(false)
   })}
 
   return (
     <Stack>
-      {!selectedCity ? <Button size="sm" disabled onClick={() => alert("Please select a city first.")}>Add Activity</Button> : <Button size="sm" onClick={() => setShowModal(true)}>Add Activity</Button>}
+      {!currentCity ? <Button size="sm" disabled onClick={() => alert("Please select a city first.")}>Add Activity</Button> : <Button size="sm" onClick={() => setShowModal(true)}>Add Activity</Button>}
 
       <Modal show={showModal} backdrop="static" keyboard={false} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
-          {!selectedCity ? null : <Modal.Title>Add an Activity in {selectedCity.city}</Modal.Title>}
+          {!currentCity ? null : <Modal.Title>Add an Activity in {currentCity.city}</Modal.Title>}
         </Modal.Header>
 
         <Form>

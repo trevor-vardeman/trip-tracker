@@ -1,15 +1,17 @@
 import { useState } from 'react'
-import { useUserUpdate } from './context/UserContext'
-import { useTripContext } from './context/CurrentTripContext'
+import { useUserUpdate } from '../context/UserContext'
+import { useTripContext } from '../context/CurrentTripContext'
+import { useCityContext } from '../context/CurrentCityContext'
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup'
 import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
 
-function TripAddActivity({ selectedCity, handleCitySelection }) {
+function TripAddActivity() {
   const userUpdate = useUserUpdate()
   const {setCurrentTrip} = useTripContext()
+  const { currentCity } = useCityContext()
   const [showModal, setShowModal] = useState(false)
   const [description, setDescription] = useState("")
   const [startDateTime, setStartDateTime] = useState("")
@@ -22,7 +24,7 @@ function TripAddActivity({ selectedCity, handleCitySelection }) {
       alert("Please add a description, start date/time, and end date/time.")
     } else {
       const accommodation = {
-        city_id: selectedCity.id,
+        city_id: currentCity.id,
         description: description,
         start_datetime: startDateTime,
         end_datetime: endDateTime,
@@ -50,11 +52,11 @@ function TripAddActivity({ selectedCity, handleCitySelection }) {
 
   return (
     <Stack>
-      {!selectedCity ? <Button size="sm" disabled onClick={() => alert("Please select a city first.")}>Add Accommodation</Button> : <Button size="sm" onClick={() => setShowModal(true)}>Add Accommodation</Button>}
+      {!currentCity ? <Button size="sm" disabled onClick={() => alert("Please select a city first.")}>Add Accommodation</Button> : <Button size="sm" onClick={() => setShowModal(true)}>Add Accommodation</Button>}
 
       <Modal show={showModal} backdrop="static" keyboard={false} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
-          {!selectedCity ? null : <Modal.Title>Add Accommodations in {selectedCity.city}</Modal.Title>}
+          {!currentCity ? null : <Modal.Title>Add Accommodations in {currentCity.city}</Modal.Title>}
         </Modal.Header>
 
         <Form>

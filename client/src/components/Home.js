@@ -1,4 +1,4 @@
-import { useUserContext } from './context/UserContext'
+import { useUserContext } from '../context/UserContext'
 import Stack from 'react-bootstrap/Stack'
 
 function Home() {
