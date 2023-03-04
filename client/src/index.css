@@ -74,3 +74,9 @@ body {
 .xsmall {
   font-size: xx-small;
 }
+
+.city-detail {
+  align-self: center;
+  border-color: black;
+  border-style: solid;
+}

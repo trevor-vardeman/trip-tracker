@@ -1,9 +1,8 @@
 import { useTripContext } from '../context/CurrentTripContext'
 import Stack from 'react-bootstrap/Stack'
-import CityDetails from './CityDetails'
 
 function TripSummary() {
-  const { currentTrip, setCurrentTrip } = useTripContext()
+  const { currentTrip } = useTripContext()
 
   const summary = () => {
     console.log("currentTrip in TripSummary", currentTrip)

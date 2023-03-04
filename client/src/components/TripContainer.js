@@ -4,7 +4,7 @@ import CityDetails from './CityDetails'
 
 function TripContainer() {
   return (
-    <Stack direction="horizontal" gap={3}>
+    <Stack direction="horizontal">
       <Trip />
       <CityDetails />
     </Stack>

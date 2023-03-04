@@ -8,6 +8,12 @@ class AccommodationsController < ApplicationController
     end
   end
 
+  def destroy
+    accommodation = Accommodation.find(params[:id])
+    accommodation.destroy
+    render json: current_user, include: ["trips", "trips.tags", "trips.cities", "trips.cities.activities", "trips.cities.accommodations", "trips.cities.start_locations", "trips.cities.end_locations", "trips.trip_tags", "cities"], status: :accepted
+  end
+
   private
 
   def accommodation_params
