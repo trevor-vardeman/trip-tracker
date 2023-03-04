@@ -3,7 +3,6 @@ import Stack from 'react-bootstrap/Stack'
 
 function CityDetails() {
   const { currentCity } = useCityContext()
-  console.log("currentCity", currentCity)
 
   const endLocations = () => {
     if (currentCity.end_locations.length > 0) {

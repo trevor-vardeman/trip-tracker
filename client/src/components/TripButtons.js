@@ -1,11 +1,13 @@
 import { useHistory } from "react-router-dom"
-import { useTripContext } from '../context/CurrentTripContext'
 import { useUserUpdate } from '../context/UserContext'
+import { useTripContext } from '../context/CurrentTripContext'
+import { useCityContext } from '../context/CurrentCityContext'
 import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
 
 function TripButtons() {
-  const { currentTrip } = useTripContext()
+  const { currentTrip, setCurrentTrip } = useTripContext()
+  const { setCurrentCity } = useCityContext()
   const history = useHistory()
   const userUpdate = useUserUpdate()
 
@@ -17,6 +19,8 @@ function TripButtons() {
     .catch(e => alert(e))
     .then(r => r.json())
     .then(user => {
+      setCurrentTrip(null)
+      setCurrentCity(null)
       userUpdate(user)
       history.push("/")
     })

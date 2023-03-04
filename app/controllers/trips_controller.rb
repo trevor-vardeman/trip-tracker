@@ -15,7 +15,7 @@ class TripsController < ApplicationController
   end
 
   def update
-    trip = Trip.find(params[:id]) 
+    trip = Trip.find(params[:id])
     trip.update(trips_params)
     if trip.valid?
       render json: current_user, include: ["trips", "trips.tags", "trips.cities", "trips.cities.activities", "trips.cities.accommodations", "trips.cities.start_locations", "trips.cities.end_locations", "trips.trip_tags", "cities"], status: :accepted
