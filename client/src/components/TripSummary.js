@@ -11,6 +11,7 @@ function TripSummary() {
     var accommodations = 0
     var activities = 0
     var transportations = 0
+    var cost = 0
 
     currentTrip.cities.forEach((city) => {
       let cityAccommodations = city.accommodations.length
@@ -19,6 +20,9 @@ function TripSummary() {
       accommodations += cityAccommodations
       activities += cityActivities
       transportations += cityStartLocations
+      city.accommodations.map(acc => cost += acc.cost)
+      city.activities.map(act => cost += act.cost)
+      city.start_locations.map(tran => cost += tran.cost)
     })
 
     return (
@@ -27,6 +31,7 @@ function TripSummary() {
         <p>Accommodations: {accommodations}</p>
         <p>Activities: {activities}</p>
         <p>Transporatation: {transportations}</p>
+        <p className="bold">Cost: ${cost}</p>
       </div>
     )
   }
