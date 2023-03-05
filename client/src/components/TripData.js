@@ -16,7 +16,6 @@ function TripData() {
   }
 
   const handleDelete = id => {
-    console.log(id)
     fetch(`/cities/${id}`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
