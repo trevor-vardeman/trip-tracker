@@ -14,27 +14,30 @@ function NewTrip() {
   const { setCurrentTrip } = useTripContext()
   const history = useHistory()
   const [showModal, setShowModal] = useState(true)
+  const [name, setName] = useState("")
   const [city, setCity] = useState("")
   const [country, setCountry] = useState("")
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (!city || !country) {
-      alert("Please enter a city and country name.")
+    if (!name || !city || !country) {
+      alert("Please name your trip, enter a city name, and enter a country name.")
     } else {
-      const cityCountry = {
+      const trip = {
+        name: name,
         city: city,
         country: country
       }
       fetch("/trips", {
         method: "POST",
         headers: { "Content-Type": "application/json", },
-        body: JSON.stringify(cityCountry)
+        body: JSON.stringify(trip)
       })
       .then(r => r.json())
       .then(user => {
         userUpdate(user)
         setCurrentTrip(user.trips[user.trips.length - 1])
+        setName("")
         setCity("")
         setCountry("")
         setShowModal(false)
@@ -58,9 +61,15 @@ function NewTrip() {
           >
             <Form>
               <Modal.Header closeButton>
-                <Modal.Title>Where is your journey beginning?</Modal.Title>
+                <Modal.Title>New Trip</Modal.Title>
               </Modal.Header>
 
+              <Form.Label htmlFor="disabledTextInput">What would you like to name this trip?</Form.Label>
+              <Form.Group controlId="formForName">
+                <Form.Control value={name} type="text" placeholder="Name your trip..." onChange={e => setName(e.target.value)}></Form.Control>
+              </Form.Group><br></br>
+
+              <Form.Label htmlFor="disabledTextInput">Where is your journey beginning?</Form.Label>
               <Form.Group controlId="formForCity">
                 <Form.Control value={city} type="text" placeholder="Enter a city name..." onChange={e => setCity(e.target.value)}></Form.Control>
               </Form.Group>

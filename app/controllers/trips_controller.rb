@@ -1,7 +1,10 @@
 class TripsController < ApplicationController
 
   def create
-    trip = Trip.create(user_id: current_user.id)
+    trip = Trip.create(
+      user_id: current_user.id,
+      name: params[:name]
+    )
     city = City.create(
       city: params[:city],
       country: params[:country],
