@@ -10,7 +10,7 @@ class TransportationsController < ApplicationController
 
   def update
     transportation = Transportation.find(params[:id])
-    transportation.update(accommodation_params)
+    transportation.update(transportation_params)
     render json: current_user, include: ["trips", "trips.tags", "trips.cities", "trips.cities.activities", "trips.cities.accommodations", "trips.cities.start_locations", "trips.cities.end_locations", "trips.trip_tags", "cities"], status: :accepted
   end
 

@@ -8,7 +8,7 @@ import InputGroup from 'react-bootstrap/InputGroup'
 import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
 
-function TripAddActivity( props ) {
+function TripAddAccommodation( props ) {
   const userUpdate = useUserUpdate()
   const { currentTrip, setCurrentTrip } = useTripContext()
   const { currentCity, setCurrentCity } = useCityContext()
@@ -147,4 +147,4 @@ function TripAddActivity( props ) {
   )
 }
 
-export default TripAddActivity
+export default TripAddAccommodation

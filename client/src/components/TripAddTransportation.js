@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useUserUpdate } from '../context/UserContext'
 import { useTripContext } from '../context/CurrentTripContext'
 import { useCityContext } from '../context/CurrentCityContext'
@@ -9,11 +9,14 @@ import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
 import Dropdown from 'react-bootstrap/Dropdown'
 
-function TripAddActivity() {
+function TripAddTransportation( props ) {
   const userUpdate = useUserUpdate()
   const { currentTrip, setCurrentTrip } = useTripContext()
   const { currentCity, setCurrentCity } = useCityContext()
   const [showModal, setShowModal] = useState(false)
+  const [editMode, setEditMode] = useState(false)
+  const [transportationId, setTransportationId] = useState(null)
+  const [cityId, setCityId] = useState(null)
   const [description, setDescription] = useState("")
   const [startLocation, setStartLocation] = useState(null)
   const [startDateTime, setStartDateTime] = useState("")
@@ -21,11 +24,77 @@ function TripAddActivity() {
   const [endDateTime, setEndDateTime] = useState("")
   const [cost, setCost] = useState("")
   const sortedCities = currentTrip.cities.sort((a, b) => a.city.localeCompare(b.city))
+  const closeAndClearState = () => {
+    setShowModal(false)
+    setEditMode(false)
+    setTransportationId(null)
+    setCityId(null)
+    setDescription("")
+    setStartLocation(null)
+    setStartDateTime("")
+    setEndLocation(null)
+    setEndDateTime("")
+    setCost("")
+    props.handleClose()
+  }
+
+  useEffect(() => {
+    if (Object.keys(props).length > 0) {
+      let transportation = Object.values(props)[0]
+      let startTime = transportation.start_datetime.substring(0,23)
+      let endTime = transportation.end_datetime.substring(0,23)
+      console.log(transportation)
+      setShowModal(true)
+      setEditMode(true)
+      setTransportationId(transportation.id)
+      setCityId(transportation.city_id)
+      setDescription(transportation.description)
+      setStartLocation(transportation.start_location)
+      setStartDateTime(startTime)
+      setEndLocation(transportation.end_location)
+      setEndDateTime(endTime)
+      setCost(transportation.cost)
+    } else return
+  },[props])
 
   const handleSubmit = e => {
     e.preventDefault()
     if (!description || !startDateTime || !endDateTime) {
       alert("Please add a description, start date/time, and end date/time.")
+    } else if (editMode) {
+      const transportation = {
+        city_id: cityId,
+        description: description,
+        start_location_id: startLocation[0].id,
+        start_datetime: startDateTime,
+        end_location_id: endLocation[0].id,
+        end_datetime: endDateTime,
+        cost: cost
+      }
+      fetch(`/transportations/${transportationId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json", },
+        body: JSON.stringify(transportation)
+      })
+      .then(r => r.json())
+      .then(user => {
+        setShowModal(false)
+        setEditMode(false)
+        props.handleClose()
+        userUpdate(user)
+        const updatedTrip = user.trips.filter(trip => trip.id === currentTrip.id)[0]
+        setCurrentTrip(updatedTrip)
+        const updatedCity = updatedTrip.cities.filter(city => city.id === currentCity.id)[0]
+        setCurrentCity(updatedCity)
+        setTransportationId(null)
+        setCityId(null)
+        setDescription("")
+        setStartLocation(null)
+        setStartDateTime("")
+        setEndLocation(null)
+        setEndDateTime("")
+        setCost("")
+      })
     } else {
       const transportation = {
         description: description,
@@ -102,7 +171,7 @@ function TripAddActivity() {
     <Stack>
       {!currentCity ? <Button size="sm" disabled onClick={() => alert("Please select a city first.")}>Add Transportation</Button> : <Button size="sm" onClick={() => setShowModal(true)}>Add Transportation</Button>}
 
-      <Modal show={showModal} backdrop="static" keyboard={false} onHide={() => setShowModal(false)}>
+      <Modal show={showModal} backdrop="static" keyboard={false} onHide={() => closeAndClearState()}>
         <Modal.Header closeButton>
           <Modal.Title>Add Transportation</Modal.Title>
         </Modal.Header>
@@ -154,7 +223,7 @@ function TripAddActivity() {
         </Form>
 
         <Modal.Footer>
-          <Button size="sm" variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
+          <Button size="sm" variant="secondary" onClick={() => closeAndClearState()}>Close</Button>
           <Button size="sm" variant="primary" type="submit" onClick={e => handleSubmit(e)}>Submit</Button>
         </Modal.Footer>
       </Modal>
@@ -162,4 +231,4 @@ function TripAddActivity() {
   )
 }
 
-export default TripAddActivity
+export default TripAddTransportation
