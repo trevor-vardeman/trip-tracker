@@ -13,8 +13,5 @@ Rails.application.routes.draw do
   post "/user-avatar", to: "users#avatar"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
-  # post "/accommodation-image", to: "accommodation#add_image"
-  # post "/activity-images", to: "activities#add_file"
-  # post "/transportation-image", to: "transportation#add_image"
   get '*path', to: 'fallback#index', constraints: ->(req) { !req.xhr? && req.format.html }
 end

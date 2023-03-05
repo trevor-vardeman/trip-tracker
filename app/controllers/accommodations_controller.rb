@@ -8,6 +8,12 @@ class AccommodationsController < ApplicationController
     end
   end
 
+  def update
+    accommodation = Accommodation.find(params[:id])
+    accommodation.update(accommodation_params)
+    render json: current_user, include: ["trips", "trips.tags", "trips.cities", "trips.cities.activities", "trips.cities.accommodations", "trips.cities.start_locations", "trips.cities.end_locations", "trips.trip_tags", "cities"], status: :accepted
+  end
+
   def destroy
     accommodation = Accommodation.find(params[:id])
     accommodation.destroy
@@ -17,6 +23,6 @@ class AccommodationsController < ApplicationController
   private
 
   def accommodation_params
-    params.permit(:city_id, :description, :start_datetime, :end_datetime, :cost, :image)
+    params.permit(:city_id, :description, :start_datetime, :end_datetime, :cost)
   end
 end

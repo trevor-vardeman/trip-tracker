@@ -4,17 +4,24 @@ import { useTripContext } from '../context/CurrentTripContext'
 import { useCityContext } from '../context/CurrentCityContext'
 import Stack from 'react-bootstrap/Stack'
 import TripAddActivity from './TripAddActivity'
+import TripAddAccommodation from './TripAddAccommodation'
+import TripAddTransportation from './TripAddTransportation'
 
 function CityDetails() {
   const userUpdate = useUserUpdate()
   const { currentTrip, setCurrentTrip } = useTripContext()
   const { currentCity, setCurrentCity } = useCityContext()
   const [activityProps, setActivityProps] = useState(null)
+  const [accommodationProps, setAccommodationProps] = useState(null)
+  const [transportationProps, setTransportationProps] = useState(null)
 
   const handleActivityEdit = activity => setActivityProps(activity)
+  const handleAccommodationEdit = accommodation => setAccommodationProps(accommodation)
+  const handleTransportationEdit = transportation => setTransportationProps(transportation)
   const handleClose = () => {
     setActivityProps(null)
-    console.log("cleared")
+    setAccommodationProps(null)
+    setTransportationProps(null)
   }
 
   const handleDelete = (type, objId) => {
@@ -49,10 +56,13 @@ function CityDetails() {
               </Stack>
               <Stack>
                 <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete("transportations", transportation.id)}/>
-                <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="18" height="18"/>
+                <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="18" height="18" onClick={() => handleTransportationEdit(transportation)}/>
               </Stack>
             </Stack>
           ))}
+          <div className="hide">
+            {transportationProps ? <TripAddTransportation props={transportationProps} handleClose={handleClose}/> : null}
+          </div>
         </>
       )
     }
@@ -72,10 +82,13 @@ function CityDetails() {
               </Stack>
               <Stack>
                 <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete("accommodations", accommodation.id)}/>
-                <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="18" height="18"/>
+                <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="18" height="18" onClick={() => handleAccommodationEdit(accommodation)}/>
               </Stack>
             </Stack>
           ))}
+          <div className="hide">
+            {accommodationProps ? <TripAddAccommodation props={accommodationProps} handleClose={handleClose}/> : null}
+          </div>
         </>
       )
     } else return null
@@ -99,7 +112,7 @@ function CityDetails() {
               </Stack>
             </Stack>
           ))}
-          <div style={{display: "none"}}>
+          <div className="hide">
             {activityProps ? <TripAddActivity props={activityProps} handleClose={handleClose}/> : null}
           </div>
         </>
@@ -122,10 +135,13 @@ function CityDetails() {
               </Stack>
               <Stack>
                 <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete("transportations", transportation.id)}/>
-                <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="18" height="18"/>
+                <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="18" height="18" onClick={() => handleTransportationEdit(transportation)}/>
               </Stack>
             </Stack>
           ))}
+          <div className="hide">
+            {transportationProps ? <TripAddTransportation props={transportationProps} handleClose={handleClose}/> : null}
+          </div>
         </>
       )
     } else return null

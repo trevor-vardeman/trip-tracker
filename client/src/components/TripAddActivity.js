@@ -39,8 +39,6 @@ function TripAddActivity( props ) {
   //   // setFile(newFile)
   // }
 
-  console.log("props", props)
-
   useEffect(() => {
     if (Object.keys(props).length > 0) {
       let activity = Object.values(props)[0]
@@ -59,8 +57,9 @@ function TripAddActivity( props ) {
 
   const handleSubmit = e => {
     e.preventDefault()
-
-    if (editMode) {
+    if (!description || !startDateTime || !endDateTime) {
+      alert("Please add a description, start date/time, and end date/time.")
+    } else if (editMode) {
       const activity = {
         city_id: cityId,
         description: description,
@@ -68,7 +67,6 @@ function TripAddActivity( props ) {
         end_datetime: endDateTime,
         cost: cost
       }
-
       fetch(`/activities/${activityId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json", },
@@ -99,7 +97,6 @@ function TripAddActivity( props ) {
         end_datetime: endDateTime,
         cost: cost
       }
-
       fetch("/activities", {
         method: "POST",
         headers: { "Content-Type": "application/json", },
@@ -119,7 +116,7 @@ function TripAddActivity( props ) {
         setCost("")
       })
     }
-}
+  }
 
   return (
     <Stack>
