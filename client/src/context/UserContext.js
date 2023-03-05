@@ -6,6 +6,7 @@ const UserLogin = React.createContext()
 const UserLogout = React.createContext()
 const UserRegister = React.createContext()
 const UserUpdate = React.createContext()
+const UserAuthCheck = React.createContext()
 
 export function useUserContext() {
   return useContext(UserContext)
@@ -27,10 +28,16 @@ export function useUserUpdate() {
   return useContext(UserUpdate)
 }
 
+export function useUserAuthCheck() {
+  return useContext(UserAuthCheck)
+}
+
 export function UserProvider({ children }) {
   const [userLoggedIn, setUserLoggedIn] = useState(false)
   const [user, setUser] = useState(null)
+  // const [authChecked, setAuthChecked] = useState(false)
   const history = useHistory()
+  // console.log(authChecked)
 
   useEffect(() => {
     fetch("/me")
@@ -38,10 +45,12 @@ export function UserProvider({ children }) {
       if (r.ok) {
         r.json().then(user => {
           setUser(user)
+          // localStorage.setItem("user", user)
+          // setAuthChecked(true)
           setUserLoggedIn(true)
         })
       } else {
-        return
+        // setAuthChecked(true)
       }
   })},[userLoggedIn])
 
@@ -61,6 +70,8 @@ export function UserProvider({ children }) {
         if (r.ok) {
           r.json().then(user => {
             setUser(user)
+            // localStorage.setItem(user)
+            // setAuthChecked(true)
             setUserLoggedIn(true)
             history.push("/")
           })
@@ -85,6 +96,9 @@ export function UserProvider({ children }) {
       .then((r) => {
         if (r.ok) {
           r.json().then(() => {
+            setUser(user)
+            // localStorage.setItem(user)
+            // setAuthChecked(true)
             setUserLoggedIn(true)
             history.push("/")
           })
@@ -104,6 +118,8 @@ export function UserProvider({ children }) {
       .then(() => {
         setUser(null)
         setUserLoggedIn(false)
+        // setAuthChecked(false)
+        // localStorage.clear()
         history.push("/")
       })
       .catch(err => alert(err.message))
@@ -120,7 +136,9 @@ export function UserProvider({ children }) {
         <UserLogin.Provider value={login}>
           <UserLogout.Provider value={logout}>
             <UserUpdate.Provider value={update}>
-              {children}
+              {/* <UserAuthCheck.Provider value={authChecked}> */}
+                {children}
+              {/* </UserAuthCheck.Provider> */}
             </UserUpdate.Provider>
           </UserLogout.Provider>
         </UserLogin.Provider>

@@ -26,22 +26,24 @@ function Profile() {
       })
   }
 
-  return (
-    <div>
-      {user 
-        ? <Stack gap={3}>
-            <Form>
-              <Form.Group controlId="formAvatarUpload">
-                <Form.Label>Upload an Avatar</Form.Label>
-                <Form.Control type="file" accept="image/*" onChange={e => setAvatar(e.target.files[0])}></Form.Control>
-              </Form.Group>
+  if (user) {
+    return (
+      <Stack className="profile" gap={3}>
+        <h3>Profile</h3>
+        <Form>
+          <Form.Group controlId="formAvatarUpload">
+            <Form.Label>Upload an Avatar</Form.Label>
+            <Stack direction="horizontal">
+              <Form.Control type="file" accept="image/*" onChange={e => setAvatar(e.target.files[0])}></Form.Control>
               <Button className="small-button" onClick={e => submitAvatar(e)}>Submit</Button>
-            </Form>
-            {user.avatar ? <img className="img" src={`https://storage.cloud.google.com/flatiron-travel-app/${user.avatar.toString()}`} alt="userAvatar"/> : null}
-          </Stack>
-        : <p>You are not signed in. Click here to get signed in before editing your profile.</p>
-      }
-    </div>
+            </Stack>
+          </Form.Group>
+        </Form>
+        {user.avatar ? <img className="img border" src={`https://storage.cloud.google.com/flatiron-travel-app/${user.avatar.toString()}`} alt="userAvatar"/> : null}
+      </Stack>
+    )
+  } else return (
+    <h3>You are not signed in. Click here to get signed in before editing your profile.</h3>
   )
 }
 

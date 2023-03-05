@@ -5,7 +5,15 @@ body {
     sans-serif;
 }
 
-.sign-in-form {
+.profile {
+  position: absolute;
+  top: 52%;
+  left: 50%;
+  transform: translate(-50%, -50%);  
+  align-items: center;
+}
+
+.definite-center {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -13,7 +21,7 @@ body {
 }
 
 .small-button {
-  width: fit-content;
+  width: min-content;
   size: "sm";
 }
 
@@ -53,8 +61,8 @@ body {
 }
 
 .img {
-  height: auto;
   width: 100%;
+  height: auto;
   align-self: center;
 }
 
@@ -78,8 +86,23 @@ body {
 .border {
   border-color: black;
   border-style: solid;
+  border-width: 2px;
 }
 
 .hide {
   display: none;
+}
+
+.cards {
+  width: 250px;
+  align-items: center;
+}
+
+.card-header {
+  width: 100%;
+  text-align: center;
+}
+
+.card-buttons {
+  justify-content: center;
 }

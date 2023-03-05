@@ -3,7 +3,8 @@ class TripsController < ApplicationController
   def create
     trip = Trip.create(
       user_id: current_user.id,
-      name: params[:name]
+      name: params[:name],
+      plan: false
     )
     city = City.create(
       city: params[:city],

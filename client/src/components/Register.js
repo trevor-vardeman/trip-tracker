@@ -13,7 +13,7 @@ function Register() {
   }
 
   return (
-    <Stack gap={3} className="sign-in-form">
+    <Stack gap={3} className="definite-center">
       <h1>Sign up for Travel</h1>
       <Form>
         <Form.Group controlId="usernameForm">

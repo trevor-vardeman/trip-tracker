@@ -11,6 +11,7 @@ import Trip from './Trip'
 import Drafts from './Drafts'
 import Plans from './Plans'
 import Cities from './Cities'
+// import PrivateRoute from './PrivateRoute'
 import { UserProvider } from '../context/UserContext'
 import { TripProvider } from '../context/CurrentTripContext'
 import { CityProvider } from '../context/CurrentCityContext'
@@ -60,6 +61,47 @@ function App() {
       </UserProvider>
     </Stack>
   )
+
+  // return (
+  //   <Stack direction="horizontal">
+  //     <UserProvider className="App">
+  //       <TripProvider>
+  //         <CityProvider>
+  //           <Nav />
+  //           <Switch>
+  //             <Route path="/register">
+  //               <Register />
+  //             </Route>
+  //             <Route path="/login">
+  //               <Login />
+  //             </Route>
+  //             <PrivateRoute path="/profile">
+  //               <Profile />
+  //             </PrivateRoute>
+  //             <PrivateRoute path="/new-trip">
+  //               <NewTrip />
+  //             </PrivateRoute>
+  //             <PrivateRoute path="/drafts/:id">
+  //               <Trip />
+  //             </PrivateRoute>
+  //             <PrivateRoute path="/drafts">
+  //               <Drafts />
+  //             </PrivateRoute>
+  //             <PrivateRoute path="/plans">
+  //               <Plans />
+  //             </PrivateRoute>
+  //             <PrivateRoute path="/cities">
+  //               <Cities />
+  //             </PrivateRoute>
+  //             <Route path="/">
+  //               <Home />
+  //             </Route>
+  //           </Switch>
+  //         </CityProvider>
+  //       </TripProvider>
+  //     </UserProvider>
+  //   </Stack>
+  // )
 }
 
 export default App

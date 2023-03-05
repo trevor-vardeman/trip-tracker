@@ -28,22 +28,17 @@ function TripButtons() {
   }
 
   const handleFinalize = e => {
-    if (currentTrip.name === null) {
-      alert("Give your trip a name before finalizing!")
-    } else {
-      e.preventDefault()
-      fetch(`/trips/${currentTrip.id}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json", },
-        body: JSON.stringify({plan: true})
-      })
-      .then(r => r.json())
-      .then(user => {
-        userUpdate(user)
-        alert("Trip finalized!")
-      })
-      .catch(e => alert(e))
-    }
+    fetch(`/trips/${currentTrip.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json", },
+      body: JSON.stringify({plan: true})
+    })
+    .then(r => r.json())
+    .then(user => {
+      userUpdate(user)
+      alert("Trip finalized!")
+    })
+    .catch(e => alert(e))
   }
 
   return (

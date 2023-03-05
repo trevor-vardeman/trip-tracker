@@ -37,9 +37,8 @@ function TripData() {
       <p className="box-header-footer">Trip Start</p>
       <ArcherContainer>
         {currentTrip.cities.map((city, index) => (
-          <Stack direction="horizontal">
+          <Stack direction="horizontal" key={city.id}>
             <ArcherElement 
-              key={city.id}
               id={index.toString()}
               relations={[
                 {
