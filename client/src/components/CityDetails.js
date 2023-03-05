@@ -47,7 +47,7 @@ function CityDetails() {
         <>
           {currentCity.end_locations.map((transportation) => (
             <Stack direction="horizontal" key={transportation.id}>
-              <Stack className="city-detail">
+              <Stack className="border">
                 <p><span className="bold">{transportation.start_location}</span> to <span className="bold">{transportation.end_location}</span></p>
                 <p><span className="bold">Description:</span> {transportation.description}</p>
                 <p><span className="bold">Cost:</span> ${transportation.cost}</p>
@@ -61,7 +61,7 @@ function CityDetails() {
             </Stack>
           ))}
           <div className="hide">
-            {transportationProps ? <TripAddTransportation props={transportationProps} handleClose={handleClose}/> : null}
+            {transportationProps ? <TripAddTransportation transportationProps={transportationProps} handleClose={handleClose}/> : null}
           </div>
         </>
       )
@@ -74,7 +74,7 @@ function CityDetails() {
         <>
           {currentCity.accommodations.map((accommodation) => (
             <Stack direction="horizontal" key={accommodation.id}>
-              <Stack className="city-detail">
+              <Stack className="border">
                 <p className="bold">{accommodation.description}</p>
                 <p><span className="bold">Cost:</span> ${accommodation.cost}</p>
                 <p><span className="bold">Arrival Date:</span> {accommodation.start_datetime}</p>
@@ -87,7 +87,7 @@ function CityDetails() {
             </Stack>
           ))}
           <div className="hide">
-            {accommodationProps ? <TripAddAccommodation props={accommodationProps} handleClose={handleClose}/> : null}
+            {accommodationProps ? <TripAddAccommodation accommodationProps={accommodationProps} handleClose={handleClose}/> : null}
           </div>
         </>
       )
@@ -100,7 +100,7 @@ function CityDetails() {
         <>
           {currentCity.activities.map((activity) => (
             <Stack direction="horizontal" key={activity.id}>
-              <Stack className="city-detail">
+              <Stack className="border">
                 <p className="bold">{activity.description}</p>
                 <p><span className="bold">Cost:</span> ${activity.cost}</p>
                 <p><span className="bold">Start Time:</span> {activity.start_datetime}</p>
@@ -113,7 +113,7 @@ function CityDetails() {
             </Stack>
           ))}
           <div className="hide">
-            {activityProps ? <TripAddActivity props={activityProps} handleClose={handleClose}/> : null}
+            {activityProps ? <TripAddActivity activityProps={activityProps} handleClose={handleClose}/> : null}
           </div>
         </>
       )
@@ -126,7 +126,7 @@ function CityDetails() {
         <>
           {currentCity.start_locations.map((transportation) => (
             <Stack direction="horizontal" key={transportation.id}>
-              <Stack className="city-detail">
+              <Stack className="border">
                 <p><span className="bold">{transportation.start_location}</span> to <span className="bold">{transportation.end_location}</span></p>
                 <p><span className="bold">Description:</span> {transportation.description}</p>
                 <p><span className="bold">Cost:</span> ${transportation.cost}</p>
@@ -140,7 +140,7 @@ function CityDetails() {
             </Stack>
           ))}
           <div className="hide">
-            {transportationProps ? <TripAddTransportation props={transportationProps} handleClose={handleClose}/> : null}
+            {transportationProps ? <TripAddTransportation transportationProps={transportationProps} handleClose={handleClose}/> : null}
           </div>
         </>
       )
