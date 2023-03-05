@@ -12,7 +12,10 @@ function CityDetails() {
   const [activityProps, setActivityProps] = useState(null)
 
   const handleActivityEdit = activity => setActivityProps(activity)
-  const handleClose = () => setActivityProps(null)
+  const handleClose = () => {
+    setActivityProps(null)
+    console.log("cleared")
+  }
 
   const handleDelete = (type, objId) => {
     fetch(`/${type}/${objId}`, {

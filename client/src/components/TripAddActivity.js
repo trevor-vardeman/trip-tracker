@@ -39,6 +39,8 @@ function TripAddActivity( props ) {
   //   // setFile(newFile)
   // }
 
+  console.log("props", props)
+
   useEffect(() => {
     if (Object.keys(props).length > 0) {
       let activity = Object.values(props)[0]
@@ -76,6 +78,7 @@ function TripAddActivity( props ) {
       .then(user => {
         setShowModal(false)
         setEditMode(false)
+        props.handleClose()
         userUpdate(user)
         const updatedTrip = user.trips.filter(trip => trip.id === currentTrip.id)[0]
         setCurrentTrip(updatedTrip)
