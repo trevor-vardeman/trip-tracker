@@ -8,7 +8,7 @@ import Stack from 'react-bootstrap/Stack'
 function TripData() {
   const userUpdate = useUserUpdate()
   const { currentTrip, setCurrentTrip } = useTripContext()
-  const { setCurrentCity } = useCityContext()
+  const { currentCity, setCurrentCity } = useCityContext()
   const [selectedCityStyle, setSelectedCityStyle] = useState("")
   const citySelection = city => {
     setSelectedCityStyle(city.id)
@@ -23,9 +23,11 @@ function TripData() {
     .catch(e => alert(e))
     .then(r => r.json())
     .then(user => {
+      userUpdate(user)
       const updatedTrip = user.trips.filter(trip => trip.id === currentTrip.id)[0]
       setCurrentTrip(updatedTrip)
-      userUpdate(user)
+      const updatedCity = updatedTrip.cities.filter(city => city.id === currentCity.id)[0]
+      setCurrentCity(updatedCity)
     })
     .catch(e => alert(e))
   }

@@ -118,7 +118,9 @@ function TripAddTransportation( props ) {
         const updatedCity = updatedTrip.cities.filter(city => city.id === currentCity.id)[0]
         setCurrentCity(updatedCity)
         setDescription("")
+        setStartLocation(null)
         setStartDateTime("")
+        setEndLocation(null)
         setEndDateTime("")
         setCost("")
       })

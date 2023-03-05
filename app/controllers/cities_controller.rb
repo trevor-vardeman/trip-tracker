@@ -10,6 +10,18 @@ class CitiesController < ApplicationController
 
   def destroy
     city = City.find(params[:id])
+    if city.start_locations.length > 0
+      city.start_locations.each do |t|
+        transportation = Transportation.find(t.id)
+        transportation.destroy
+      end
+    end
+    if city.end_locations.length > 0
+      city.end_locations.each do |t|
+        transportation = Transportation.find(t.id)
+        transportation.destroy
+      end
+    end
     city.destroy
     render json: current_user, include: ["trips", "trips.tags", "trips.cities", "trips.cities.activities", "trips.cities.accommodations", "trips.cities.start_locations", "trips.cities.end_locations", "trips.trip_tags", "cities"], status: :accepted
   end
