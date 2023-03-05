@@ -40,7 +40,7 @@ body {
   display: flex;
 }
 
-.city {
+.hover {
   cursor: pointer;
 }
 

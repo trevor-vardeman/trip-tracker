@@ -1,13 +1,19 @@
+import { useState } from 'react'
 import { useUserUpdate } from '../context/UserContext'
 import { useTripContext } from '../context/CurrentTripContext'
 import { useCityContext } from '../context/CurrentCityContext'
 import Stack from 'react-bootstrap/Stack'
+import TripAddActivity from './TripAddActivity'
 
 function CityDetails() {
   const userUpdate = useUserUpdate()
   const { currentTrip, setCurrentTrip } = useTripContext()
   const { currentCity, setCurrentCity } = useCityContext()
-  
+  const [activityProps, setActivityProps] = useState(null)
+
+  const handleActivityEdit = activity => setActivityProps(activity)
+  const handleClose = () => setActivityProps(null)
+
   const handleDelete = (type, objId) => {
     fetch(`/${type}/${objId}`, {
       method: 'DELETE',
@@ -39,8 +45,8 @@ function CityDetails() {
                 <p><span className="bold">Arrival Time:</span> {transportation.end_datetime}</p>
               </Stack>
               <Stack>
-                <img src="/assets/x.svg" alt="Bootstrap" width="20" height="20" onClick={() => handleDelete("transportations", transportation.id)}/>
-                <img src="/assets/pencil-square.svg" alt="Bootstrap" width="18" height="18"/>
+                <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete("transportations", transportation.id)}/>
+                <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="18" height="18"/>
               </Stack>
             </Stack>
           ))}
@@ -58,12 +64,12 @@ function CityDetails() {
               <Stack className="city-detail">
                 <p className="bold">{accommodation.description}</p>
                 <p><span className="bold">Cost:</span> ${accommodation.cost}</p>
-                <p><span className="bold">Arrival Date:</span> ${accommodation.start_datetime}</p>
-                <p><span className="bold">Arrival Date:</span> ${accommodation.end_datetime}</p>
+                <p><span className="bold">Arrival Date:</span> {accommodation.start_datetime}</p>
+                <p><span className="bold">Arrival Date:</span> {accommodation.end_datetime}</p>
               </Stack>
               <Stack>
-                <img src="/assets/x.svg" alt="Bootstrap" width="20" height="20" onClick={() => handleDelete("accommodations", accommodation.id)}/>
-                <img src="/assets/pencil-square.svg" alt="Bootstrap" width="18" height="18"/>
+                <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete("accommodations", accommodation.id)}/>
+                <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="18" height="18"/>
               </Stack>
             </Stack>
           ))}
@@ -81,15 +87,18 @@ function CityDetails() {
               <Stack className="city-detail">
                 <p className="bold">{activity.description}</p>
                 <p><span className="bold">Cost:</span> ${activity.cost}</p>
-                <p><span className="bold">Start Time:</span> ${activity.start_datetime}</p>
-                <p><span className="bold">End Time:</span> ${activity.end_datetime}</p>
+                <p><span className="bold">Start Time:</span> {activity.start_datetime}</p>
+                <p><span className="bold">End Time:</span> {activity.end_datetime}</p>
               </Stack>
               <Stack>
-                <img src="/assets/x.svg" alt="Bootstrap" width="20" height="20" onClick={() => handleDelete("activities", activity.id)}/>
-                <img src="/assets/pencil-square.svg" alt="Bootstrap" width="18" height="18"/>
+                <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete("activities", activity.id)}/>
+                <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="18" height="18" onClick={() => handleActivityEdit(activity)}/>
               </Stack>
             </Stack>
           ))}
+          <div style={{display: "none"}}>
+            {activityProps ? <TripAddActivity props={activityProps} handleClose={handleClose}/> : null}
+          </div>
         </>
       )
     } else return null
@@ -109,8 +118,8 @@ function CityDetails() {
                 <p><span className="bold">Arrival Time:</span> {transportation.end_datetime}</p>
               </Stack>
               <Stack>
-                <img src="/assets/x.svg" alt="Bootstrap" width="20" height="20" onClick={() => handleDelete("transportations", transportation.id)}/>
-                <img src="/assets/pencil-square.svg" alt="Bootstrap" width="18" height="18"/>
+                <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete("transportations", transportation.id)}/>
+                <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="18" height="18"/>
               </Stack>
             </Stack>
           ))}

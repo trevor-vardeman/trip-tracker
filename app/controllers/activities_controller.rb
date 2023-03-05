@@ -8,6 +8,12 @@ class ActivitiesController < ApplicationController
     end
   end
 
+  def update
+    activity = Activity.find(params[:id])
+    activity.update(activity_params)
+    render json: current_user, include: ["trips", "trips.tags", "trips.cities", "trips.cities.activities", "trips.cities.accommodations", "trips.cities.start_locations", "trips.cities.end_locations", "trips.trip_tags", "cities"], status: :accepted
+  end
+
   def destroy
     activity = Activity.find(params[:id])
     activity.destroy

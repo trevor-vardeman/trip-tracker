@@ -32,7 +32,7 @@ function TripData() {
           >
             <p 
               key={city.id} 
-              className={`${city.id === selectedCityStyle ? "selected-city" : "null"} city`}
+              className={`${city.id === selectedCityStyle ? "selected-city" : "null"} hover`}
               onClick={() => citySelection(city)}
             >{city.city}, {city.country}</p>
           </ArcherElement>

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useUserUpdate } from '../context/UserContext'
 import { useTripContext } from '../context/CurrentTripContext'
 import { useCityContext } from '../context/CurrentCityContext'
@@ -9,15 +9,29 @@ import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
 // import FileUpload from './FileUpload'
 
-function TripAddActivity() {
+function TripAddActivity( props ) {
   const userUpdate = useUserUpdate()
   const { currentTrip, setCurrentTrip } = useTripContext()
   const { currentCity, setCurrentCity } = useCityContext()
   const [showModal, setShowModal] = useState(false)
+  const [editMode, setEditMode] = useState(false)
+  const [activityId, setActivityId] = useState(null)
+  const [cityId, setCityId] = useState(null)
   const [description, setDescription] = useState("")
   const [startDateTime, setStartDateTime] = useState("")
   const [endDateTime, setEndDateTime] = useState("")
   const [cost, setCost] = useState("")
+  const closeAndClearState = () => {
+    setShowModal(false)
+    setEditMode(false)
+    setActivityId(null)
+    setCityId(null)
+    setDescription("")
+    setStartDateTime("")
+    setEndDateTime("")
+    setCost("")
+    props.handleClose()
+  }
   // const [file, setFile] = useState(null)
   // const handleFileUpload = (e, newFile) => {
   //   e.preventDefault()
@@ -25,41 +39,90 @@ function TripAddActivity() {
   //   // setFile(newFile)
   // }
 
+  useEffect(() => {
+    if (Object.keys(props).length > 0) {
+      let activity = Object.values(props)[0]
+      let startTime = activity.start_datetime.substring(0,23)
+      let endTime = activity.end_datetime.substring(0,23)
+      setShowModal(true)
+      setEditMode(true)
+      setActivityId(activity.id)
+      setCityId(activity.city_id)
+      setDescription(activity.description)
+      setStartDateTime(startTime)
+      setEndDateTime(endTime)
+      setCost(activity.cost)
+    } else return
+  },[props])
+
   const handleSubmit = e => {
     e.preventDefault()
 
-    const activity = {
-      city_id: currentCity.id,
-      description: description,
-      start_datetime: startDateTime,
-      end_datetime: endDateTime,
-      cost: cost
-    }
+    if (editMode) {
+      const activity = {
+        city_id: cityId,
+        description: description,
+        start_datetime: startDateTime,
+        end_datetime: endDateTime,
+        cost: cost
+      }
 
-    fetch("/activities", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", },
-      body: JSON.stringify(activity)
-    })
-    .then(r => r.json())
-    .then(user => {
-      setShowModal(false)
-      userUpdate(user)
-      const updatedTrip = user.trips.filter(trip => trip.id === currentTrip.id)[0]
-      setCurrentTrip(updatedTrip)
-      const updatedCity = updatedTrip.cities.filter(city => city.id === currentCity.id)[0]
-      setCurrentCity(updatedCity)
-      setDescription("")
-      setStartDateTime("")
-      setEndDateTime("")
-      setCost("")
-  })}
+      fetch(`/activities/${activityId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json", },
+        body: JSON.stringify(activity)
+      })
+      .then(r => r.json())
+      .then(user => {
+        setShowModal(false)
+        setEditMode(false)
+        userUpdate(user)
+        const updatedTrip = user.trips.filter(trip => trip.id === currentTrip.id)[0]
+        setCurrentTrip(updatedTrip)
+        const updatedCity = updatedTrip.cities.filter(city => city.id === currentCity.id)[0]
+        setCurrentCity(updatedCity)
+        setActivityId(null)
+        setCityId(null)
+        setDescription("")
+        setStartDateTime("")
+        setEndDateTime("")
+        setCost("")
+      })
+    } else {
+      const activity = {
+        city_id: currentCity.id,
+        description: description,
+        start_datetime: startDateTime,
+        end_datetime: endDateTime,
+        cost: cost
+      }
+
+      fetch("/activities", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", },
+        body: JSON.stringify(activity)
+      })
+      .then(r => r.json())
+      .then(user => {
+        setShowModal(false)
+        userUpdate(user)
+        const updatedTrip = user.trips.filter(trip => trip.id === currentTrip.id)[0]
+        setCurrentTrip(updatedTrip)
+        const updatedCity = updatedTrip.cities.filter(city => city.id === currentCity.id)[0]
+        setCurrentCity(updatedCity)
+        setDescription("")
+        setStartDateTime("")
+        setEndDateTime("")
+        setCost("")
+      })
+    }
+}
 
   return (
     <Stack>
       {!currentCity ? <Button size="sm" disabled onClick={() => alert("Please select a city first.")}>Add Activity</Button> : <Button size="sm" onClick={() => setShowModal(true)}>Add Activity</Button>}
 
-      <Modal show={showModal} backdrop="static" keyboard={false} onHide={() => setShowModal(false)}>
+      <Modal show={showModal} backdrop="static" keyboard={false} onHide={() => closeAndClearState()}>
         <Modal.Header closeButton>
           {!currentCity ? null : <Modal.Title>Add an Activity in {currentCity.city}</Modal.Title>}
         </Modal.Header>
@@ -82,7 +145,7 @@ function TripAddActivity() {
         {/* <FileUpload file={file} handleFileUpload={handleFileUpload} /> */}
 
         <Modal.Footer>
-          <Button size="sm" variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
+          <Button size="sm" variant="secondary" onClick={() => closeAndClearState()}>Close</Button>
           <Button size="sm" variant="primary" type="submit" onClick={e => handleSubmit(e)}>Submit</Button>
         </Modal.Footer>
       </Modal>
