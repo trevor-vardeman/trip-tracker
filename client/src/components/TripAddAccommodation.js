@@ -115,7 +115,7 @@ function TripAddAccommodation( props ) {
 
   return (
     <Stack>
-      {!currentCity ? <Button size="sm" disabled onClick={() => alert("Please select a city first.")}>Add Accommodation</Button> : <Button size="sm" onClick={() => setShowModal(true)}>Add Accommodation</Button>}
+      {!currentCity ? <Button size="sm" disabled>Add Accommodation</Button> : <Button size="sm" onClick={() => setShowModal(true)}>Add Accommodation</Button>}
 
       <Modal show={showModal} backdrop="static" keyboard={false} onHide={() => closeAndClearState()}>
         <Modal.Header closeButton>

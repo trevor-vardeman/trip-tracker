@@ -18,6 +18,13 @@ function Plans() {
         <span className="visually-hidden">Loading...</span>
       </Spinner>
     )
+  } else if (user.trips.filter(trip => trip.plan === true).length === 0) {
+    return (
+      <Stack gap={3}>
+        <h3>Plans</h3>
+        <p>No plans have been finalized.</p>
+      </Stack>
+    )
   } else {
     return (
       <Stack gap={3}>

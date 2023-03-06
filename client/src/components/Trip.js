@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useParams } from "react-router-dom"
 import { useUserContext } from '../context/UserContext'
 import { useTripContext } from '../context/CurrentTripContext'
@@ -16,35 +16,22 @@ import Spinner from 'react-bootstrap/Spinner'
 function Trip() {
   const user = useUserContext()
   const { currentTrip, setCurrentTrip } = useTripContext()
-  const paramId = useParams().id
+  const { id } = useParams()
+  const intId = parseInt(id)
 
   useEffect(() => {
-    if (currentTrip === null) {
-      let trip = user.trips.filter(trip => trip.id === paramId)
-      if (trip) {
-        setCurrentTrip(trip)
-      } else {
-        return <h3>Trip not found.</h3>
-      }
-      // fetch("/trips", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json", },
-      //   body: JSON.stringify(trip)
-      // })
-      // .then(r => r.json())
-      // .then(user => {
-      //   userUpdate(user)
-      //   setCurrentTrip(user.trips[user.trips.length - 1])
-      //   setName("")
-      //   setCity("")
-      //   setCountry("")
-      //   setShowModal(false)
-      // })
-      // .catch(e => alert(e))
+    if (!currentTrip && user) {
+      setCurrentTrip(user.trips.filter(trip => intId === trip.id)[0])
     }
-  })
+  },[intId, user, currentTrip, setCurrentTrip])
 
-  if (currentTrip !== null) {
+  if (user === (null && !currentTrip)) {
+    return (
+      <Spinner className="definite-center" animation="border" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </Spinner>
+    )
+  } else {
     return (
       <Stack>
         <TripName />
@@ -59,12 +46,6 @@ function Trip() {
         <TripSummary />
         <TripButtons />
       </Stack>
-    )
-  } else {
-    return (
-      <Spinner className="definite-center" animation="border" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </Spinner>
     )
   }
 }

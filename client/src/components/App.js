@@ -11,6 +11,7 @@ import TripContainer from './TripContainer'
 import Drafts from './Drafts'
 import Plans from './Plans'
 import Cities from './Cities'
+import Tags from './Tags'
 // import PrivateRoute from './PrivateRoute'
 import { UserProvider } from '../context/UserContext'
 import { TripProvider } from '../context/CurrentTripContext'
@@ -51,6 +52,9 @@ function App() {
               </Route>
               <Route path="/cities">
                 <Cities />
+              </Route>
+              <Route path="/tags">
+                <Tags />
               </Route>
               <Route path="/">
                 <Home />

@@ -37,6 +37,7 @@ function TripButtons() {
     .then(user => {
       userUpdate(user)
       alert("Trip finalized!")
+      history.push("/plans")
     })
     .catch(e => alert(e))
   }

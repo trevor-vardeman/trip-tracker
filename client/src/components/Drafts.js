@@ -26,7 +26,6 @@ function Drafts() {
   }
 
   const handleEdit = trip => {
-    console.log(trip)
     setCurrentTrip(trip)
     history.push(`/drafts/${trip.id}`)
   }
@@ -49,6 +48,13 @@ function Drafts() {
       <Spinner className="definite-center" animation="border" role="status">
         <span className="visually-hidden">Loading...</span>
       </Spinner>
+    )
+  } else if (user.trips.filter(trip => trip.plan === false).length === 0) {
+    return (
+      <Stack gap={3}>
+        <h3>Drafts</h3>
+        <p>No drafts have been saved.</p>
+      </Stack>
     )
   } else {
     return (

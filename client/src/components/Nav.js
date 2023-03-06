@@ -14,11 +14,15 @@ function Nav() {
         <NavLink to="/drafts">Drafts</NavLink>
         <NavLink to="/plans">Plans</NavLink>
         <NavLink to="/cities">Cities</NavLink>
+        <NavLink to="/tags">Tags</NavLink>
         <button className="small-button" onClick={logout}>logout</button>
       </Stack>
     )
   } else return (
-    <NavLink to="/register">Sign in</NavLink>
+    <Stack gap={3}>
+      <NavLink to="/register">Sign up</NavLink>
+      <NavLink to="/login">Sign in</NavLink>
+    </Stack>
   )
 }
 

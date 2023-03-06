@@ -44,8 +44,8 @@ export function UserProvider({ children }) {
     .then((r) => {
       if (r.ok) {
         r.json().then(user => {
+          console.log("/me in UserContext", user)
           setUser(user)
-          // localStorage.setItem("user", user)
           // setAuthChecked(true)
           setUserLoggedIn(true)
         })
@@ -70,7 +70,7 @@ export function UserProvider({ children }) {
         if (r.ok) {
           r.json().then(user => {
             setUser(user)
-            // localStorage.setItem(user)
+            // sessionStorage.setItem("user", user)
             // setAuthChecked(true)
             setUserLoggedIn(true)
             history.push("/")
@@ -97,7 +97,7 @@ export function UserProvider({ children }) {
         if (r.ok) {
           r.json().then(() => {
             setUser(user)
-            // localStorage.setItem(user)
+            // sessionStorage.setItem("user", user)
             // setAuthChecked(true)
             setUserLoggedIn(true)
             history.push("/")
@@ -118,8 +118,8 @@ export function UserProvider({ children }) {
       .then(() => {
         setUser(null)
         setUserLoggedIn(false)
+        // sessionStorage.clear()
         // setAuthChecked(false)
-        // localStorage.clear()
         history.push("/")
       })
       .catch(err => alert(err.message))

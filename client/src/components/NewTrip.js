@@ -6,11 +6,12 @@ import TripContainer from './TripContainer'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
+import Spinner from 'react-bootstrap/Spinner'
 
 function NewTrip() {
   const user = useUserContext()
   const userUpdate = useUserUpdate()
-  const { currentTrip, setCurrentTrip } = useTripContext()
+  const { setCurrentTrip } = useTripContext()
   const history = useHistory()
   const [showModal, setShowModal] = useState(true)
   const [name, setName] = useState("")
@@ -40,12 +41,11 @@ function NewTrip() {
         setCity("")
         setCountry("")
         setShowModal(false)
-        history.push(`/drafts/${currentTrip.id}`)
+        history.push(`/drafts/${user.trips[user.trips.length - 1].id}`)
       })
       .catch(e => alert(e))
     }
   }
-  console.log(user)
 
   if (showModal && user) {
     return (
@@ -95,7 +95,9 @@ function NewTrip() {
     )
   } else {
     return (
-      <h3>Sign in or sign up to get started!</h3>
+      <Spinner className="definite-center" animation="border" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </Spinner>
     )
   }
 }

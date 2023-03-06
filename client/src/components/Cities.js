@@ -1,6 +1,6 @@
 function Cities() {
   return (
-    <div>Cities</div>
+    <h3>Cities</h3>
   )
 }
 

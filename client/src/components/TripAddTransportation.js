@@ -8,6 +8,7 @@ import InputGroup from 'react-bootstrap/InputGroup'
 import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
 import Dropdown from 'react-bootstrap/Dropdown'
+import Spinner from 'react-bootstrap/Spinner'
 
 function TripAddTransportation( props ) {
   const userUpdate = useUserUpdate()
@@ -23,7 +24,6 @@ function TripAddTransportation( props ) {
   const [endLocation, setEndLocation] = useState(null)
   const [endDateTime, setEndDateTime] = useState("")
   const [cost, setCost] = useState("")
-  const sortedCities = currentTrip.cities.sort((a, b) => a.city.localeCompare(b.city))
   const closeAndClearState = () => {
     setShowModal(false)
     setEditMode(false)
@@ -169,68 +169,76 @@ function TripAddTransportation( props ) {
     },
   )
 
-  return (
-    <Stack>
-      {!currentCity ? <Button size="sm" disabled onClick={() => alert("Please select a city first.")}>Add Transportation</Button> : <Button size="sm" onClick={() => setShowModal(true)}>Add Transportation</Button>}
+  if (!currentTrip) {
+    return (
+      <Spinner className="definite-center" animation="border" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </Spinner>
+    )
+  } else {
+    return (
+      <Stack>
+        {!currentCity ? <Button size="sm" disabled>Add Transportation</Button> : <Button size="sm" onClick={() => setShowModal(true)}>Add Transportation</Button>}
 
-      <Modal show={showModal} backdrop="static" keyboard={false} onHide={() => closeAndClearState()}>
-        <Modal.Header closeButton>
-          <Modal.Title>Add Transportation</Modal.Title>
-        </Modal.Header>
+        <Modal show={showModal} backdrop="static" keyboard={false} onHide={() => closeAndClearState()}>
+          <Modal.Header closeButton>
+            <Modal.Title>Add Transportation</Modal.Title>
+          </Modal.Header>
 
-        <Form>
-          <Form.Group controlId="formForDescription">
-            <Form.Control value={description} type="text" placeholder="Enter a description..." onChange={e => setDescription(e.target.value)}></Form.Control>
-          </Form.Group>
+          <Form>
+            <Form.Group controlId="formForDescription">
+              <Form.Control value={description} type="text" placeholder="Enter a description..." onChange={e => setDescription(e.target.value)}></Form.Control>
+            </Form.Group>
 
-          <Stack direction="horizontal" gap={3}>
-            <Dropdown>
-              <Dropdown.Toggle as={CustomToggle} id="dropdownForStartLocation">Starting Location</Dropdown.Toggle>
-                <Dropdown.Menu as={CustomMenu}>
-                  {sortedCities.map(city => (
-                    <Dropdown.Item key={city.id} size="sm" value={startLocation} onClick={() => setStartLocation([city])}>{city.city}, {city.country}</Dropdown.Item>
-                  ))}
-                  <Dropdown.Divider />
-                  <Dropdown.Item eventKey="noCity">Don't see your city? Create it first.</Dropdown.Item>
-                </Dropdown.Menu>
-            </Dropdown>
-            {startLocation ? <p>{startLocation[0].city}, {startLocation[0].country}</p> : null}
-          </Stack>
+            <Stack direction="horizontal" gap={3}>
+              <Dropdown>
+                <Dropdown.Toggle as={CustomToggle} id="dropdownForStartLocation">Starting Location</Dropdown.Toggle>
+                  <Dropdown.Menu as={CustomMenu}>
+                    {currentTrip.cities.sort((a, b) => a.city.localeCompare(b.city)).map(city => (
+                      <Dropdown.Item key={city.id} size="sm" value={startLocation} onClick={() => setStartLocation([city])}>{city.city}, {city.country}</Dropdown.Item>
+                    ))}
+                    <Dropdown.Divider />
+                    <Dropdown.Item eventKey="noCity">Don't see your city? Create it first.</Dropdown.Item>
+                  </Dropdown.Menu>
+              </Dropdown>
+              {startLocation ? <p>{startLocation[0].city}, {startLocation[0].country}</p> : null}
+            </Stack>
 
-          <Form.Group controlId="formForStartDateTime">
-            <Form.Control value={startDateTime} type="datetime-local" placeholder="Select the start date/time" onChange={e => setStartDateTime(e.target.value)}></Form.Control>
-          </Form.Group>
+            <Form.Group controlId="formForStartDateTime">
+              <Form.Control value={startDateTime} type="datetime-local" placeholder="Select the start date/time" onChange={e => setStartDateTime(e.target.value)}></Form.Control>
+            </Form.Group>
 
-          <Stack direction="horizontal" gap={3}>
-            <Dropdown>
-              <Dropdown.Toggle as={CustomToggle} id="dropdownForStartLocation">Destination</Dropdown.Toggle>
-                <Dropdown.Menu as={CustomMenu}>
-                  {sortedCities.map(city => (
-                    <Dropdown.Item key={city.id} size="sm" value={endLocation} onClick={() => setEndLocation([city])}>{city.city}, {city.country}</Dropdown.Item>
-                  ))}
-                  <Dropdown.Divider />
-                  <Dropdown.Item eventKey="noCity">Don't see your city? Create it first.</Dropdown.Item>
-                </Dropdown.Menu>
-            </Dropdown>
-            {endLocation ? <p>{endLocation[0].city}, {endLocation[0].country}</p> : null}
-          </Stack>
+            <Stack direction="horizontal" gap={3}>
+              <Dropdown>
+                <Dropdown.Toggle as={CustomToggle} id="dropdownForStartLocation">Destination</Dropdown.Toggle>
+                  <Dropdown.Menu as={CustomMenu}>
+                    {currentTrip.cities.sort((a, b) => a.city.localeCompare(b.city)).map(city => (
+                      <Dropdown.Item key={city.id} size="sm" value={endLocation} onClick={() => setEndLocation([city])}>{city.city}, {city.country}</Dropdown.Item>
+                    ))}
+                    <Dropdown.Divider />
+                    <Dropdown.Item eventKey="noCity">Don't see your city? Create it first.</Dropdown.Item>
+                  </Dropdown.Menu>
+              </Dropdown>
+              {endLocation ? <p>{endLocation[0].city}, {endLocation[0].country}</p> : null}
+            </Stack>
 
-          <Form.Group controlId="formForEndDateTime">
-            <Form.Control value={endDateTime} type="datetime-local" placeholder="Select the end date/time" onChange={e => setEndDateTime(e.target.value)}></Form.Control>
-          </Form.Group>
-          <InputGroup id="formForCost">
-            <InputGroup.Text>$</InputGroup.Text>
-            <Form.Control value={cost} type="number" placeholder={!cost ? "How much does this cost? (Optional)" : `$${cost}`} onChange={e => setCost(e.target.value)} />
-          </InputGroup>
-        </Form>
+            <Form.Group controlId="formForEndDateTime">
+              <Form.Control value={endDateTime} type="datetime-local" placeholder="Select the end date/time" onChange={e => setEndDateTime(e.target.value)}></Form.Control>
+            </Form.Group>
+            <InputGroup id="formForCost">
+              <InputGroup.Text>$</InputGroup.Text>
+              <Form.Control value={cost} type="number" placeholder={!cost ? "How much does this cost? (Optional)" : `$${cost}`} onChange={e => setCost(e.target.value)} />
+            </InputGroup>
+          </Form>
 
-        <Modal.Footer>
-          <Button size="sm" variant="secondary" onClick={() => closeAndClearState()}>Close</Button>
-          <Button size="sm" variant="primary" type="submit" onClick={e => handleSubmit(e)}>Submit</Button>
-        </Modal.Footer>
-      </Modal>
-    </Stack>
-  )
+          <Modal.Footer>
+            <Button size="sm" variant="secondary" onClick={() => closeAndClearState()}>Close</Button>
+            <Button size="sm" variant="primary" type="submit" onClick={e => handleSubmit(e)}>Submit</Button>
+          </Modal.Footer>
+        </Modal>
+      </Stack>
+    )
+  }
 }
 
 export default TripAddTransportation
