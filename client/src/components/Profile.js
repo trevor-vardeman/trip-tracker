@@ -13,8 +13,6 @@ function Profile() {
     e.preventDefault()
     const formData = new FormData()
     formData.append("avatar", avatar)
-    console.log("formData", formData)
-
     fetch("/user-avatar", {
       method: "POST",
       body: formData,

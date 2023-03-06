@@ -106,3 +106,10 @@ body {
 .card-buttons {
   justify-content: center;
 }
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

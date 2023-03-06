@@ -22,6 +22,10 @@ function Plans() {
     return (
       <Stack gap={3}>
         <h3>Plans</h3>
+        <Stack direction="horizontal">
+          <Button size="sm" variant={past ? "primary" : "secondary"} onClick={() => setPast(!past)}>Past</Button>
+          <Button size="sm" variant={!past ? "primary" : "secondary"} onClick={() => setPast(!past)}>Upcoming</Button>
+        </Stack>
         {user.trips.filter(trip => trip.plan === true).map(trip => (
           <Stack key={trip.id}>
             <Card className="cards">

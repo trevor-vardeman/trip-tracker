@@ -1,11 +1,15 @@
+import { useHistory } from "react-router-dom"
 import { useUserContext, useUserUpdate } from '../context/UserContext'
+import { useTripContext } from '../context/CurrentTripContext'
 import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
 import Spinner from 'react-bootstrap/Spinner'
 
 function Drafts() {
+  const history = useHistory()
   const user = useUserContext()
+  const { setCurrentTrip } = useTripContext()
   const userUpdate = useUserUpdate()
 
   const handleDelete = trip => {
@@ -23,6 +27,8 @@ function Drafts() {
 
   const handleEdit = trip => {
     console.log(trip)
+    setCurrentTrip(trip)
+    history.push(`/drafts/${trip.id}`)
   }
 
   const handleFinalize = trip => {

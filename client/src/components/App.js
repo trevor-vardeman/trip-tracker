@@ -7,7 +7,7 @@ import Register from './Register'
 import Login from './Login'
 import Profile from './Profile'
 import NewTrip from './NewTrip'
-import Trip from './Trip'
+import TripContainer from './TripContainer'
 import Drafts from './Drafts'
 import Plans from './Plans'
 import Cities from './Cities'
@@ -41,7 +41,7 @@ function App() {
                 <NewTrip />
               </Route>
               <Route path="/drafts/:id">
-                <Trip />
+                <TripContainer />
               </Route>
               <Route path="/drafts">
                 <Drafts />
