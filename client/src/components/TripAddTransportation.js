@@ -59,6 +59,11 @@ function TripAddTransportation( props ) {
 
   const handleSubmit = e => {
     e.preventDefault()
+    const finalCost = () => {
+      if (cost === "") {
+        return 0
+      } else return cost
+    }
     if (!description || !startDateTime || !endDateTime) {
       alert("Please add a description, start date/time, and end date/time.")
     } else if (editMode) {
@@ -69,7 +74,7 @@ function TripAddTransportation( props ) {
         start_datetime: startDateTime,
         end_location_id: endLocation[0].id,
         end_datetime: endDateTime,
-        cost: cost
+        cost: finalCost()
       }
       fetch(`/transportations/${transportationId}`, {
         method: "PATCH",
@@ -102,7 +107,7 @@ function TripAddTransportation( props ) {
         start_datetime: startDateTime,
         end_location_id: endLocation[0].id,
         end_datetime: endDateTime,
-        cost: cost
+        cost: finalCost()
       }
       fetch("/transportations", {
         method: "POST",

@@ -57,6 +57,11 @@ function TripAddActivity( props ) {
 
   const handleSubmit = e => {
     e.preventDefault()
+    const finalCost = () => {
+      if (cost === "") {
+        return 0
+      } else return cost
+    }
     if (!description || !startDateTime || !endDateTime) {
       alert("Please add a description, start date/time, and end date/time.")
     } else if (editMode) {
@@ -65,7 +70,7 @@ function TripAddActivity( props ) {
         description: description,
         start_datetime: startDateTime,
         end_datetime: endDateTime,
-        cost: cost
+        cost: finalCost()
       }
       fetch(`/activities/${activityId}`, {
         method: "PATCH",
@@ -95,7 +100,7 @@ function TripAddActivity( props ) {
         description: description,
         start_datetime: startDateTime,
         end_datetime: endDateTime,
-        cost: cost
+        cost: finalCost()
       }
       fetch("/activities", {
         method: "POST",
@@ -139,7 +144,7 @@ function TripAddActivity( props ) {
           </Form.Group>
           <InputGroup id="formForCost">
             <InputGroup.Text>$</InputGroup.Text>
-            <Form.Control value={cost} type="number" placeholder={!cost ? "How much does this activity cost? (Optional)" : `$${cost}`} onChange={e => setCost(e.target.value)} />
+            <Form.Control value={cost} type="number" placeholder={!cost ? "How much does this activity cost? (Optional)" : `${cost}`} onChange={e => setCost(e.target.value)} />
           </InputGroup>
         </Form>
         {/* <FileUpload file={file} handleFileUpload={handleFileUpload} /> */}

@@ -1,5 +1,5 @@
 class CitySerializer < ActiveModel::Serializer
-  attributes :id, :city, :country, :trip_id
+  attributes :id, :city, :country, :trip_id, :start_locations, :end_locations, :dates
 
   belongs_to :trip
   has_many :accommodations
@@ -7,4 +7,8 @@ class CitySerializer < ActiveModel::Serializer
   has_many :start_locations, :class_name => "Transportation", :foreign_key => "start_location_id"
   has_many :end_locations, :class_name => "Transportation", :foreign_key => "end_location_id"
   has_many :users, through: :trips
+
+  def dates
+
+  end
 end
