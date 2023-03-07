@@ -27,7 +27,7 @@ function Drafts() {
 
   const handleEdit = trip => {
     setCurrentTrip(trip)
-    history.push(`/drafts/${trip.id}`)
+    history.push(`/trips/${trip.id}`)
   }
 
   const handleFinalize = trip => {
@@ -64,8 +64,8 @@ function Drafts() {
           <Stack key={trip.id}>
             <Card className="cards">
               <Card.Header className="card-header" as="h5">{trip.name}</Card.Header>
-              <Card.Text>[Dates go here]</Card.Text>
               <Card.Text>Cities: {trip.trip_summary.num_cities}</Card.Text>
+              <Card.Text>{trip.trip_summary.departure_date && trip.trip_summary.return_date ? <td>{trip.trip_summary.departure_date.split("T")[0]} - {trip.trip_summary.return_date.split("T")[0]}</td> : <td>No dates yet</td>}</Card.Text>
               <Card.Text>Cost: ${trip.trip_summary.cost}</Card.Text>
               <Stack className="card-buttons" direction="horizontal" gap={3}>
                 <Button size="sm" variant="danger" onClick={() => handleDelete(trip)}>Delete</Button>

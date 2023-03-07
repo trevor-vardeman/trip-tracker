@@ -41,7 +41,7 @@ function NewTrip() {
         setCity("")
         setCountry("")
         setShowModal(false)
-        history.push(`/drafts/${user.trips[user.trips.length - 1].id}`)
+        history.push(`/trips/${user.trips[user.trips.length - 1].id}`)
       })
       .catch(e => alert(e))
     }

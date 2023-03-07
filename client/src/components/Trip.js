@@ -25,11 +25,19 @@ function Trip() {
     }
   },[intId, user, currentTrip, setCurrentTrip])
 
-  if (user === (null && !currentTrip)) {
+  if (!user && !currentTrip) {
     return (
       <Spinner className="definite-center" animation="border" role="status">
         <span className="visually-hidden">Loading...</span>
       </Spinner>
+    )
+  } else if (user && currentTrip && currentTrip.plan === true) {
+    return (
+      <Stack>
+        <TripName />
+        <TripData />
+        <TripSummary />
+      </Stack>
     )
   } else {
     return (

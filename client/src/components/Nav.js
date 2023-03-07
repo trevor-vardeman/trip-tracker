@@ -18,12 +18,7 @@ function Nav() {
         <button className="small-button" onClick={logout}>logout</button>
       </Stack>
     )
-  } else return (
-    <Stack gap={3}>
-      <NavLink to="/register">Sign up</NavLink>
-      <NavLink to="/login">Sign in</NavLink>
-    </Stack>
-  )
+  } else return null
 }
 
 export default Nav

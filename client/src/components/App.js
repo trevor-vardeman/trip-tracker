@@ -41,7 +41,7 @@ function App() {
               <Route path="/new-trip">
                 <NewTrip />
               </Route>
-              <Route path="/drafts/:id">
+              <Route path="/trips/:id">
                 <TripContainer />
               </Route>
               <Route path="/drafts">

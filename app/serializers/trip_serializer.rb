@@ -12,18 +12,42 @@ class TripSerializer < ActiveModel::Serializer
     activities = 0
     transportations = 0
     cost = 0
+    earliest_date = []
+    latest_date = []
+
 
     self.object.cities.each do |city|
-    city_accommodations = city.accommodations.length
-    city_activities = city.activities.length
-    city_start_locations = city.start_locations.length
-    accommodations += city_accommodations
-    activities += city_activities
-    transportations += city_start_locations
-    city.accommodations.map { |acc| cost += acc.cost }
-    city.activities.map { |act| cost += act.cost }
-    city.start_locations.map { |tran| cost += tran.cost }
+      city_accommodations = city.accommodations.length
+      city_activities = city.activities.length
+      city_start_locations = city.start_locations.length
+
+      accommodations += city_accommodations
+      activities += city_activities
+      transportations += city_start_locations
+
+      city.accommodations.map do |acc|
+        cost += acc.cost
+        earliest_date << acc.start_datetime
+        latest_date << acc.end_datetime
+      end
+
+      city.activities.map do |act|
+        cost += act.cost
+        earliest_date << act.start_datetime
+        latest_date << act.end_datetime
+      end
+
+      city.start_locations.map do |tran|
+        cost += tran.cost
+        earliest_date << tran.start_datetime
+      end
+
+      city.end_locations.map { |tran| latest_date << tran.end_datetime }
     end
-    return {num_cities: num_cities, accommodations: accommodations, activities: activities, transportations: transportations, cost: cost}
-  end
+
+    departure_date = earliest_date.min
+    return_date = latest_date.max
+
+    return {num_cities: num_cities, accommodations: accommodations, activities: activities, transportations: transportations, cost: cost, departure_date: departure_date, return_date: return_date}
+  end 
 end

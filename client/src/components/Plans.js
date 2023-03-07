@@ -1,15 +1,20 @@
 import { useState } from 'react'
+import { useHistory } from "react-router-dom"
 import { useUserContext } from '../context/UserContext'
+import { useTripContext } from '../context/CurrentTripContext'
 import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
 import Spinner from 'react-bootstrap/Spinner'
 
 function Plans() {
+  const history = useHistory()
   const user = useUserContext()
+  const { setCurrentTrip } = useTripContext()
   const [past, setPast] = useState(true)
   const handleView = trip => {
-    console.log(trip)
+    setCurrentTrip(trip)
+    history.push(`/trips/${trip.id}`)
   }
 
   if (user === null || undefined) {
@@ -37,8 +42,8 @@ function Plans() {
           <Stack key={trip.id}>
             <Card className="cards">
               <Card.Header className="card-header" as="h5">{trip.name}</Card.Header>
-              <Card.Text>[Dates go here]</Card.Text>
               <Card.Text>Cities: {trip.trip_summary.num_cities}</Card.Text>
+              <Card.Text>{trip.trip_summary.departure_date && trip.trip_summary.return_date ? <td>{trip.trip_summary.departure_date.split("T")[0]} - {trip.trip_summary.return_date.split("T")[0]}</td> : <td>No dates yet</td>}</Card.Text>
               <Card.Text>Cost: ${trip.trip_summary.cost}</Card.Text>
               <Button size="sm" variant="dark" onClick={() => handleView(trip)}>View</Button>
             </Card>

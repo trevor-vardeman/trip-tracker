@@ -66,7 +66,7 @@ function TripData() {
                 {city.city}, {city.country}
               </p>
               </ArcherElement>
-              <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete(city.id)}/>
+              {!currentTrip.plan ? <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete(city.id)}/> : null}
             </Stack>
           ))}
         </ArcherContainer>

@@ -12,7 +12,9 @@ function TripName() {
     )
   } else {
     return (
-      <h3>Trip | {currentTrip.name}</h3>
+      <div>
+        {!currentTrip.plan ? <h3>Draft | {currentTrip.name}</h3> : <h3>Plan | {currentTrip.name}</h3>}
+      </div>
     )
   }
 }

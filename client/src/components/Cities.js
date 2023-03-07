@@ -9,9 +9,6 @@ import Spinner from 'react-bootstrap/Spinner'
 function Cities() {
   const user = useUserContext()
   const [past, setPast] = useState(true)
-  const handleView = trip => {
-    console.log(trip)
-  }
 
   if (user === null || undefined) {
     return (
@@ -37,19 +34,19 @@ function Cities() {
         <Table size="sm">
           <thead>
             <tr>
-              <th>Dates</th>
               <th>City</th>
               <th>Country</th>
+              <th>Dates</th>
               <th>View Trip</th>
             </tr>
           </thead>
           <tbody>
-            {user.cities.map(city => (
+            {user.cities.sort((a, b) => a.city.localeCompare(b.city)).map(city => (
               <tr key={city.id}>
-                <td></td>
                 <td>{city.city}</td>
                 <td>{city.country}</td>
-                <Link to={`/drafts/${city.trip_id}`}>Open Trip</Link>
+                {city.arrival_date && city.departure_date ? <td>{city.arrival_date.split("T")[0]} - {city.departure_date.split("T")[0]}</td> : <td>No dates yet</td>}
+                <Link to={`/trips/${city.trip_id}`}>Open Trip</Link>
               </tr>
             ))}
           </tbody>

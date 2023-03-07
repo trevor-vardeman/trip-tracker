@@ -1,5 +1,6 @@
 import { useUserContext } from '../context/UserContext'
 import Stack from 'react-bootstrap/Stack'
+import Login from './Login'
 
 function Home() {
   const user = useUserContext()
@@ -16,7 +17,7 @@ function Home() {
     )
   } else {
     return (
-      <h3>Sign in or sign up to get started!</h3>
+      <Login />
     )
   }
 }

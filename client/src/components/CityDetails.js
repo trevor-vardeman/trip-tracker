@@ -55,8 +55,8 @@ function CityDetails() {
                 <p><span className="bold">Arrival Time:</span> {transportation.end_datetime}</p>
               </Stack>
               <Stack>
-                <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete("transportations", transportation.id)}/>
-                <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="18" height="18" onClick={() => handleTransportationEdit(transportation)}/>
+                {!currentTrip.plan ? <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete("transportations", transportation.id)}/> : null}
+                {!currentTrip.plan ? <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="18" height="18" onClick={() => handleTransportationEdit(transportation)}/> : null}
               </Stack>
             </Stack>
           ))}
@@ -81,8 +81,8 @@ function CityDetails() {
                 <p><span className="bold">Arrival Date:</span> {accommodation.end_datetime}</p>
               </Stack>
               <Stack>
-                <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete("accommodations", accommodation.id)}/>
-                <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="18" height="18" onClick={() => handleAccommodationEdit(accommodation)}/>
+                {!currentTrip.plan ? <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete("accommodations", accommodation.id)}/> : null}
+                {!currentTrip.plan ? <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="18" height="18" onClick={() => handleAccommodationEdit(accommodation)}/> : null}
               </Stack>
             </Stack>
           ))}
@@ -107,8 +107,8 @@ function CityDetails() {
                 <p><span className="bold">End Time:</span> {activity.end_datetime}</p>
               </Stack>
               <Stack>
-                <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete("activities", activity.id)}/>
-                <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="18" height="18" onClick={() => handleActivityEdit(activity)}/>
+                {!currentTrip.plan ? <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete("activities", activity.id)}/> : null}
+                {!currentTrip.plan ? <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="18" height="18" onClick={() => handleActivityEdit(activity)}/> : null}
               </Stack>
             </Stack>
           ))}
@@ -134,8 +134,8 @@ function CityDetails() {
                 <p><span className="bold">Arrival Time:</span> {transportation.end_datetime}</p>
               </Stack>
               <Stack>
-                <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete("transportations", transportation.id)}/>
-                <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="18" height="18" onClick={() => handleTransportationEdit(transportation)}/>
+                {!currentTrip.plan ? <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete("transportations", transportation.id)}/> : null}
+                {!currentTrip.plan ? <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="18" height="18" onClick={() => handleTransportationEdit(transportation)}/> : null}
               </Stack>
             </Stack>
           ))}
