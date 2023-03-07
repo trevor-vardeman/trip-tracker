@@ -22,7 +22,7 @@ function Cities() {
   } else if (user.cities.length === 0) {
     return (
       <Stack gap={3}>
-        <h3>Plans</h3>
+        <h3>Cities</h3>
         <p>No cities have been added.</p>
       </Stack>
     )

@@ -114,22 +114,30 @@ function TripAddTransportation( props ) {
         headers: { "Content-Type": "application/json", },
         body: JSON.stringify(transportation)
       })
-      .then(r => r.json())
-      .then(user => {
-        setShowModal(false)
-        userUpdate(user)
-        const updatedTrip = user.trips.filter(trip => trip.id === currentTrip.id)[0]
-        setCurrentTrip(updatedTrip)
-        const updatedCity = updatedTrip.cities.filter(city => city.id === currentCity.id)[0]
-        setCurrentCity(updatedCity)
-        setDescription("")
-        setStartLocation(null)
-        setStartDateTime("")
-        setEndLocation(null)
-        setEndDateTime("")
-        setCost("")
+      .then(r => {
+        if (r.ok) {
+          r.json().then(
+            user => {
+              setShowModal(false)
+              userUpdate(user)
+              const updatedTrip = user.trips.filter(trip => trip.id === currentTrip.id)[0]
+              setCurrentTrip(updatedTrip)
+              const updatedCity = updatedTrip.cities.filter(city => city.id === currentCity.id)[0]
+              setCurrentCity(updatedCity)
+              setDescription("")
+              setStartLocation(null)
+              setStartDateTime("")
+              setEndLocation(null)
+              setEndDateTime("")
+              setCost("")
+            }
+          )
+        } else {
+          r.json()
+          .then(r => r.error.map(e => alert(e)))
+        }
       })
-      .catch(e => alert(e))
+      .catch(e => console.log(e))
     }
   }
 
