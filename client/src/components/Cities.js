@@ -8,16 +8,23 @@ import Spinner from 'react-bootstrap/Spinner'
 
 function Cities() {
   const user = useUserContext()
-  const [past, setPast] = useState(true)
+  const [past, setPast] = useState(false)
   const sortedCities = () => {
     if (user.cities === null) {
       return 
     } else  {
+      let now = new Date()
       let citiesWithDates = user.cities.filter(city => city.arrival_date !== null && city.departure_date !== null)
-      let citiesWithoutDates = user.cities.filter(city => city.arrival_date === null || city.departure_date === null)
       citiesWithDates.sort((a, b) => a.arrival_date.localeCompare(b.arrival_date))
+      let upcomingDates = citiesWithDates.filter(city => city.departure_date > now.toISOString())
+
+      let citiesWithoutDates = user.cities.filter(city => city.arrival_date === null || city.departure_date === null)
       citiesWithoutDates.sort((a, b) => a.city.localeCompare(b.city))
-      return [...citiesWithDates, ...citiesWithoutDates]
+
+      let pastDates = citiesWithDates.filter(city => city.departure_date < now.toISOString())
+
+      let allUpcomingTrips = [...upcomingDates, ...citiesWithoutDates]
+      return {upcoming: allUpcomingTrips, past: pastDates}
     }
   }
 
@@ -39,8 +46,8 @@ function Cities() {
       <Stack gap={3}>
         <h3>Cities</h3>
         <Stack direction="horizontal">
-          <Button size="sm" variant={past ? "primary" : "secondary"} onClick={() => setPast(!past)}>Past</Button>
           <Button size="sm" variant={!past ? "primary" : "secondary"} onClick={() => setPast(!past)}>Upcoming</Button>
+          <Button size="sm" variant={past ? "primary" : "secondary"} onClick={() => setPast(!past)}>Past</Button>
         </Stack>
         <Table size="sm">
           <thead>
@@ -52,14 +59,24 @@ function Cities() {
             </tr>
           </thead>
           <tbody>
-            {sortedCities().map(city => (
-              <tr key={city.id}>
-                {city.arrival_date && city.departure_date ? <td>{city.arrival_date.split("T")[0]} - {city.departure_date.split("T")[0]}</td> : <td>No dates yet</td>}
-                <td>{city.city}</td>
-                <td>{city.country}</td>
-                <Link to={`/trips/${city.trip_id}`}>Open Trip</Link>
-              </tr>
-            ))}
+            {!past 
+              ? sortedCities().upcoming.map(city => (
+                  <tr key={city.id}>
+                    {city.arrival_date && city.departure_date ? <td>{city.arrival_date.split("T")[0]} - {city.departure_date.split("T")[0]}</td> : <td>No dates yet</td>}
+                    <td>{city.city}</td>
+                    <td>{city.country}</td>
+                    <Link to={`/trips/${city.trip_id}`}>Open Trip</Link>
+                  </tr>
+                ))
+              : sortedCities().past.map(city => (
+                  <tr key={city.id}>
+                    {city.arrival_date && city.departure_date ? <td>{city.arrival_date.split("T")[0]} - {city.departure_date.split("T")[0]}</td> : <td>No dates yet</td>}
+                    <td>{city.city}</td>
+                    <td>{city.country}</td>
+                    <Link to={`/trips/${city.trip_id}`}>Open Trip</Link>
+                  </tr>
+                ))
+            }
           </tbody>
         </Table>
       </Stack>
