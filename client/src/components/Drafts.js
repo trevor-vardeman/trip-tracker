@@ -11,6 +11,17 @@ function Drafts() {
   const user = useUserContext()
   const { setCurrentTrip } = useTripContext()
   const userUpdate = useUserUpdate()
+  const sortedDrafts = () => {
+    if (user.cities === null) {
+      return 
+    } else  {
+      let tripsWithDates = user.trips.filter(trip => trip.trip_summary.departure_date !== null && trip.trip_summary.return_date !== null)
+      let tripsWithoutDates = user.trips.filter(trip => trip.trip_summary.departure_date === null || trip.trip_summary.return_date === null)
+      tripsWithDates.sort((a, b) => a.trip_summary.departure_date.localeCompare(b.trip_summary.departure_date))
+      tripsWithoutDates.sort((a, b) => a.name.localeCompare(b.name))
+      return [...tripsWithDates, ...tripsWithoutDates]
+    }
+  }
 
   const handleDelete = trip => {
     fetch(`/trips/${trip.id}`, {
@@ -60,12 +71,12 @@ function Drafts() {
     return (
       <Stack gap={3}>
         <h3>Drafts</h3>
-        {user.trips.filter(trip => trip.plan === false).map(trip => (
+        {sortedDrafts().filter(trip => trip.plan === false).map(trip => (
           <Stack key={trip.id}>
             <Card className="cards">
               <Card.Header className="card-header" as="h5">{trip.name}</Card.Header>
-              <Card.Text>Cities: {trip.trip_summary.num_cities}</Card.Text>
               <Card.Text>{trip.trip_summary.departure_date && trip.trip_summary.return_date ? <td>{trip.trip_summary.departure_date.split("T")[0]} - {trip.trip_summary.return_date.split("T")[0]}</td> : <td>No dates yet</td>}</Card.Text>
+              <Card.Text>Cities: {trip.trip_summary.num_cities}</Card.Text>
               <Card.Text>Cost: ${trip.trip_summary.cost}</Card.Text>
               <Stack className="card-buttons" direction="horizontal" gap={3}>
                 <Button size="sm" variant="danger" onClick={() => handleDelete(trip)}>Delete</Button>

@@ -16,6 +16,17 @@ function Plans() {
     setCurrentTrip(trip)
     history.push(`/trips/${trip.id}`)
   }
+  const sortedPlans = () => {
+    if (user.cities === null) {
+      return 
+    } else  {
+      let tripsWithDates = user.trips.filter(trip => trip.trip_summary.departure_date !== null && trip.trip_summary.return_date !== null)
+      let tripsWithoutDates = user.trips.filter(trip => trip.trip_summary.departure_date === null || trip.trip_summary.return_date === null)
+      tripsWithDates.sort((a, b) => a.trip_summary.departure_date.localeCompare(b.trip_summary.departure_date))
+      tripsWithoutDates.sort((a, b) => a.name.localeCompare(b.name))
+      return [...tripsWithDates, ...tripsWithoutDates]
+    }
+  }
 
   if (user === null || undefined) {
     return (
@@ -38,12 +49,12 @@ function Plans() {
           <Button size="sm" variant={past ? "primary" : "secondary"} onClick={() => setPast(!past)}>Past</Button>
           <Button size="sm" variant={!past ? "primary" : "secondary"} onClick={() => setPast(!past)}>Upcoming</Button>
         </Stack>
-        {user.trips.filter(trip => trip.plan === true).map(trip => (
+        {sortedPlans().filter(trip => trip.plan === true).map(trip => (
           <Stack key={trip.id}>
             <Card className="cards">
               <Card.Header className="card-header" as="h5">{trip.name}</Card.Header>
-              <Card.Text>Cities: {trip.trip_summary.num_cities}</Card.Text>
               <Card.Text>{trip.trip_summary.departure_date && trip.trip_summary.return_date ? <td>{trip.trip_summary.departure_date.split("T")[0]} - {trip.trip_summary.return_date.split("T")[0]}</td> : <td>No dates yet</td>}</Card.Text>
+              <Card.Text>Cities: {trip.trip_summary.num_cities}</Card.Text>
               <Card.Text>Cost: ${trip.trip_summary.cost}</Card.Text>
               <Button size="sm" variant="dark" onClick={() => handleView(trip)}>View</Button>
             </Card>
