@@ -2,6 +2,7 @@ import { useUserContext } from '../context/UserContext'
 import Stack from 'react-bootstrap/Stack'
 import Trip from './Trip'
 import CityDetails from './CityDetails'
+import Tags from './Tags'
 import Spinner from 'react-bootstrap/Spinner'
 
 function TripContainer() {
@@ -15,9 +16,10 @@ function TripContainer() {
     )
   } else {
     return (
-      <Stack direction="horizontal">
-      <Trip />
-      <CityDetails />
+      <Stack className="trip-container" direction="horizontal" gap={3}>
+        <Tags />
+        <Trip />
+        <CityDetails />
     </Stack>
     )
   }

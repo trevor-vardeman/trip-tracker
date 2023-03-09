@@ -44,26 +44,26 @@ function CityDetails() {
   const endLocations = () => {
     if (currentCity.end_locations.length > 0) {
       return (
-        <>
+        <Stack>
           {currentCity.end_locations.map((transportation) => (
             <Stack direction="horizontal" key={transportation.id}>
-              <Stack className="border">
+              <Stack className="edit-delete-buttons" direction="horizontal">
+                {!currentTrip.plan ? <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="18" height="18" onClick={() => handleTransportationEdit(transportation)}/> : null}
+                {!currentTrip.plan ? <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete("transportations", transportation.id)}/> : null}
+              </Stack>
+              <Stack>
                 <p><span className="bold">{transportation.start_location}</span> to <span className="bold">{transportation.end_location}</span></p>
                 <p><span className="bold">Description:</span> {transportation.description}</p>
                 <p><span className="bold">Cost:</span> ${transportation.cost}</p>
                 <p><span className="bold">Departure Time:</span> {transportation.start_datetime}</p>
                 <p><span className="bold">Arrival Time:</span> {transportation.end_datetime}</p>
               </Stack>
-              <Stack>
-                {!currentTrip.plan ? <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete("transportations", transportation.id)}/> : null}
-                {!currentTrip.plan ? <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="18" height="18" onClick={() => handleTransportationEdit(transportation)}/> : null}
-              </Stack>
             </Stack>
           ))}
           <div className="hide">
             {transportationProps ? <TripAddTransportation transportationProps={transportationProps} handleClose={handleClose}/> : null}
           </div>
-        </>
+        </Stack>
       )
     }
   }
@@ -75,14 +75,14 @@ function CityDetails() {
           {currentCity.accommodations.map((accommodation) => (
             <Stack direction="horizontal" key={accommodation.id}>
               <Stack className="border">
+                <Stack className="edit-delete-buttons" direction="horizontal">
+                  {!currentTrip.plan ? <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="18" height="18" onClick={() => handleAccommodationEdit(accommodation)}/> : null}
+                  {!currentTrip.plan ? <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete("accommodations", accommodation.id)}/> : null}
+                </Stack>
                 <p className="bold">{accommodation.description}</p>
                 <p><span className="bold">Cost:</span> ${accommodation.cost}</p>
                 <p><span className="bold">Arrival Date:</span> {accommodation.start_datetime}</p>
                 <p><span className="bold">Arrival Date:</span> {accommodation.end_datetime}</p>
-              </Stack>
-              <Stack>
-                {!currentTrip.plan ? <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete("accommodations", accommodation.id)}/> : null}
-                {!currentTrip.plan ? <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="18" height="18" onClick={() => handleAccommodationEdit(accommodation)}/> : null}
               </Stack>
             </Stack>
           ))}
@@ -97,25 +97,25 @@ function CityDetails() {
   const activities = () => {
     if (currentCity.activities.length > 0) {
       return (
-        <>
+        <Stack className="centered">
           {currentCity.activities.map((activity) => (
-            <Stack direction="horizontal" key={activity.id}>
-              <Stack className="border">
+            <Stack key={activity.id}>
+              <Stack className="city-item border">
+                <Stack className="edit-delete-buttons" direction="horizontal">
+                  {!currentTrip.plan ? <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="18" height="18" onClick={() => handleActivityEdit(activity)}/> : null}
+                  {!currentTrip.plan ? <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete("activities", activity.id)}/> : null}
+                </Stack>
                 <p className="bold">{activity.description}</p>
                 <p><span className="bold">Cost:</span> ${activity.cost}</p>
                 <p><span className="bold">Start Time:</span> {activity.start_datetime}</p>
                 <p><span className="bold">End Time:</span> {activity.end_datetime}</p>
-              </Stack>
-              <Stack>
-                {!currentTrip.plan ? <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete("activities", activity.id)}/> : null}
-                {!currentTrip.plan ? <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="18" height="18" onClick={() => handleActivityEdit(activity)}/> : null}
               </Stack>
             </Stack>
           ))}
           <div className="hide">
             {activityProps ? <TripAddActivity activityProps={activityProps} handleClose={handleClose}/> : null}
           </div>
-        </>
+        </Stack>
       )
     } else return null
   }
@@ -127,15 +127,15 @@ function CityDetails() {
           {currentCity.start_locations.map((transportation) => (
             <Stack direction="horizontal" key={transportation.id}>
               <Stack className="border">
+                <Stack className="edit-delete-buttons" direction="horizontal">
+                  {!currentTrip.plan ? <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="18" height="18" onClick={() => handleTransportationEdit(transportation)}/> : null}
+                  {!currentTrip.plan ? <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete("transportations", transportation.id)}/> : null}
+                </Stack>
                 <p><span className="bold">{transportation.start_location}</span> to <span className="bold">{transportation.end_location}</span></p>
                 <p><span className="bold">Description:</span> {transportation.description}</p>
                 <p><span className="bold">Cost:</span> ${transportation.cost}</p>
                 <p><span className="bold">Departure Time:</span> {transportation.start_datetime}</p>
                 <p><span className="bold">Arrival Time:</span> {transportation.end_datetime}</p>
-              </Stack>
-              <Stack>
-                {!currentTrip.plan ? <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete("transportations", transportation.id)}/> : null}
-                {!currentTrip.plan ? <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="18" height="18" onClick={() => handleTransportationEdit(transportation)}/> : null}
               </Stack>
             </Stack>
           ))}
@@ -149,9 +149,9 @@ function CityDetails() {
 
   if (currentCity) {
     return (
-      <Stack className="city-details">
-        <p className="box-header-footer">{currentCity.city}, {currentCity.country} Details</p>
-        <Stack gap={1} className="xsmall">
+      <Stack className="centered city-details">
+        <h3>{currentCity.city}, {currentCity.country} Details</h3>
+        <Stack className="city-data xsmall" gap={1}>
           {endLocations()}
           {accommodations()}
           {activities()}
@@ -160,7 +160,14 @@ function CityDetails() {
         <br></br>
       </Stack>
     )
-  } else return null
+  } else {
+    return (
+      <Stack className="centered">
+        <h3>City Details</h3>
+        <Stack className="centered city-details" gap={1}></Stack>
+      </Stack>
+    )
+  }
 }
 
 export default CityDetails

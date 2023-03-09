@@ -43,7 +43,7 @@ function TripData() {
   } else {
     return (
       <Stack className="trip-data">
-        <p className="box-header-footer">Trip Start</p>
+        <p className="bold">Trip Start</p>
         <ArcherContainer>
           {currentTrip.cities.map((city, index) => (
             <Stack direction="horizontal" key={city.id}>
@@ -70,7 +70,7 @@ function TripData() {
             </Stack>
           ))}
         </ArcherContainer>
-        <p className="box-header-footer">Trip End</p>
+        <p className="bold">Trip End</p>
       </Stack>
     )
   }

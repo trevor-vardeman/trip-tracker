@@ -5,12 +5,18 @@ body {
     sans-serif;
 }
 
-.profile {
-  position: absolute;
-  top: 52%;
-  left: 50%;
-  transform: translate(-50%, -50%);  
+.centered {
+  justify-content: center;
   align-items: center;
+}
+
+.nav {
+  place-content: space-around;
+  margin: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-color: black;
+  border-width: 2px;
 }
 
 .definite-center {
@@ -20,9 +26,33 @@ body {
   transform: translate(-50%, -50%);
 }
 
-.small-button {
-  width: min-content;
-  size: "sm";
+.trip-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.tags {
+  flex-grow: 1;
+  height: 90vh;
+  /* width: 30vw; */
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tag-data {
+  border-color: black;
+  border-style: solid;
+}
+
+.trip {
+  height: 90vh;
+  /* width: 40vw; */
+  flex-grow: 2;
+  border: 2px black;
+  align-items: center;
 }
 
 .trip-data {
@@ -30,22 +60,41 @@ body {
   justify-content: space-between;
   border-color: black;
   border-style: solid;
-  width: 50vw;
-  height: 65vw;
+  /* width: 50vw;
+  height: 65vw; */
   background-color: lightblue;
   display: flex;
 }
 
 .city-details {
-  align-items: center;
-  justify-content: space-between;
-  transform: translate(50px, 40%);
+  height: 90vh;
+  flex-grow: 1;
+  /* width: 30vw; */
+}
+
+.city-data {
   border-color: black;
   border-style: solid;
-  width: 50vw;
-  height: 50vw;
   background-color: lightgrey;
-  display: flex;
+  text-align-last: center;
+}
+
+.city-item {
+  /* align-self: center; */
+  border: 2px solid black;
+}
+
+.edit-delete-buttons {
+  place-content: space-evenly;
+}
+
+.cities {
+  width: 75vw;
+}
+
+.small-button {
+  width: min-content;
+  size: "sm";
 }
 
 .hover {
@@ -56,23 +105,23 @@ body {
   outline: 2px solid orange;
 }
 
-.box-header-footer {
-  font-weight: bold;
-}
-
-.img {
-  width: 100%;
-  height: auto;
-  align-self: center;
-}
-
 .profile-avatar {
   border: 2px solid black;
   position: relative;
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   overflow: hidden;
   border-radius: 50%;
+}
+
+.profile-img {
+  width: 50%;
+  height: auto;
+  border: 2px solid black;
+}
+
+.margin-bottom {
+  margin-bottom: 10px;
 }
 
 .bold {
@@ -81,12 +130,6 @@ body {
 
 .xsmall {
   font-size: xx-small;
-}
-
-.border {
-  border-color: black;
-  border-style: solid;
-  border-width: 2px;
 }
 
 .hide {
@@ -107,9 +150,8 @@ body {
   justify-content: center;
 }
 
-.centered {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
+/* .img {
+  width: 100%;
+  height: auto;
+  align-self: center;
+} */

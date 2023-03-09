@@ -43,22 +43,22 @@ function Plans() {
     )
   } else if (user.trips.filter(trip => trip.plan === true).length === 0) {
     return (
-      <Stack gap={3}>
+      <Stack className="centered" gap={3}>
         <h3>Plans</h3>
         <p>No plans have been finalized.</p>
       </Stack>
     )
   } else {
     return (
-      <Stack gap={3}>
+      <Stack className="centered" gap={3}>
         <h3>Plans</h3>
-        <Stack direction="horizontal">
+        <Stack className="centered" direction="horizontal">
           <Button size="sm" variant={!past ? "primary" : "secondary"} onClick={() => setPast(!past)}>Upcoming</Button>
           <Button size="sm" variant={past ? "primary" : "secondary"} onClick={() => setPast(!past)}>Past</Button>
         </Stack>
           {!past
             ? sortedPlans().upcoming.filter(trip => trip.plan === true).map(trip => (
-                <Stack key={trip.id}>
+                <Stack className="centered" key={trip.id}>
                   <Card className="cards">
                     <Card.Header className="card-header" as="h5">{trip.name}</Card.Header>
                     <Card.Text>{trip.trip_summary.departure_date && trip.trip_summary.return_date ? <td>{trip.trip_summary.departure_date.split("T")[0]} - {trip.trip_summary.return_date.split("T")[0]}</td> : <td>No dates yet</td>}</Card.Text>
@@ -69,7 +69,7 @@ function Plans() {
                 </Stack>
               ))
             : sortedPlans().past.filter(trip => trip.plan === true).map(trip => (
-                <Stack key={trip.id}>
+                <Stack className="centered" key={trip.id}>
                   <Card className="cards">
                     <Card.Header className="card-header" as="h5">{trip.name}</Card.Header>
                     <Card.Text>{trip.trip_summary.departure_date && trip.trip_summary.return_date ? <td>{trip.trip_summary.departure_date.split("T")[0]} - {trip.trip_summary.return_date.split("T")[0]}</td> : <td>No dates yet</td>}</Card.Text>

@@ -1,6 +1,13 @@
+import Stack from 'react-bootstrap/Stack'
+
 function Tags() {
   return (
-    <h3>Tags</h3>
+    <Stack className="centered tags">
+      <h3>Tags</h3>
+      <Stack className="tag-data">
+
+      </Stack>
+    </Stack>
   )
 }
 

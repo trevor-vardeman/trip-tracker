@@ -8,7 +8,7 @@ function Nav() {
 
   if (user) {
     return (
-      <Stack gap={3}>
+      <Stack className="nav" direction="horizontal" gap={3}>
         {user.avatar ? <NavLink to="/profile"><img href="" className="profile-avatar" src={`https://storage.cloud.google.com/flatiron-travel-app/${user.avatar.toString()}`} alt="userAvatar"/></NavLink> : <NavLink to="/profile">Profile</NavLink>}
         <NavLink to="/new-trip">New Trip</NavLink>
         <NavLink to="/drafts">Drafts</NavLink>

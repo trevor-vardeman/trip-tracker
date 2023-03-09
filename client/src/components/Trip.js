@@ -33,7 +33,7 @@ function Trip() {
     )
   } else if (user && currentTrip && currentTrip.plan === true) {
     return (
-      <Stack>
+      <Stack className="trip">
         <TripName />
         <TripData />
         <TripSummary />
@@ -41,11 +41,10 @@ function Trip() {
     )
   } else {
     return (
-      <Stack>
+      <Stack className="trip">
         <TripName />
-        <TripAddCity />
-        <p>Select a city to add...</p>
-          <Stack className="small-button" direction="horizontal">
+          <Stack className="centered margin-bottom" direction="horizontal">
+            <TripAddCity />
             <TripAddTransportation />
             <TripAddAccommodation />
             <TripAddActivity />

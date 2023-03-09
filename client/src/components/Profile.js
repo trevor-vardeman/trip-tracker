@@ -32,7 +32,7 @@ function Profile() {
       </Spinner>
     )
   } else return (
-    <Stack className="profile" gap={3}>
+    <Stack className="centered" gap={3}>
       <h3>Profile</h3>
       <Form>
         <Form.Group controlId="formAvatarUpload">
@@ -43,7 +43,7 @@ function Profile() {
           </Stack>
         </Form.Group>
       </Form>
-      {user.avatar ? <img className="img border" src={`https://storage.cloud.google.com/flatiron-travel-app/${user.avatar.toString()}`} alt="userAvatar"/> : null}
+      {user.avatar ? <img className="profile-img" src={`https://storage.cloud.google.com/flatiron-travel-app/${user.avatar.toString()}`} alt="userAvatar"/> : null}
     </Stack>
   )
 }

@@ -13,7 +13,7 @@ function TripSummary() {
     )
   } else {
     return (
-      <Stack>
+      <Stack className="centered">
         <p className="bold">Trip Summary</p>
         <p>Cities: {currentTrip.trip_summary.num_cities}</p>
         <p>Accommodations: {currentTrip.trip_summary.accommodations}</p>

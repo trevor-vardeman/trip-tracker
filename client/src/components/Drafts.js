@@ -62,14 +62,14 @@ function Drafts() {
     )
   } else if (user.trips.filter(trip => trip.plan === false).length === 0) {
     return (
-      <Stack gap={3}>
+      <Stack className="centered" gap={3}>
         <h3>Drafts</h3>
         <p>No drafts have been saved.</p>
       </Stack>
     )
   } else {
     return (
-      <Stack gap={3}>
+      <Stack className="centered" gap={3}>
         <h3>Drafts</h3>
         {sortedDrafts().filter(trip => trip.plan === false).map(trip => (
           <Stack key={trip.id}>

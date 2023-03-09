@@ -23,8 +23,8 @@ export const CurrentCityContext = React.createContext()
 
 function App() {
   return (
-    <Stack direction="horizontal">
-      <UserProvider className="App">
+    <Stack>
+      <UserProvider>
         <TripProvider>
           <CityProvider>
             <Nav />
