@@ -88,10 +88,6 @@ body {
   place-content: space-evenly;
 }
 
-.cities {
-  width: 75vw;
-}
-
 .small-button {
   width: min-content;
   size: "sm";

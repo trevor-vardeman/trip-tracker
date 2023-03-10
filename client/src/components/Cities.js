@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useUserContext } from '../context/UserContext'
 import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
@@ -7,6 +7,7 @@ import Table from 'react-bootstrap/Table'
 import Spinner from 'react-bootstrap/Spinner'
 
 function Cities() {
+  const history = useHistory()
   const user = useUserContext()
   const [past, setPast] = useState(false)
   const sortedCities = () => {
@@ -43,13 +44,13 @@ function Cities() {
     )
   } else {
     return (
-      <Stack className="centered cities" gap={3}>
+      <Stack className="centered" gap={3}>
         <h3>Cities</h3>
         <Stack className="centered" direction="horizontal">
           <Button size="sm" variant={!past ? "primary" : "secondary"} onClick={() => setPast(!past)}>Upcoming</Button>
           <Button size="sm" variant={past ? "primary" : "secondary"} onClick={() => setPast(!past)}>Past</Button>
         </Stack>
-        <Table size="sm">
+        <Table className="centered" size="sm" striped bordered hover>
           <thead>
             <tr>
               <th>Dates</th>
@@ -61,19 +62,19 @@ function Cities() {
           <tbody>
             {!past 
               ? sortedCities().upcoming.map(city => (
-                  <tr key={city.id}>
+                  <tr className="centered" key={city.id}>
                     {city.arrival_date && city.departure_date ? <td>{city.arrival_date.split("T")[0]} - {city.departure_date.split("T")[0]}</td> : <td>No dates yet</td>}
                     <td>{city.city}</td>
                     <td>{city.country}</td>
-                    <Link to={`/trips/${city.trip_id}`}>Open Trip</Link>
+                    <td><img className="hover" src="/assets/arrow-up-right-circle.svg" alt="bootstrapOpenIcon" width="20" height="20" onClick={() => history.push(`/trips/${city.trip_id}`)}/></td>
                   </tr>
                 ))
               : sortedCities().past.map(city => (
-                  <tr key={city.id}>
+                  <tr className="centered" key={city.id}>
                     {city.arrival_date && city.departure_date ? <td>{city.arrival_date.split("T")[0]} - {city.departure_date.split("T")[0]}</td> : <td>No dates yet</td>}
                     <td>{city.city}</td>
                     <td>{city.country}</td>
-                    <Link to={`/trips/${city.trip_id}`}>Open Trip</Link>
+                    <td><img className="hover" src="/assets/arrow-up-right-circle.svg" alt="bootstrapOpenIcon" width="20" height="20" onClick={() => history.push(`/trips/${city.trip_id}`)}/></td>
                   </tr>
                 ))
             }

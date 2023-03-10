@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import { useUserContext, useUserLogout } from '../context/UserContext'
 import Stack from 'react-bootstrap/Stack'
+import Button from 'react-bootstrap/Button'
 
 function Nav() {
   const user = useUserContext()
@@ -15,7 +16,7 @@ function Nav() {
         <NavLink to="/plans">Plans</NavLink>
         <NavLink to="/cities">Cities</NavLink>
         <NavLink to="/tags">Tags</NavLink>
-        <button className="small-button" onClick={logout}>logout</button>
+        <Button className="small-button" onClick={logout} variant="danger" size="sm">Logout</Button>
       </Stack>
     )
   } else return null
