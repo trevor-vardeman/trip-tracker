@@ -49,9 +49,11 @@ function Trip() {
             <TripAddAccommodation />
             <TripAddActivity />
           </Stack>
-        <TripData />
-        <TripSummary />
-        <TripButtons />
+          <Stack>
+            <TripData />
+            <TripSummary />
+            <TripButtons />
+          </Stack>
       </Stack>
     )
   }

@@ -29,7 +29,7 @@ function TripData() {
       const updatedCity = updatedTrip.cities.filter(city => city.id === currentCity.id)[0]
       setCurrentCity(updatedCity)
     })
-    .catch(e => alert(e))
+    .catch(e => console.log(e))
   }
 
   if (!currentTrip) {
@@ -41,10 +41,10 @@ function TripData() {
   } else {
     return (
       <Stack className="trip-data">
-        <p className="bold">Trip Start</p>
+        <p className="bold centered">Trip Start</p>
         <ArcherContainer>
           {currentTrip.cities.sort((a, b) => a.id - b.id).map((city, index) => (
-            <Stack className="centered" direction="horizontal" key={city.id}>
+            <Stack direction="horizontal" key={city.id}>
               <ArcherElement 
                 id={index.toString()}
                 relations={[

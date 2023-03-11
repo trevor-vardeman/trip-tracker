@@ -35,7 +35,6 @@ body {
 }
 
 .tags {
-  flex-grow: 1;
   height: 90vh;
   align-items: center;
   justify-content: space-between;
@@ -48,12 +47,12 @@ body {
 
 .trip {
   height: 90vh;
-  flex-grow: 2;
   border: 2px black;
   align-items: center;
 }
 
 .trip-data {
+  height: 60vh;
   align-items: center;
   justify-content: space-between;
   border-color: black;
@@ -61,15 +60,14 @@ body {
   background-color: lightblue;
   display: flex;
 }
-
 .archer-element {
   width: 150px;
   text-align: center;
+  margin: 15px;
 }
 
 .city-details {
   height: 90vh;
-  flex-grow: 1;
 }
 
 .city-data {
@@ -145,9 +143,9 @@ body {
   justify-content: center;
 }
 
-p {
-  margin: 0;
-  padding: 0;
+.p {
+  margin: 0px;
+  padding: 0px;
 }
 
 /* .img {

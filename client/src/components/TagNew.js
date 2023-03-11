@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button'
 
 function TagNew() {
   const userUpdate = useUserUpdate()
-  const { currentTrip } = useTripContext()
+  const { currentTrip, setCurrentTrip } = useTripContext()
   const [tag, setTag] = useState("")
   const handleSubmit = e => {
     e.preventDefault()
@@ -23,6 +23,8 @@ function TagNew() {
       if (r.ok) {
         r.json().then(user => {
           userUpdate(user)
+          const updatedTrip = user.trips.filter(trip => trip.id === currentTrip.id)[0]
+          setCurrentTrip(updatedTrip)
           setTag("")
         })
       } else {

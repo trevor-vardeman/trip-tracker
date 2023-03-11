@@ -14,12 +14,12 @@ function TripSummary() {
   } else {
     return (
       <Stack className="centered">
-        <p className="bold">Trip Summary</p>
-        <p>Cities: {currentTrip.trip_summary.num_cities}</p>
-        <p>Accommodations: {currentTrip.trip_summary.accommodations}</p>
-        <p>Activities: {currentTrip.trip_summary.activities}</p>
-        <p>Transporatation: {currentTrip.trip_summary.transportations}</p>
-        <p className="bold">Cost: ${currentTrip.trip_summary.cost}</p>
+        <p className="bold p">Trip Summary</p>
+        <p className="p">Cities: {currentTrip.trip_summary.num_cities}</p>
+        <p className="p">Accommodations: {currentTrip.trip_summary.accommodations}</p>
+        <p className="p">Activities: {currentTrip.trip_summary.activities}</p>
+        <p className="p">Transporatation: {currentTrip.trip_summary.transportations}</p>
+        <p className="bold p">Cost: ${currentTrip.trip_summary.cost}</p>
       </Stack>
     )
   }

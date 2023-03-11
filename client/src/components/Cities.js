@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { useUserContext } from '../context/UserContext'
 import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'

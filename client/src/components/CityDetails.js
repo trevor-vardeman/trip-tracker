@@ -53,11 +53,11 @@ function CityDetails() {
                   {!currentTrip.plan ? <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete("transportations", transportation.id)}/> : null}
                 </Stack>
                 <Stack>
-                  <p><span className="bold">{transportation.start_location}</span> to <span className="bold">{transportation.end_location}</span></p>
-                  <p><span className="bold">Description:</span> {transportation.description}</p>
-                  <p><span className="bold">Cost:</span> ${transportation.cost}</p>
-                  <p><span className="bold">Departure Time:</span> {transportation.start_datetime}</p>
-                  <p><span className="bold">Arrival Time:</span> {transportation.end_datetime}</p>
+                  <p className="p"><span className="bold">{transportation.start_location}</span> to <span className="bold">{transportation.end_location}</span></p>
+                  <p className="p"><span className="bold">Description:</span> {transportation.description}</p>
+                  <p className="p"><span className="bold">Cost:</span> ${transportation.cost}</p>
+                  <p className="p"><span className="bold">Departure Time:</span> {transportation.start_datetime}</p>
+                  <p className="p"><span className="bold">Arrival Time:</span> {transportation.end_datetime}</p>
                 </Stack>
               </Stack>
             </Stack>
@@ -81,10 +81,10 @@ function CityDetails() {
                   {!currentTrip.plan ? <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="18" height="18" onClick={() => handleAccommodationEdit(accommodation)}/> : null}
                   {!currentTrip.plan ? <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete("accommodations", accommodation.id)}/> : null}
                 </Stack>
-                <p className="bold">{accommodation.description}</p>
-                <p><span className="bold">Cost:</span> ${accommodation.cost}</p>
-                <p><span className="bold">Arrival Date:</span> {accommodation.start_datetime}</p>
-                <p><span className="bold">Arrival Date:</span> {accommodation.end_datetime}</p>
+                <p className="bold p">{accommodation.description}</p>
+                <p className="p"><span className="bold p">Cost:</span> ${accommodation.cost}</p>
+                <p className="p"><span className="bold">Arrival Date:</span> {accommodation.start_datetime}</p>
+                <p className="p"><span className="bold">Arrival Date:</span> {accommodation.end_datetime}</p>
               </Stack>
             </Stack>
           ))}
@@ -107,10 +107,10 @@ function CityDetails() {
                   {!currentTrip.plan ? <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="18" height="18" onClick={() => handleActivityEdit(activity)}/> : null}
                   {!currentTrip.plan ? <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete("activities", activity.id)}/> : null}
                 </Stack>
-                <p className="bold">{activity.description}</p>
-                <p><span className="bold">Cost:</span> ${activity.cost}</p>
-                <p><span className="bold">Start Time:</span> {activity.start_datetime}</p>
-                <p><span className="bold">End Time:</span> {activity.end_datetime}</p>
+                <p className="bold p">{activity.description}</p>
+                <p className="p"><span className="bold">Cost:</span> ${activity.cost}</p>
+                <p className="p"><span className="bold">Start Time:</span> {activity.start_datetime}</p>
+                <p className="p"><span className="bold">End Time:</span> {activity.end_datetime}</p>
               </Stack>
             </Stack>
           ))}
@@ -133,11 +133,11 @@ function CityDetails() {
                   {!currentTrip.plan ? <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="18" height="18" onClick={() => handleTransportationEdit(transportation)}/> : null}
                   {!currentTrip.plan ? <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete("transportations", transportation.id)}/> : null}
                 </Stack>
-                <p><span className="bold">{transportation.start_location}</span> to <span className="bold">{transportation.end_location}</span></p>
-                <p><span className="bold">Description:</span> {transportation.description}</p>
-                <p><span className="bold">Cost:</span> ${transportation.cost}</p>
-                <p><span className="bold">Departure Time:</span> {transportation.start_datetime}</p>
-                <p><span className="bold">Arrival Time:</span> {transportation.end_datetime}</p>
+                <p className="p"><span className="bold">{transportation.start_location}</span> to <span className="bold">{transportation.end_location}</span></p>
+                <p className="p"><span className="bold">Description:</span> {transportation.description}</p>
+                <p className="p"><span className="bold">Cost:</span> ${transportation.cost}</p>
+                <p className="p"><span className="bold">Departure Time:</span> {transportation.start_datetime}</p>
+                <p className="p"><span className="bold">Arrival Time:</span> {transportation.end_datetime}</p>
               </Stack>
             </Stack>
           ))}
