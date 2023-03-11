@@ -36,6 +36,7 @@ body {
 
 .tags {
   height: 90vh;
+  width: 33vw;
   align-items: center;
   justify-content: space-between;
 }
@@ -47,6 +48,7 @@ body {
 
 .trip {
   height: 90vh;
+  width: 34vw;
   border: 2px black;
   align-items: center;
 }
@@ -68,6 +70,7 @@ body {
 
 .city-details {
   height: 90vh;
+  width: 33vw;
 }
 
 .city-data {

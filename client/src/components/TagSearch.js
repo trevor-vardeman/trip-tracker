@@ -16,46 +16,49 @@ function TagSearch() {
   const animatedComponents = makeAnimated()
 
   useEffect(() => {
-    fetch("/tags", {
-      method: "GET",
-      headers: { "Content-Type": "application/json" }
-    })
-    .then(r => r.json())
-    .then(tags => {
-      setUnformattedTags(tags)
-      const tagFormat = tags.map(tag => {
-        let newTag = {
-          label: tag.name, value: tag.name
-        }
-        return newTag
+    if (currentTrip) {
+      fetch("/tags", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" }
       })
-      setFormattedTags(tagFormat)
-    })
-    .catch(e => alert(e))
-  },[])
+      .then(r => r.json())
+      .then(tags => {
+        setUnformattedTags(tags)
+        let tagsToBeRemoved = []
+        const getTagIdsToRemove = () => tags.map(tag => {
+          let newTags = currentTrip.tags.filter(currentTag => currentTag.id === tag.id)
+          tagsToBeRemoved.push(newTags.map(tag => tag.id))
+          return newTags
+        })
+        getTagIdsToRemove()
+        const updatedTags = tags.filter(({ id }) => !tagsToBeRemoved.flat().includes(id))
+        const tagFormat = updatedTags.map(tag => {
+          let newTag = {
+            label: tag.name, value: tag.name
+          }
+          return newTag
+        })
+        setFormattedTags(tagFormat)
+      })
+      .catch(e => alert(e))
+    } else return
+  },[currentTrip])
 
   const handleSubmit = e => {
     e.preventDefault()
-    const new_tags = tripTags.filter(tag => tag.__isNew__ === true).map(tag => {
-      let tagObj = {
-        name: tag.label.toLowerCase(),
-        trip_id: currentTrip.id
-      }
-      return tagObj
-    })
-
-    const existingTags = tripTags.filter(tag => Object.keys(tag).length < 3)
-    const existing_trip_tags = existingTags.map(existingTag => {
-      let tags = unformattedTags.filter(tag => tag.name === existingTag.label)
-      let id =  tags.map(tag => tag.id)[0]
-      let tagObj = {
-        tag_id: id,
-        trip_id: currentTrip.id
-      }
-      return tagObj
-    })
-
-    if (new_tags.length > 0) {
+    if (!tripTags) {
+        alert("Please select or create some tags before submitting.")
+    } else if (tripTags.filter(tag => tag.label.length < 2 || tag.label.length > 20).length > 0) {
+        alert("All tags must be between 2 and 20 characters. Please try again.")
+    } else {
+      const new_tags = tripTags.filter(tag => tag.__isNew__ === true).map(tag => {
+        let tagObj = {
+          name: tag.label.toLowerCase(),
+          trip_id: currentTrip.id
+        }
+        return tagObj
+      })
+  
       fetch("/tags", {
         method: "POST",
         headers: { "Content-Type": "application/json", },
@@ -74,7 +77,18 @@ function TagSearch() {
         }
       })
       .catch(e => alert(e))
-    } else if (existing_trip_tags.length > 0) {
+
+      const existingTags = tripTags.filter(tag => Object.keys(tag).length < 3)
+      const existing_trip_tags = existingTags.map(existingTag => {
+        let tags = unformattedTags.filter(tag => tag.name === existingTag.label)
+        let id =  tags.map(tag => tag.id)[0]
+        let tagObj = {
+          tag_id: id,
+          trip_id: currentTrip.id
+        }
+        return tagObj
+      })
+
       fetch("/trip_tags", {
         method: "POST",
         headers: { "Content-Type": "application/json", },
@@ -93,7 +107,7 @@ function TagSearch() {
         }
       })
       .catch(e => alert(e))
-    } else return
+    }
   }
 
   if (!formattedTags) {
