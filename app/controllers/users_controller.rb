@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   def show
     user = User.find_by(id: session[:user_id])
     if user
-      render json: current_user, include: ["trips", "trips.tags", "trips.cities", "trips.cities.activities", "trips.cities.accommodations", "trips.cities.start_locations", "trips.cities.end_locations", "trips.trip_tags", "cities"], status: :accepted
+      render json: current_user, include: ["trips", "trips.tags", "trips.cities", "trips.cities.activities", "trips.cities.accommodations", "trips.cities.start_locations", "trips.cities.end_locations", "cities"], status: :accepted
     else
       render json: { error: "Not authorized" }, status: :unauthorized
     end
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   def avatar
     user = User.find_by(id: session[:user_id])
     user.avatar.attach(params[:avatar])
-    render json: current_user, include: ["trips", "trips.tags", "trips.cities", "trips.cities.activities", "trips.cities.accommodations", "trips.cities.start_locations", "trips.cities.end_locations", "trips.trip_tags", "cities"], status: :accepted
+    render json: current_user, include: ["trips", "trips.tags", "trips.cities", "trips.cities.activities", "trips.cities.accommodations", "trips.cities.start_locations", "trips.cities.end_locations", "cities"], status: :accepted
   end
 
   private

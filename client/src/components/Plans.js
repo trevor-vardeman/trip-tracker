@@ -27,10 +27,8 @@ function Plans() {
 
       let tripsWithoutDates = user.trips.filter(trip => trip.trip_summary.departure_date === null || trip.trip_summary.return_date === null)
       tripsWithoutDates.sort((a, b) => a.name.localeCompare(b.name))
-      console.log(tripsWithDates)
       let pastDates = tripsWithDates.filter(trip => trip.trip_summary.return_date < now.toISOString())
       let allUpcomingPlans = [...upcomingDates, ...tripsWithoutDates]
-      console.log(pastDates)
       return {upcoming: allUpcomingPlans, past: pastDates}
     }
   }

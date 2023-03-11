@@ -1,10 +1,12 @@
 import { useState } from 'react'
+import { useUserUpdate } from '../context/UserContext'
 import { useTripContext } from '../context/CurrentTripContext'
 import Stack from 'react-bootstrap/Stack'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
 function TagNew() {
+  const userUpdate = useUserUpdate()
   const { currentTrip } = useTripContext()
   const [tag, setTag] = useState("")
   const handleSubmit = e => {
@@ -20,7 +22,7 @@ function TagNew() {
     .then(r => {
       if (r.ok) {
         r.json().then(user => {
-          console.log(user)
+          userUpdate(user)
           setTag("")
         })
       } else {
@@ -36,7 +38,7 @@ function TagNew() {
       <Stack direction="horizontal">
         <Form>
           <Form.Group controlId="formForNewTag">
-            <Form.Control value={tag} type="text" placeholder="Enter a new tag..." onChange={e => setTag(e.target.value)}></Form.Control>
+            <Form.Control value={tag} type="text" placeholder="Enter a new tag..." onChange={e => setTag(e.target.value.toLowerCase())}></Form.Control>
           </Form.Group>
         </Form>
         <Button type="submit" size="sm" variant="primary" onClick={e => handleSubmit(e)}>Submit</Button>
