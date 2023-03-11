@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useUserContext } from '../context/UserContext'
+import { useTripContext } from '../context/CurrentTripContext'
 import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
 import Table from 'react-bootstrap/Table'
@@ -9,7 +10,13 @@ import Spinner from 'react-bootstrap/Spinner'
 function Cities() {
   const history = useHistory()
   const user = useUserContext()
+  const { setCurrentTrip } = useTripContext()
   const [past, setPast] = useState(false)
+  const handleOpenTrip = city => {
+    setCurrentTrip(user.trips.find(trip => trip.id === city.trip_id))
+    history.push(`/trips/${city.trip_id}`)
+  }
+
   const sortedCities = () => {
     if (user.cities === null) {
       return 
@@ -25,6 +32,7 @@ function Cities() {
       let pastDates = citiesWithDates.filter(city => city.departure_date < now.toISOString())
 
       let allUpcomingTrips = [...upcomingDates, ...citiesWithoutDates]
+      console.log({upcoming: allUpcomingTrips, past: pastDates})
       return {upcoming: allUpcomingTrips, past: pastDates}
     }
   }
@@ -66,7 +74,7 @@ function Cities() {
                     {city.arrival_date && city.departure_date ? <td>{city.arrival_date.split("T")[0]} - {city.departure_date.split("T")[0]}</td> : <td>No dates yet</td>}
                     <td>{city.city}</td>
                     <td>{city.country}</td>
-                    <td><img className="hover" src="/assets/arrow-up-right-circle.svg" alt="bootstrapOpenIcon" width="20" height="20" onClick={() => history.push(`/trips/${city.trip_id}`)}/></td>
+                    <td><img className="hover" src="/assets/arrow-up-right-circle.svg" alt="bootstrapOpenIcon" width="20" height="20" onClick={() => handleOpenTrip(city)}/></td>
                   </tr>
                 ))
               : sortedCities().past.map(city => (
@@ -74,7 +82,7 @@ function Cities() {
                     {city.arrival_date && city.departure_date ? <td>{city.arrival_date.split("T")[0]} - {city.departure_date.split("T")[0]}</td> : <td>No dates yet</td>}
                     <td>{city.city}</td>
                     <td>{city.country}</td>
-                    <td><img className="hover" src="/assets/arrow-up-right-circle.svg" alt="bootstrapOpenIcon" width="20" height="20" onClick={() => history.push(`/trips/${city.trip_id}`)}/></td>
+                    <td><img className="hover" src="/assets/arrow-up-right-circle.svg" alt="bootstrapOpenIcon" width="20" height="20" onClick={() => handleOpenTrip(city)}/></td>
                   </tr>
                 ))
             }
