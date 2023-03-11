@@ -164,9 +164,9 @@ function CityDetails() {
     )
   } else {
     return (
-      <Stack className="centered">
+      <Stack className="centered city-details">
         <h3>City Details</h3>
-        <Stack className="centered city-details" gap={1}></Stack>
+        <Stack className="city-data xsmall" gap={1}></Stack>
       </Stack>
     )
   }

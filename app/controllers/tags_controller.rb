@@ -1,5 +1,10 @@
 class TagsController < ApplicationController
 
+  def index
+    tags = Tag.all.order(name: :asc)
+    render json: tags, status: :ok
+  end
+
   def create
     tag = Tag.create(name: params[:name])
     trip_tag = TripTag.create(

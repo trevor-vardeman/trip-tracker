@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import Stack from 'react-bootstrap/Stack'
 
 function TagsCurrent() {
   return (
-    <div>TagsCurrent</div>
+    <Stack>
+      TagsCurrent
+    </Stack>
   )
 }
 

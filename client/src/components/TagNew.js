@@ -31,13 +31,16 @@ function TagNew() {
   }
 
   return (
-    <Stack direction="horizontal">
-      <Form>
-        <Form.Group controlId="formForDescription">
-          <Form.Control value={tag} type="text" placeholder="Enter a new tag..." onChange={e => setTag(e.target.value)}></Form.Control>
-        </Form.Group>
-      </Form>
-      <Button type="submit" size="sm" variant="secondary" onClick={e => handleSubmit(e)}>Submit</Button>
+    <Stack>
+      <p>Couldn't find a tag by searching?</p>
+      <Stack direction="horizontal">
+        <Form>
+          <Form.Group controlId="formForNewTag">
+            <Form.Control value={tag} type="text" placeholder="Enter a new tag..." onChange={e => setTag(e.target.value)}></Form.Control>
+          </Form.Group>
+        </Form>
+        <Button type="submit" size="sm" variant="primary" onClick={e => handleSubmit(e)}>Submit</Button>
+      </Stack>
     </Stack>
   )
 }

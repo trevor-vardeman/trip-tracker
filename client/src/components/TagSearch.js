@@ -1,8 +1,10 @@
-import React from 'react'
+import Stack from 'react-bootstrap/Stack'
 
 function TagSearch() {
   return (
-    <div>TagSearch</div>
+    <Stack>
+      TagSearch
+    </Stack>
   )
 }
 

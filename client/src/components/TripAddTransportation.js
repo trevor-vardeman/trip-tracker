@@ -7,7 +7,6 @@ import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup'
 import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
-import Dropdown from 'react-bootstrap/Dropdown'
 import Spinner from 'react-bootstrap/Spinner'
 
 function TripAddTransportation( props ) {
@@ -19,9 +18,9 @@ function TripAddTransportation( props ) {
   const [transportationId, setTransportationId] = useState(null)
   const [cityId, setCityId] = useState(null)
   const [description, setDescription] = useState("")
-  const [startLocation, setStartLocation] = useState(null)
+  const [startLocationId, setStartLocationId] = useState(null)
   const [startDateTime, setStartDateTime] = useState("")
-  const [endLocation, setEndLocation] = useState(null)
+  const [endLocationId, setEndLocationId] = useState(null)
   const [endDateTime, setEndDateTime] = useState("")
   const [cost, setCost] = useState("")
   const closeAndClearState = () => {
@@ -30,9 +29,9 @@ function TripAddTransportation( props ) {
     setTransportationId(null)
     setCityId(null)
     setDescription("")
-    setStartLocation(null)
+    setStartLocationId(null)
     setStartDateTime("")
-    setEndLocation(null)
+    setEndLocationId(null)
     setEndDateTime("")
     setCost("")
     props.handleClose()
@@ -43,20 +42,18 @@ function TripAddTransportation( props ) {
       let transportation = Object.values(props)[0]
       let startTime = transportation.start_datetime.substring(0,23)
       let endTime = transportation.end_datetime.substring(0,23)
-      console.log(transportation)
       setShowModal(true)
       setEditMode(true)
       setTransportationId(transportation.id)
       setCityId(transportation.city_id)
       setDescription(transportation.description)
-      setStartLocation(transportation.start_location)
+      setStartLocationId(transportation.start_location)
       setStartDateTime(startTime)
-      setEndLocation(transportation.end_location)
+      setEndLocationId(transportation.end_location)
       setEndDateTime(endTime)
       setCost(transportation.cost)
     } else return
   },[props])
-
   const handleSubmit = e => {
     e.preventDefault()
     const finalCost = () => {
@@ -64,15 +61,15 @@ function TripAddTransportation( props ) {
         return 0
       } else return cost
     }
-    if (!description || !startDateTime || !endDateTime) {
-      alert("Please add a description, start date/time, and end date/time.")
+    if (!description || !startDateTime || !endDateTime || typeof startLocationId !== "number" || typeof endLocationId !== "number") {
+      alert("Please fill out the form in its entirety.")
     } else if (editMode) {
       const transportation = {
         city_id: cityId,
         description: description,
-        start_location_id: startLocation[0].id,
+        start_location_id: startLocationId,
         start_datetime: startDateTime,
-        end_location_id: endLocation[0].id,
+        end_location_id: endLocationId,
         end_datetime: endDateTime,
         cost: finalCost()
       }
@@ -94,18 +91,18 @@ function TripAddTransportation( props ) {
         setTransportationId(null)
         setCityId(null)
         setDescription("")
-        setStartLocation(null)
+        setStartLocationId(null)
         setStartDateTime("")
-        setEndLocation(null)
+        setEndLocationId(null)
         setEndDateTime("")
         setCost("")
       })
     } else {
       const transportation = {
         description: description,
-        start_location_id: startLocation[0].id,
+        start_location_id: startLocationId,
         start_datetime: startDateTime,
-        end_location_id: endLocation[0].id,
+        end_location_id: endLocationId,
         end_datetime: endDateTime,
         cost: finalCost()
       }
@@ -125,9 +122,9 @@ function TripAddTransportation( props ) {
               const updatedCity = updatedTrip.cities.filter(city => city.id === currentCity.id)[0]
               setCurrentCity(updatedCity)
               setDescription("")
-              setStartLocation(null)
+              setStartLocationId(null)
               setStartDateTime("")
-              setEndLocation(null)
+              setEndLocationId(null)
               setEndDateTime("")
               setCost("")
             }
@@ -141,47 +138,6 @@ function TripAddTransportation( props ) {
     }
   }
 
-  const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
-    <a
-      href="/new"
-      ref={ref}
-      onClick={(e) => {
-        e.preventDefault()
-        onClick(e)
-      }}
-    >
-      {children} &#x25bc;
-    </a>
-  ))
-
-  const CustomMenu = React.forwardRef(
-    ({ children, style, className, 'aria-labelledby': labeledBy }, ref) => {
-      const [value, setValue] = useState('')
-      return (
-        <div
-          ref={ref}
-          style={style}
-          className={className}
-          aria-labelledby={labeledBy}
-        >
-          <Form.Control
-            autoFocus
-            className="mx-3 my-2 w-auto"
-            placeholder="Type to filter..."
-            onChange={e => setValue(e.target.value)}
-            value={value}
-          />
-          <ul className="list-unstyled">
-            {React.Children.toArray(children).filter(
-              (child) =>
-                !value || child.props.children.toLowerCase().startsWith(value),
-            )}
-          </ul>
-        </div>
-      )
-    },
-  )
-
   if (!currentTrip) {
     return (
       <Spinner className="definite-center" animation="border" role="status">
@@ -192,7 +148,6 @@ function TripAddTransportation( props ) {
     return (
       <Stack>
         {!currentCity ? <Button size="sm" disabled>Add Transportation</Button> : <Button size="sm" onClick={() => setShowModal(true)}>Add Transportation</Button>}
-
         <Modal show={showModal} backdrop="static" keyboard={false} onHide={() => closeAndClearState()}>
           <Modal.Header closeButton>
             <Modal.Title>Add Transportation</Modal.Title>
@@ -202,39 +157,21 @@ function TripAddTransportation( props ) {
             <Form.Group controlId="formForDescription">
               <Form.Control value={description} type="text" placeholder="Enter a description..." onChange={e => setDescription(e.target.value)}></Form.Control>
             </Form.Group>
-
-            <Stack direction="horizontal" gap={3}>
-              <Dropdown>
-                <Dropdown.Toggle as={CustomToggle} id="dropdownForStartLocation">Starting Location</Dropdown.Toggle>
-                  <Dropdown.Menu as={CustomMenu}>
-                    {currentTrip.cities.sort((a, b) => a.city.localeCompare(b.city)).map(city => (
-                      <Dropdown.Item key={city.id} size="sm" value={startLocation} onClick={() => setStartLocation([city])}>{city.city}, {city.country}</Dropdown.Item>
-                    ))}
-                    <Dropdown.Divider />
-                    <Dropdown.Item eventKey="noCity">Don't see your city? Create it first.</Dropdown.Item>
-                  </Dropdown.Menu>
-              </Dropdown>
-              {startLocation ? <p>{startLocation[0].city}, {startLocation[0].country}</p> : null}
-            </Stack>
-
+            <Form.Control value={startLocationId} as="select" aria-label="formForSelectingDepartingCity" onChange={e => setStartLocationId(parseInt(e.target.value))}>
+              <option>Select the Starting Location</option>
+              {currentTrip.cities.map(city => (
+                <option key={city.id} value={city.id} size="sm">{city.city}, {city.country}</option>
+              ))}
+            </Form.Control>
             <Form.Group controlId="formForStartDateTime">
               <Form.Control value={startDateTime} type="datetime-local" placeholder="Select the start date/time" onChange={e => setStartDateTime(e.target.value)}></Form.Control>
             </Form.Group>
-
-            <Stack direction="horizontal" gap={3}>
-              <Dropdown>
-                <Dropdown.Toggle as={CustomToggle} id="dropdownForStartLocation">Destination</Dropdown.Toggle>
-                  <Dropdown.Menu as={CustomMenu}>
-                    {currentTrip.cities.sort((a, b) => a.city.localeCompare(b.city)).map(city => (
-                      <Dropdown.Item key={city.id} size="sm" value={endLocation} onClick={() => setEndLocation([city])}>{city.city}, {city.country}</Dropdown.Item>
-                    ))}
-                    <Dropdown.Divider />
-                    <Dropdown.Item eventKey="noCity">Don't see your city? Create it first.</Dropdown.Item>
-                  </Dropdown.Menu>
-              </Dropdown>
-              {endLocation ? <p>{endLocation[0].city}, {endLocation[0].country}</p> : null}
-            </Stack>
-
+            <Form.Control value={endLocationId} as="select" aria-label="formForSelectingDestination" onChange={e => setEndLocationId(parseInt(e.target.value))}>
+              <option>Select the Destination</option>
+              {currentTrip.cities.map(city => (
+                <option key={city.id} value={city.id} size="sm">{city.city}, {city.country}</option>
+              ))}
+            </Form.Control>
             <Form.Group controlId="formForEndDateTime">
               <Form.Control value={endDateTime} type="datetime-local" placeholder="Select the end date/time" onChange={e => setEndDateTime(e.target.value)}></Form.Control>
             </Form.Group>

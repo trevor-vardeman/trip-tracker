@@ -17,21 +17,19 @@ function TripData() {
   }
 
   const handleDelete = id => {
-    console.log(id)
     fetch(`/cities/${id}`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
     })
     .then(r => r.json())
     .then(user => {
-      console.log(user)
       userUpdate(user)
       const updatedTrip = user.trips.filter(trip => trip.id === currentTrip.id)[0]
       setCurrentTrip(updatedTrip)
       const updatedCity = updatedTrip.cities.filter(city => city.id === currentCity.id)[0]
       setCurrentCity(updatedCity)
     })
-    .catch(e => console.log(e))
+    .catch(e => alert(e))
   }
 
   if (!currentTrip) {
@@ -45,7 +43,7 @@ function TripData() {
       <Stack className="trip-data">
         <p className="bold">Trip Start</p>
         <ArcherContainer>
-          {currentTrip.cities.map((city, index) => (
+          {currentTrip.cities.sort((a, b) => a.id - b.id).map((city, index) => (
             <Stack className="centered" direction="horizontal" key={city.id}>
               <ArcherElement 
                 id={index.toString()}
