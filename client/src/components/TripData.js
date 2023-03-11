@@ -46,7 +46,7 @@ function TripData() {
         <p className="bold">Trip Start</p>
         <ArcherContainer>
           {currentTrip.cities.map((city, index) => (
-            <Stack direction="horizontal" key={city.id}>
+            <Stack className="centered" direction="horizontal" key={city.id}>
               <ArcherElement 
                 id={index.toString()}
                 relations={[
@@ -60,13 +60,13 @@ function TripData() {
               >
               <p 
                 key={city.id} 
-                className={`${city.id === selectedCityStyle ? "selected-city" : "null"} hover`}
+                className={`${city.id === selectedCityStyle ? "selected-city archer-element centered" : "null archer-element centered"} hover`}
                 onClick={() => citySelection(city)}
               >
                 {city.city}, {city.country}
               </p>
               </ArcherElement>
-              {!currentTrip.plan ? <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete(city.id)}/> : null}
+              <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete(city.id)}/>
             </Stack>
           ))}
         </ArcherContainer>

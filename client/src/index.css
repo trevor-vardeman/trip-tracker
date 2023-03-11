@@ -37,7 +37,6 @@ body {
 .tags {
   flex-grow: 1;
   height: 90vh;
-  /* width: 30vw; */
   align-items: center;
   justify-content: space-between;
 }
@@ -49,7 +48,6 @@ body {
 
 .trip {
   height: 90vh;
-  /* width: 40vw; */
   flex-grow: 2;
   border: 2px black;
   align-items: center;
@@ -60,16 +58,18 @@ body {
   justify-content: space-between;
   border-color: black;
   border-style: solid;
-  /* width: 50vw;
-  height: 65vw; */
   background-color: lightblue;
   display: flex;
+}
+
+.archer-element {
+  width: 150px;
+  text-align: center;
 }
 
 .city-details {
   height: 90vh;
   flex-grow: 1;
-  /* width: 30vw; */
 }
 
 .city-data {
@@ -80,7 +80,6 @@ body {
 }
 
 .city-item {
-  /* align-self: center; */
   border: 2px solid black;
 }
 
@@ -144,6 +143,11 @@ body {
 
 .card-buttons {
   justify-content: center;
+}
+
+p {
+  margin: 0;
+  padding: 0;
 }
 
 /* .img {

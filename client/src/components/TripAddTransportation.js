@@ -137,7 +137,7 @@ function TripAddTransportation( props ) {
           .then(r => r.error.map(e => alert(e)))
         }
       })
-      .catch(e => console.log(e))
+      .catch(e => alert(e))
     }
   }
 

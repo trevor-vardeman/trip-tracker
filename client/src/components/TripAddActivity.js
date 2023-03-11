@@ -120,6 +120,7 @@ function TripAddActivity( props ) {
         setEndDateTime("")
         setCost("")
       })
+      .catch(e => alert(e))
     }
   }
 

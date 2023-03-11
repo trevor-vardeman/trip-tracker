@@ -47,16 +47,18 @@ function CityDetails() {
         <Stack>
           {currentCity.end_locations.map((transportation) => (
             <Stack direction="horizontal" key={transportation.id}>
-              <Stack className="edit-delete-buttons" direction="horizontal">
-                {!currentTrip.plan ? <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="18" height="18" onClick={() => handleTransportationEdit(transportation)}/> : null}
-                {!currentTrip.plan ? <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete("transportations", transportation.id)}/> : null}
-              </Stack>
-              <Stack>
-                <p><span className="bold">{transportation.start_location}</span> to <span className="bold">{transportation.end_location}</span></p>
-                <p><span className="bold">Description:</span> {transportation.description}</p>
-                <p><span className="bold">Cost:</span> ${transportation.cost}</p>
-                <p><span className="bold">Departure Time:</span> {transportation.start_datetime}</p>
-                <p><span className="bold">Arrival Time:</span> {transportation.end_datetime}</p>
+              <Stack className="border">
+                <Stack className="edit-delete-buttons" direction="horizontal">
+                  {!currentTrip.plan ? <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="18" height="18" onClick={() => handleTransportationEdit(transportation)}/> : null}
+                  {!currentTrip.plan ? <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete("transportations", transportation.id)}/> : null}
+                </Stack>
+                <Stack>
+                  <p><span className="bold">{transportation.start_location}</span> to <span className="bold">{transportation.end_location}</span></p>
+                  <p><span className="bold">Description:</span> {transportation.description}</p>
+                  <p><span className="bold">Cost:</span> ${transportation.cost}</p>
+                  <p><span className="bold">Departure Time:</span> {transportation.start_datetime}</p>
+                  <p><span className="bold">Arrival Time:</span> {transportation.end_datetime}</p>
+                </Stack>
               </Stack>
             </Stack>
           ))}
