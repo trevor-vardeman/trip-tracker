@@ -16,10 +16,12 @@ import Tags from './Tags'
 import { UserProvider } from '../context/UserContext'
 import { TripProvider } from '../context/CurrentTripContext'
 import { CityProvider } from '../context/CurrentCityContext'
+import { TagProvider } from '../context/TagContext'
 
 export const UserContext = React.createContext()
 export const CurrentTripContext = React.createContext()
 export const CurrentCityContext = React.createContext()
+export const TagContext = React.createContext()
 
 function App() {
   return (
@@ -27,39 +29,41 @@ function App() {
       <UserProvider>
         <TripProvider>
           <CityProvider>
-            <Nav />
-            <Switch>
-              <Route path="/register">
-                <Register />
-              </Route>
-              <Route path="/login">
-                <Login />
-              </Route>
-              <Route path="/profile">
-                <Profile />
-              </Route>
-              <Route path="/new-trip">
-                <NewTrip />
-              </Route>
-              <Route path="/trips/:id">
-                <TripContainer />
-              </Route>
-              <Route path="/drafts">
-                <Drafts />
-              </Route>
-              <Route path="/plans">
-                <Plans />
-              </Route>
-              <Route path="/cities">
-                <Cities />
-              </Route>
-              <Route path="/tags">
-                <Tags />
-              </Route>
-              <Route path="/">
-                <Home />
-              </Route>
-            </Switch>
+            <TagProvider>
+              <Nav />
+              <Switch>
+                <Route path="/register">
+                  <Register />
+                </Route>
+                <Route path="/login">
+                  <Login />
+                </Route>
+                <Route path="/profile">
+                  <Profile />
+                </Route>
+                <Route path="/new-trip">
+                  <NewTrip />
+                </Route>
+                <Route path="/trips/:id">
+                  <TripContainer />
+                </Route>
+                <Route path="/drafts">
+                  <Drafts />
+                </Route>
+                <Route path="/plans">
+                  <Plans />
+                </Route>
+                <Route path="/cities">
+                  <Cities />
+                </Route>
+                <Route path="/tags">
+                  <Tags />
+                </Route>
+                <Route path="/">
+                  <Home />
+                </Route>
+              </Switch>
+            </TagProvider>
           </CityProvider>
         </TripProvider>
       </UserProvider>

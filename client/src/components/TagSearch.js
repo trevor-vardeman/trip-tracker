@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useUserUpdate } from '../context/UserContext'
 import { useTripContext } from '../context/CurrentTripContext'
+import { useTagContext } from '../context/TagContext'
 import CreatableSelect from 'react-select/creatable'
 import makeAnimated from 'react-select/animated'
 import Button from 'react-bootstrap/Button'
@@ -10,39 +11,9 @@ import Spinner from 'react-bootstrap/Spinner'
 function TagSearch() {
   const userUpdate = useUserUpdate()
   const { currentTrip, setCurrentTrip } = useTripContext()
-  const [unformattedTags, setUnformattedTags] = useState(null)
-  const [formattedTags, setFormattedTags] = useState(null)
+  const { unformattedTags, formattedTags } = useTagContext()
   const [tripTags, setTripTags] = useState(null)
   const animatedComponents = makeAnimated()
-
-  useEffect(() => {
-    if (currentTrip) {
-      fetch("/tags", {
-        method: "GET",
-        headers: { "Content-Type": "application/json" }
-      })
-      .then(r => r.json())
-      .then(tags => {
-        setUnformattedTags(tags)
-        let tagsToBeRemoved = []
-        const getTagIdsToRemove = () => tags.map(tag => {
-          let newTags = currentTrip.tags.filter(currentTag => currentTag.id === tag.id)
-          tagsToBeRemoved.push(newTags.map(tag => tag.id))
-          return newTags
-        })
-        getTagIdsToRemove()
-        const updatedTags = tags.filter(({ id }) => !tagsToBeRemoved.flat().includes(id))
-        const tagFormat = updatedTags.map(tag => {
-          let newTag = {
-            label: tag.name, value: tag.name
-          }
-          return newTag
-        })
-        setFormattedTags(tagFormat)
-      })
-      .catch(e => alert(e))
-    } else return
-  },[currentTrip])
 
   const handleSubmit = e => {
     e.preventDefault()
