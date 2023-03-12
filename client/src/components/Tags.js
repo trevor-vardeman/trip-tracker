@@ -14,8 +14,8 @@ function Tags() {
   const [myTags, setMyTags] = useState(true)
   const handleOpenTrip = tag => {
     console.log(tag)
-    // setCurrentTrip(user.trips.find(trip => trip.id === tag.trip_id))
-    // history.push(`/trips/${tag.trip_id}`)
+    setCurrentTrip(user.trips.find(trip => trip.id === tag.trip))
+    history.push(`/trips/${tag.trip}`)
   }
 
   const myTripTags = () => {
@@ -23,7 +23,9 @@ function Tags() {
       return 
     } else  {
       const tags = []
-      user.trips.map(trip => trip.trip_tags.map(tag => tags.push({name: tag.name, trip:  tag.trip_id})))
+      user.trips.map(trip => trip.trip_tags.map(tag => tags.push({ name: tag.name, trip: tag.trip_id, tripName: tag.trip_name })))
+      tags.sort((a, b) => a.name.localeCompare(b.name))
+      console.log(tags)
       return tags
     }
   }
@@ -37,7 +39,7 @@ function Tags() {
   } else {
     return (
       <Stack className="centered" gap={3}>
-        <h3>Cities</h3>
+        <h3>Tags</h3>
         <Stack className="centered" direction="horizontal">
           <Button size="sm" variant={!myTags ? "primary" : "secondary"} onClick={() => setMyTags(!myTags)}>My Tags</Button>
           <Button size="sm" variant={myTags ? "primary" : "secondary"} onClick={() => setMyTags(!myTags)}>Explore Tags</Button>
@@ -46,7 +48,7 @@ function Tags() {
           <thead>
             <tr>
               <th>Tag Name</th>
-              <th># Trips</th>
+              <th>Trip Name</th>
               <th>View Trip</th>
             </tr>
           </thead>
@@ -55,15 +57,15 @@ function Tags() {
               ? myTripTags().map(tag => (
                   <tr className="centered" key={tag.id}>
                     <td>{tag.name}</td>
-                    <td>{tag.country}</td>
-                    <td><img className="hover" src="/assets/arrow-up-right-circle.svg" alt="bootstrapOpenIcon" width="20" height="20" onClick={() => console.log(tag)}/></td>
+                    <td>{tag.tripName}</td>
+                    <td><img className="hover" src="/assets/arrow-up-right-circle.svg" alt="bootstrapOpenIcon" width="20" height="20" onClick={() => handleOpenTrip(tag)}/></td>
                   </tr>
                 ))
               : myTripTags().map(tag => (
                   <tr className="centered" key={tag.id}>
                     <td>{tag.name}</td>
-                    <td>{tag.country}</td>
-                    <td><img className="hover" src="/assets/arrow-up-right-circle.svg" alt="bootstrapOpenIcon" width="20" height="20" onClick={() => console.log(tag)}/></td>
+                    <td>{tag.tripName}</td>
+                    <td><img className="hover" src="/assets/arrow-up-right-circle.svg" alt="bootstrapOpenIcon" width="20" height="20" onClick={() => handleOpenTrip(tag)}/></td>
                   </tr>
                 ))
             }

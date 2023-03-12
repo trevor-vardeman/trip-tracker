@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useLocation } from "react-router-dom"
 import { useUserUpdate } from '../context/UserContext'
 import { useTripContext } from '../context/CurrentTripContext'
 import { useCityContext } from '../context/CurrentCityContext'
@@ -8,6 +9,7 @@ import TripAddAccommodation from './TripAddAccommodation'
 import TripAddTransportation from './TripAddTransportation'
 
 function CityDetails() {
+  let location = useLocation()
   const userUpdate = useUserUpdate()
   const { currentTrip, setCurrentTrip } = useTripContext()
   const { currentCity, setCurrentCity } = useCityContext()
@@ -23,6 +25,10 @@ function CityDetails() {
     setAccommodationProps(null)
     setTransportationProps(null)
   }
+
+  useEffect(() => {
+    setCurrentCity(null)
+  },[setCurrentCity, location])
 
   const handleDelete = (type, objId) => {
     fetch(`/${type}/${objId}`, {
@@ -56,8 +62,8 @@ function CityDetails() {
                   <p className="p"><span className="bold">{transportation.start_location}</span> to <span className="bold">{transportation.end_location}</span></p>
                   <p className="p"><span className="bold">Description:</span> {transportation.description}</p>
                   <p className="p"><span className="bold">Cost:</span> ${transportation.cost}</p>
-                  <p className="p"><span className="bold">Departure Time:</span> {transportation.start_datetime}</p>
-                  <p className="p"><span className="bold">Arrival Time:</span> {transportation.end_datetime}</p>
+                  <p className="p"><span className="bold">Departure Time:</span> {transportation.start_datetime.split("T")[0]} {transportation.start_datetime.split("T")[1].split(":")[0]}:{transportation.start_datetime.split("T")[1].split(":")[1]}</p>
+                  <p className="p"><span className="bold">Arrival Time:</span> {transportation.end_datetime.split("T")[0]} {transportation.end_datetime.split("T")[1].split(":")[0]}:{transportation.end_datetime.split("T")[1].split(":")[1]}</p>
                 </Stack>
               </Stack>
             </Stack>
@@ -83,8 +89,8 @@ function CityDetails() {
                 </Stack>
                 <p className="bold p">{accommodation.description}</p>
                 <p className="p"><span className="bold p">Cost:</span> ${accommodation.cost}</p>
-                <p className="p"><span className="bold">Arrival Date:</span> {accommodation.start_datetime}</p>
-                <p className="p"><span className="bold">Arrival Date:</span> {accommodation.end_datetime}</p>
+                <p className="p"><span className="bold">Arrival Date:</span> {accommodation.start_datetime.split("T")[0]} {accommodation.start_datetime.split("T")[1].split(":")[0]}:{accommodation.start_datetime.split("T")[1].split(":")[1]}</p>
+                <p className="p"><span className="bold">Arrival Date:</span> {accommodation.end_datetime.split("T")[0]} {accommodation.end_datetime.split("T")[1].split(":")[0]}:{accommodation.end_datetime.split("T")[1].split(":")[1]}</p>
               </Stack>
             </Stack>
           ))}
@@ -109,8 +115,8 @@ function CityDetails() {
                 </Stack>
                 <p className="bold p">{activity.description}</p>
                 <p className="p"><span className="bold">Cost:</span> ${activity.cost}</p>
-                <p className="p"><span className="bold">Start Time:</span> {activity.start_datetime}</p>
-                <p className="p"><span className="bold">End Time:</span> {activity.end_datetime}</p>
+                <p className="p"><span className="bold">Start Time:</span> {activity.start_datetime.split("T")[0]} {activity.start_datetime.split("T")[1].split(":")[0]}:{activity.start_datetime.split("T")[1].split(":")[1]}</p>
+                <p className="p"><span className="bold">End Time:</span> {activity.end_datetime.split("T")[0]} {activity.end_datetime.split("T")[1].split(":")[0]}:{activity.end_datetime.split("T")[1].split(":")[1]}</p>
               </Stack>
             </Stack>
           ))}
@@ -136,8 +142,8 @@ function CityDetails() {
                 <p className="p"><span className="bold">{transportation.start_location}</span> to <span className="bold">{transportation.end_location}</span></p>
                 <p className="p"><span className="bold">Description:</span> {transportation.description}</p>
                 <p className="p"><span className="bold">Cost:</span> ${transportation.cost}</p>
-                <p className="p"><span className="bold">Departure Time:</span> {transportation.start_datetime}</p>
-                <p className="p"><span className="bold">Arrival Time:</span> {transportation.end_datetime}</p>
+                <p className="p"><span className="bold">Departure Time:</span> {transportation.start_datetime.split("T")[0]} {transportation.start_datetime.split("T")[1].split(":")[0]}:{transportation.start_datetime.split("T")[1].split(":")[1]}</p>
+                <p className="p"><span className="bold">Arrival Time:</span> {transportation.end_datetime.split("T")[0]} {transportation.end_datetime.split("T")[1].split(":")[0]}:{transportation.end_datetime.split("T")[1].split(":")[1]}</p>
               </Stack>
             </Stack>
           ))}

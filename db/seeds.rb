@@ -17,9 +17,6 @@ Trip.create([
   {user_id: 1, name: "Alaska Trip", plan: false, published: false, notes: "Hoping to go on this one."},
   {user_id: 1, name: "Mexico Trip", plan: true, published: false, notes: "This is my second choice.."},
   {user_id: 2, name: "Europe Trip", plan: true, published: true, notes: "Would love to explore Europe!"},
-  {user_id: 1, name: "Alaska Trip", plan: false, published: false, notes: "Hoping to go on this one."},
-  {user_id: 1, name: "Mexico Trip", plan: true, published: false, notes: "This is my second choice.."},
-  {user_id: 2, name: "Europe Trip", plan: true, published: true, notes: "Would love to explore Europe!"},
   {user_id: 2, name: "italy", plan: false, published: nil, notes: nil}
 ])
 
@@ -33,9 +30,9 @@ City.create([
   {city: "Amsterdam", country: "Netherlands", trip_id: 3},
   {city: "Brussels", country: "Belgium", trip_id: 3},
   {city: "Paris", country: "France", trip_id: 3},
-  {city: "milan", country: "italy", trip_id: 7},
-  {city: "palermo", country: "italy", trip_id: 7},
-  {city: "rome", country: "italy", trip_id: 7}
+  {city: "milan", country: "italy", trip_id: 4},
+  {city: "palermo", country: "italy", trip_id: 4},
+  {city: "rome", country: "italy", trip_id: 4}
 ])
 
 Tag.create([
