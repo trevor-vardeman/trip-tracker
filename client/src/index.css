@@ -15,8 +15,6 @@ body {
   margin: auto;
   margin-top: 5px;
   margin-bottom: 5px;
-  border-color: black;
-  border-width: 2px;
 }
 
 .definite-center {
@@ -36,9 +34,9 @@ body {
 
 .tags {
   height: 90vh;
-  width: 33vw;
-  align-items: center;
-  justify-content: space-between;
+  max-width: 33vw;
+  /* align-items: center; */
+  /* justify-content: space-bedtween; */
 }
 
 .tag-data {
@@ -48,7 +46,7 @@ body {
 
 .trip {
   height: 90vh;
-  width: 34vw;
+  max-width: 34vw;
   border: 2px black;
   align-items: center;
 }
@@ -59,7 +57,7 @@ body {
   justify-content: space-between;
   border-color: black;
   border-style: solid;
-  background-color: lightblue;
+  background-color: rgba(72, 173, 207, 0.254);
   display: flex;
 }
 .archer-element {
@@ -70,7 +68,7 @@ body {
 
 .city-details {
   height: 90vh;
-  width: 33vw;
+  max-width: 33vw;
 }
 
 .city-data {

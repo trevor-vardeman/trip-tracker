@@ -8,45 +8,77 @@
 
 puts "Seeding..."
 
-User.create({username: "admin", password: "admin", password_confirmation: "admin"})
-User.create({username: "test", password: "test", password_confirmation: "test"})
+User.create([
+  {username: "admin", password: "admin", password_confirmation: "admin"},
+  {username: "test", password: "test", password_confirmation: "test"}
+])
 
-Trip.create({user_id: 1, name: "Alaska Trip", plan: false, published: false, notes: "Hoping to go on this one."})
-Trip.create({user_id: 1, name: "Mexico Trip", plan: true, published: false, notes: "This is my second choice.."})
-Trip.create({user_id: 2, name: "Europe Trip", plan: true, published: true, notes: "Would love to explore Europe!"})
+Trip.create([
+  {user_id: 1, name: "Alaska Trip", plan: false, published: false, notes: "Hoping to go on this one."},
+  {user_id: 1, name: "Mexico Trip", plan: true, published: false, notes: "This is my second choice.."},
+  {user_id: 2, name: "Europe Trip", plan: true, published: true, notes: "Would love to explore Europe!"},
+  {user_id: 1, name: "Alaska Trip", plan: false, published: false, notes: "Hoping to go on this one."},
+  {user_id: 1, name: "Mexico Trip", plan: true, published: false, notes: "This is my second choice.."},
+  {user_id: 2, name: "Europe Trip", plan: true, published: true, notes: "Would love to explore Europe!"},
+  {user_id: 2, name: "italy", plan: false, published: nil, notes: nil}
+])
 
-City.create({city: "Juneau", country: "United States", trip_id: 1})
-City.create({city: "Fairbanks", country: "United States", trip_id: 1})
-City.create({city: "Anchorage", country: "United States", trip_id: 1})
-City.create({city: "Mexico City", country: "Mexico", trip_id: 2})
-City.create({city: "Cancun", country: "Mexico", trip_id: 2})
-City.create({city: "Puerto Vallarta", country: "Mexico", trip_id: 2})
-City.create({city: "Amsterdam", country: "Netherlands", trip_id: 3})
-City.create({city: "Brussels", country: "Belgium", trip_id: 3})
-City.create({city: "Paris", country: "France", trip_id: 3})
+City.create([
+  {city: "Juneau", country: "United States", trip_id: 1},
+  {city: "Fairbanks", country: "United States", trip_id: 1},
+  {city: "Anchorage", country: "United States", trip_id: 1},
+  {city: "Mexico City", country: "Mexico", trip_id: 2},
+  {city: "Cancun", country: "Mexico", trip_id: 2},
+  {city: "Puerto Vallarta", country: "Mexico", trip_id: 2},
+  {city: "Amsterdam", country: "Netherlands", trip_id: 3},
+  {city: "Brussels", country: "Belgium", trip_id: 3},
+  {city: "Paris", country: "France", trip_id: 3},
+  {city: "milan", country: "italy", trip_id: 7},
+  {city: "palermo", country: "italy", trip_id: 7},
+  {city: "rome", country: "italy", trip_id: 7}
+])
 
-Tag.create({name: "skiing"})
-Tag.create({name: "snowboarding"})
-Tag.create({name: "snowmobiling"})
-Tag.create({name: "surfing"})
-Tag.create({name: "beach"})
-Tag.create({name: "fishing"})
-Tag.create({name: "visiting ruins"})
-Tag.create({name: "climbing"})
-Tag.create({name: "snorkeling"})
-Tag.create({name: "visiting friends"})
-Tag.create({name: "backpacking"})
-Tag.create({name: "skydiving"})
-Tag.create({name: "foodie"})
+Tag.create([
+  {name: "skiing"},
+  {name: "snowboarding"},
+  {name: "snowmobiling"},
+  {name: "surfing"},
+  {name: "beach"},
+  {name: "fishing"},
+  {name: "visiting ruins"},
+  {name: "climbing"},
+  {name: "snorkeling"},
+  {name: "visiting friends"},
+  {name: "backpacking"},
+  {name: "skydiving"},
+  {name: "foodie"},
+  {name: "sunbathing"}
+])
 
-TripTag.create({trip_id: 1, tag_id: 1})
-TripTag.create({trip_id: 1, tag_id: 2})
-TripTag.create({trip_id: 1, tag_id: 3})
-TripTag.create({trip_id: 2, tag_id: 4})
-TripTag.create({trip_id: 2, tag_id: 7})
-TripTag.create({trip_id: 2, tag_id: 6})
-TripTag.create({trip_id: 3, tag_id: 10})
-TripTag.create({trip_id: 3, tag_id: 11})
-TripTag.create({trip_id: 3, tag_id: 13})
+TripTag.create([
+  {trip_id: 1, tag_id: 1},
+  {trip_id: 1, tag_id: 2},
+  {trip_id: 1, tag_id: 3},
+  {trip_id: 2, tag_id: 4},
+  {trip_id: 2, tag_id: 7},
+  {trip_id: 2, tag_id: 6},
+  {trip_id: 3, tag_id: 10},
+  {trip_id: 3, tag_id: 11},
+  {trip_id: 3, tag_id: 13}
+])
+
+Accommodation.create!([
+  {city_id: 10, start_datetime: "2023-03-22 13:57:00", end_datetime: "2023-03-24 13:57:00", cost: 400.0, description: "hotel"},
+  {city_id: 11, start_datetime: "2023-03-24 14:00:00", end_datetime: "2023-03-26 14:00:00", cost: 0.0, description: "friend's house"}
+])
+
+Activity.create!([
+  {description: "museum", city_id: 10, start_datetime: "2023-03-23 13:56:00", end_datetime: "2023-03-23 13:56:00", cost: 100.0}
+])
+
+Transportation.create!([
+  {start_location_id: 10, start_datetime: "2023-03-24 13:55:00", end_location_id: 11, end_datetime: "2023-03-24 13:55:00", cost: 200.0, description: "flight"},
+  {start_location_id: 11, start_datetime: "2023-03-26 13:56:00", end_location_id: 12, end_datetime: "2023-03-26 13:56:00", cost: 300.0, description: "flight"}
+])
 
 puts "Seeding complete!"

@@ -32,7 +32,6 @@ function Cities() {
       let pastDates = citiesWithDates.filter(city => city.departure_date < now.toISOString())
 
       let allUpcomingTrips = [...upcomingDates, ...citiesWithoutDates]
-      console.log({upcoming: allUpcomingTrips, past: pastDates})
       return {upcoming: allUpcomingTrips, past: pastDates}
     }
   }

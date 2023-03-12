@@ -6,12 +6,19 @@ class TagsController < ApplicationController
   end
 
   def create
-    tag = Tag.create(name: params[:name])
-    trip_tag = TripTag.create(
-      tag_id: tag.id,
-      trip_id: params[:trip_id]
-    )
-    if tag.valid? && trip_tag.valid?
+    render json: tags.errors, status: 422 and return unless params[:new_tags]
+    all_created = true
+    tags = []
+    trip_tags = []
+    params[:new_tags].each do |tags_params|
+      tag = Tag.create(name: tags_params[:name])
+      tags << tag
+      trip_tag = TripTag.create(tag_id: tag.id, trip_id: tags_params[:trip_id])
+      trip_tags << trip_tag
+      all_created && tag.valid? && trip_tag.valid?
+    end
+
+    if all_created
       render json: current_user, include: ["trips", "trips.tags", "trips.trip_tags", "trips.cities", "trips.cities.activities", "trips.cities.accommodations", "trips.cities.start_locations", "trips.cities.end_locations", "cities"], status: :accepted
     else
       render json: { error: tag.errors.full_messages }, status: :unprocessable_entity
@@ -20,8 +27,8 @@ class TagsController < ApplicationController
 
   private
 
-  def tag_params
-    params.permit(:name, :trip_id)
+  def tags_params
+    params.permit(new_tags: [:name, :trip_id]).require(:new_tags)
   end
 
 end

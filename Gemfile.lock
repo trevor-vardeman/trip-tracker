@@ -225,6 +225,9 @@ GEM
     ruby-vips (2.1.4)
       ffi (~> 1.12)
     ruby2_keywords (0.0.5)
+    seed_dump (3.3.1)
+      activerecord (>= 4)
+      activesupport (>= 4)
     signet (0.17.0)
       addressable (~> 2.8)
       faraday (>= 0.17.5, < 3.a)
@@ -260,6 +263,7 @@ DEPENDENCIES
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.4, >= 7.0.4.2)
+  seed_dump
   tzinfo-data
 
 RUBY VERSION

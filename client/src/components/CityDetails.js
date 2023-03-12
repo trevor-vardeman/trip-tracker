@@ -44,7 +44,7 @@ function CityDetails() {
   const endLocations = () => {
     if (currentCity.end_locations.length > 0) {
       return (
-        <Stack>
+        <>
           {currentCity.end_locations.map((transportation) => (
             <Stack direction="horizontal" key={transportation.id}>
               <Stack className="border">
@@ -65,7 +65,7 @@ function CityDetails() {
           <div className="hide">
             {transportationProps ? <TripAddTransportation transportationProps={transportationProps} handleClose={handleClose}/> : null}
           </div>
-        </Stack>
+        </>
       )
     }
   }
@@ -99,10 +99,10 @@ function CityDetails() {
   const activities = () => {
     if (currentCity.activities.length > 0) {
       return (
-        <Stack className="centered">
+        <>
           {currentCity.activities.map((activity) => (
-            <Stack key={activity.id}>
-              <Stack className="city-item border">
+            <Stack direction="horizontal" key={activity.id}>
+              <Stack className="border">
                 <Stack className="edit-delete-buttons" direction="horizontal">
                   {!currentTrip.plan ? <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="18" height="18" onClick={() => handleActivityEdit(activity)}/> : null}
                   {!currentTrip.plan ? <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete("activities", activity.id)}/> : null}
@@ -117,7 +117,7 @@ function CityDetails() {
           <div className="hide">
             {activityProps ? <TripAddActivity activityProps={activityProps} handleClose={handleClose}/> : null}
           </div>
-        </Stack>
+        </>
       )
     } else return null
   }

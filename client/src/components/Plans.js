@@ -59,9 +59,12 @@ function Plans() {
                 <Stack className="centered" key={trip.id}>
                   <Card className="cards">
                     <Card.Header className="card-header" as="h5">{trip.name}</Card.Header>
-                    <Card.Text>{trip.trip_summary.departure_date && trip.trip_summary.return_date ? <td>{trip.trip_summary.departure_date.split("T")[0]} - {trip.trip_summary.return_date.split("T")[0]}</td> : <td>No dates yet</td>}</Card.Text>
-                    <Card.Text>Cities: {trip.trip_summary.num_cities}</Card.Text>
-                    <Card.Text>Cost: ${trip.trip_summary.cost}</Card.Text>
+                    <Card.Text className="p">{trip.trip_summary.departure_date && trip.trip_summary.return_date ? <td>{trip.trip_summary.departure_date.split("T")[0]} - {trip.trip_summary.return_date.split("T")[0]}</td> : <td>No dates yet</td>}</Card.Text>
+                    <Card.Text className="p">Cities: {trip.trip_summary.num_cities}</Card.Text>
+                    <Card.Text className="p">Accommodations: {trip.trip_summary.accommodations}</Card.Text>
+                    <Card.Text className="p">Activities: {trip.trip_summary.activities}</Card.Text>
+                    <Card.Text className="p">Transportation: {trip.trip_summary.transportations}</Card.Text>
+                    <Card.Text className="p">Cost: ${trip.trip_summary.cost}</Card.Text>
                     <Button size="sm" variant="dark" onClick={() => handleView(trip)}>View</Button>
                   </Card>
                 </Stack>
@@ -70,9 +73,12 @@ function Plans() {
                 <Stack className="centered" key={trip.id}>
                   <Card className="cards">
                     <Card.Header className="card-header" as="h5">{trip.name}</Card.Header>
-                    <Card.Text>{trip.trip_summary.departure_date && trip.trip_summary.return_date ? <td>{trip.trip_summary.departure_date.split("T")[0]} - {trip.trip_summary.return_date.split("T")[0]}</td> : <td>No dates yet</td>}</Card.Text>
-                    <Card.Text>Cities: {trip.trip_summary.num_cities}</Card.Text>
-                    <Card.Text>Cost: ${trip.trip_summary.cost}</Card.Text>
+                    <Card.Text className="p">{trip.trip_summary.departure_date && trip.trip_summary.return_date ? <td>{trip.trip_summary.departure_date.split("T")[0]} - {trip.trip_summary.return_date.split("T")[0]}</td> : <td>No dates yet</td>}</Card.Text>
+                    <Card.Text className="p">Cities: {trip.trip_summary.num_cities}</Card.Text>
+                    <Card.Text className="p">Accommodations: {trip.trip_summary.accommodations}</Card.Text>
+                    <Card.Text className="p">Activities: {trip.trip_summary.activities}</Card.Text>
+                    <Card.Text className="p">Transportation: {trip.trip_summary.transportations}</Card.Text>
+                    <Card.Text className="p">Cost: ${trip.trip_summary.cost}</Card.Text>
                     <Button size="sm" variant="dark" onClick={() => handleView(trip)}>View</Button>
                   </Card>
                 </Stack>
