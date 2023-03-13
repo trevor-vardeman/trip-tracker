@@ -31,12 +31,12 @@ function TagsCurrent() {
     )
   } else {
     return (
-      <Stack className="centered">
+      <Stack className="center-aligned">
         <h6 className="bold">{currentTrip.name} Tags</h6>
         {currentTrip.tags.map(tag => (
           <Stack className="centered" direction="horizontal">
             <p className="p">{tag.name}</p>
-            <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete(tag.id)}/>
+            {!currentTrip.plan ? <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete(tag.id)}/> : null}
           </Stack>
         ))}
       </Stack>

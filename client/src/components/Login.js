@@ -15,7 +15,7 @@ function Login() {
   return (
     <Stack gap={3} className="definite-center">
       <Stack gap={3}>
-        <h1>Sign in to Travel</h1>
+        <h1>Sign in to Trip Tracker</h1>
         <Form>
           <Form.Group controlId="usernameForm">
             <Form.Label>Username</Form.Label>

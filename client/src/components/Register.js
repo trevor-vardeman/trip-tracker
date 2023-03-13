@@ -14,7 +14,7 @@ function Register() {
 
   return (
     <Stack gap={3} className="definite-center">
-      <h1>Sign up for Travel</h1>
+      <h1>Sign up for Trip Tracker</h1>
       <Form>
         <Form.Group controlId="usernameForm">
           <Form.Label>Username</Form.Label>

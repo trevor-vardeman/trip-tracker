@@ -10,6 +10,10 @@ body {
   align-items: center;
 }
 
+.center-aligned {
+  align-items: center;
+}
+
 .nav {
   place-content: space-around;
   margin: auto;
@@ -35,8 +39,6 @@ body {
 .tags {
   height: 90vh;
   max-width: 33vw;
-  /* align-items: center; */
-  /* justify-content: space-bedtween; */
 }
 
 .tag-data {

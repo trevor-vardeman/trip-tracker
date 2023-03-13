@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useUserUpdate } from '../context/UserContext'
 import { useTripContext } from '../context/CurrentTripContext'
 import { useTagContext } from '../context/TagContext'
@@ -20,7 +20,7 @@ function TagSearch() {
     if (!tripTags) {
         alert("Please select or create some tags before submitting.")
     } else if (tripTags.filter(tag => tag.label.length < 2 || tag.label.length > 20).length > 0) {
-        alert("All tags must be between 2 and 20 characters. Please try again.")
+        alert("All tags must be between 2 and 20 characters. Please try again.") 
     } else {
       const new_tags = tripTags.filter(tag => tag.__isNew__ === true).map(tag => {
         let tagObj = {
