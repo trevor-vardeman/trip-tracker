@@ -34,9 +34,9 @@ function Profile() {
   } else return (
     <Stack className="centered" gap={3}>
       <h5>Profile</h5>
+      <p className="p">Upload a Profile Picture</p>
       <Form>
         <Form.Group controlId="formAvatarUpload">
-          <Form.Label>Upload an Avatar</Form.Label>
           <Stack direction="horizontal">
             <Form.Control type="file" accept="image/*" onChange={e => setAvatar(e.target.files[0])}></Form.Control>
             <Button className="small-button" onClick={e => submitAvatar(e)}>Submit</Button>
