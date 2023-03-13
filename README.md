@@ -30,7 +30,7 @@ This app uses Ruby on Rails as an API, a PostgreSQL database, and a React front 
 * react-archer "^4.2.2"
 
 ## Deployed App
-If you'd like to use the deployed app via Render, [click here](https://travel-bph6.onrender.com/).
+If you'd like to use the deployed app via Render, [click here](https://trip-tracker.onrender.com/).
 
 ## Installation Instructions
 1. Navigate to the project's [GitHub page](https://github.com/trevor-vardeman/trip-tracker) and choose your favorite method of downloading the project. I use SSH, so I would click "Code", ensure "SSH" is chosen, and copy the link.
@@ -47,6 +47,6 @@ If you'd like to use the deployed app via Render, [click here](https://travel-bp
 `rails s`
 8. Use the following command to install all the React dependencies:
 `npm install --prefix client`
-Note: If you received an error during this stage, open the "client" folder, delete the node_modules folder and package-lock.json file, cd back up to the main folder `cd ..`, then run `npm install --prefix client` 
-9. To start the client, use the following command:
+9. **Note:** If you received an error during the step above, open the "client" folder, delete the node_modules folder and package-lock.json file, cd back up to the main folder `cd ..`, then run `npm install --prefix client` 
+10. To start the client, use the following command:
 `npm start --prefix client`
