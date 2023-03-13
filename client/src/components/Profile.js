@@ -18,11 +18,11 @@ function Profile() {
       method: "POST",
       body: formData,
     })
-      .then(r => r.json())
-      .then(userData => {
-        userUpdate(userData)
-        setAvatar(null)
-      })
+    .then(r => r.json())
+    .then(userData => {
+      userUpdate(userData)
+      setAvatar(null)
+    })
   }
 
   if (!user) {
