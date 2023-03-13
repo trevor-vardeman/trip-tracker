@@ -2,7 +2,7 @@ puts "Seeding..."
 
 User.create!([
   {username: "admin", password: "admin", password_confirmation: "admin"},
-  {username: "test", password: "test", password_confirmation: "test"}
+  {username: "trevor", password: "trevor", password_confirmation: "trevor"}
 ])
 Trip.create!([
   {user_id: 1, name: "Alaska Trip", plan: false, published: false, notes: "Hoping to go on this one."},
