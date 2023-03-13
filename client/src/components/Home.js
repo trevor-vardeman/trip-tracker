@@ -1,6 +1,6 @@
 import { useUserContext } from '../context/UserContext'
 import Stack from 'react-bootstrap/Stack'
-import Spinner from 'react-bootstrap/Spinner'
+import Login from './Login'
 
 
 function Home() {
@@ -8,9 +8,7 @@ function Home() {
 
   if (!user) {
     return (
-      <Spinner className="definite-center" animation="border" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </Spinner>
+      <Login />
     )
   } else {
     return (
