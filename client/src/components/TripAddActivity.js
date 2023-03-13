@@ -126,7 +126,7 @@ function TripAddActivity( props ) {
 
   return (
     <Stack>
-      {!currentCity ? <Button size="sm" disabled>Add Activity</Button> : <Button size="sm" onClick={() => setShowModal(true)}>Add Activity</Button>}
+      {!currentCity ? <Button size="sm" disabled>+ Activity</Button> : <Button size="sm" onClick={() => setShowModal(true)}>+ Activity</Button>}
 
       <Modal show={showModal} backdrop="static" keyboard={false} onHide={() => closeAndClearState()}>
         <Modal.Header closeButton>

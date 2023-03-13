@@ -29,7 +29,7 @@ function Tags() {
     }
   }
 
-  if (user === null) {
+  if (!user) {
     return (
       <Spinner className="definite-center" animation="border" role="status">
         <span className="visually-hidden">Loading...</span>
@@ -37,8 +37,8 @@ function Tags() {
     )
   } else {
     return (
-      <Stack gap={3}>
-        <h3>Tags</h3>
+      <Stack className="centered" gap={3}>
+        <h5>Tags</h5>
         <Stack className="centered" direction="horizontal">
           <Button size="sm" variant={myTags ? "primary" : "secondary"} onClick={() => setMyTags(!myTags)}>My Tags</Button>
           <Button size="sm" variant={!myTags ? "primary" : "secondary"} onClick={() => setMyTags(!myTags)}>Most Popular</Button>

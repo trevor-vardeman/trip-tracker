@@ -1,11 +1,18 @@
 import { useUserContext } from '../context/UserContext'
 import Stack from 'react-bootstrap/Stack'
-import Login from './Login'
+import Spinner from 'react-bootstrap/Spinner'
+
 
 function Home() {
   const user = useUserContext()
 
-  if (user) {
+  if (!user) {
+    return (
+      <Spinner className="definite-center" animation="border" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </Spinner>
+    )
+  } else {
     return (
       <Stack className="centered" gap={3}>
         <h1>Welcome to Trip Tracker!</h1>
@@ -15,10 +22,6 @@ function Home() {
         <p>Cities show you all the cool cities you're planning on going to.</p>
         <p>Tags will show you what tags are in your trips, and you can also see the top 10 tags used by everyone.</p>
       </Stack>
-    )
-  } else {
-    return (
-      <Login />
     )
   }
 }

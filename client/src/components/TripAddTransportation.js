@@ -147,7 +147,7 @@ function TripAddTransportation( props ) {
   } else {
     return (
       <Stack>
-        {!currentCity ? <Button size="sm" disabled>Add Transportation</Button> : <Button size="sm" onClick={() => setShowModal(true)}>Add Transportation</Button>}
+        {!currentCity ? <Button size="sm" disabled>+ Transportation</Button> : <Button size="sm" onClick={() => setShowModal(true)}>+ Transportation</Button>}
         <Modal show={showModal} backdrop="static" keyboard={false} onHide={() => closeAndClearState()}>
           <Modal.Header closeButton>
             <Modal.Title>Add Transportation</Modal.Title>

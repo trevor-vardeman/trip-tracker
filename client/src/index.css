@@ -49,7 +49,6 @@ body {
 .trip {
   height: 90vh;
   max-width: 34vw;
-  border: 2px black;
   align-items: center;
 }
 
@@ -59,7 +58,6 @@ body {
   justify-content: space-between;
   border-color: black;
   border-style: solid;
-  background-color: rgba(72, 173, 207, 0.254);
   display: flex;
 }
 .archer-element {
@@ -76,12 +74,27 @@ body {
 .city-data {
   border-color: black;
   border-style: solid;
-  background-color: lightgrey;
   text-align-last: center;
 }
 
 .city-item {
-  border: 2px solid black;
+  --bs-border-color: none;
+  justify-content: flex-start;
+}
+
+.accommodation {
+  font-weight: bold;
+  color: orange;
+}
+
+.activity {
+  font-weight: bold;
+  color: blue;
+}
+
+.transportation {
+  font-weight: bold;
+  color: green;
 }
 
 .edit-delete-buttons {

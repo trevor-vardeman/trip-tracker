@@ -37,14 +37,12 @@ export function UserProvider({ children }) {
   const [user, setUser] = useState(null)
   // const [authChecked, setAuthChecked] = useState(false)
   const history = useHistory()
-  // console.log(authChecked)
 
   useEffect(() => {
     fetch("/me")
     .then((r) => {
       if (r.ok) {
         r.json().then(user => {
-          console.log("/me in UserContext", user)
           setUser(user)
           // setAuthChecked(true)
           setUserLoggedIn(true)
@@ -70,7 +68,6 @@ export function UserProvider({ children }) {
         if (r.ok) {
           r.json().then(user => {
             setUser(user)
-            // sessionStorage.setItem("user", user)
             // setAuthChecked(true)
             setUserLoggedIn(true)
             history.push("/")
@@ -97,7 +94,6 @@ export function UserProvider({ children }) {
         if (r.ok) {
           r.json().then(() => {
             setUser(user)
-            // sessionStorage.setItem("user", user)
             // setAuthChecked(true)
             setUserLoggedIn(true)
             history.push("/")
@@ -118,7 +114,6 @@ export function UserProvider({ children }) {
       .then(() => {
         setUser(null)
         setUserLoggedIn(false)
-        // sessionStorage.clear()
         // setAuthChecked(false)
         history.push("/")
       })
@@ -126,7 +121,6 @@ export function UserProvider({ children }) {
   }
 
   const update = user => {
-    console.log("updated user from context", user)
     setUser(user)
   }
 

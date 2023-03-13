@@ -52,13 +52,14 @@ function CityDetails() {
       return (
         <>
           {currentCity.end_locations.map((transportation) => (
-            <Stack direction="horizontal" key={transportation.id}>
-              <Stack className="border">
+            <Stack className="city-item" direction="horizontal" key={transportation.id}>
+              <Stack>
                 <Stack className="edit-delete-buttons" direction="horizontal">
-                  {!currentTrip.plan ? <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="18" height="18" onClick={() => handleTransportationEdit(transportation)}/> : null}
+                  {!currentTrip.plan ? <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="15" height="15" onClick={() => handleTransportationEdit(transportation)}/> : null}
                   {!currentTrip.plan ? <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete("transportations", transportation.id)}/> : null}
                 </Stack>
                 <Stack>
+                  <p className="transportation p">Transportation</p>
                   <p className="p"><span className="bold">{transportation.start_location}</span> to <span className="bold">{transportation.end_location}</span></p>
                   <p className="p"><span className="bold">Description:</span> {transportation.description}</p>
                   <p className="p"><span className="bold">Cost:</span> ${transportation.cost}</p>
@@ -81,12 +82,13 @@ function CityDetails() {
       return (
         <>
           {currentCity.accommodations.map((accommodation) => (
-            <Stack direction="horizontal" key={accommodation.id}>
-              <Stack className="border">
+            <Stack className="city-item" direction="horizontal" key={accommodation.id}>
+              <Stack>
                 <Stack className="edit-delete-buttons" direction="horizontal">
-                  {!currentTrip.plan ? <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="18" height="18" onClick={() => handleAccommodationEdit(accommodation)}/> : null}
+                  {!currentTrip.plan ? <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="15" height="15" onClick={() => handleAccommodationEdit(accommodation)}/> : null}
                   {!currentTrip.plan ? <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete("accommodations", accommodation.id)}/> : null}
                 </Stack>
+                <p className="accommodation p">Accommodation</p>
                 <p className="bold p">{accommodation.description}</p>
                 <p className="p"><span className="bold p">Cost:</span> ${accommodation.cost}</p>
                 <p className="p"><span className="bold">Arrival Date:</span> {accommodation.start_datetime.split("T")[0]} {accommodation.start_datetime.split("T")[1].split(":")[0]}:{accommodation.start_datetime.split("T")[1].split(":")[1]}</p>
@@ -107,12 +109,13 @@ function CityDetails() {
       return (
         <>
           {currentCity.activities.map((activity) => (
-            <Stack direction="horizontal" key={activity.id}>
-              <Stack className="border">
+            <Stack className="city-item" direction="horizontal" key={activity.id}>
+              <Stack>
                 <Stack className="edit-delete-buttons" direction="horizontal">
-                  {!currentTrip.plan ? <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="18" height="18" onClick={() => handleActivityEdit(activity)}/> : null}
+                  {!currentTrip.plan ? <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="15" height="15" onClick={() => handleActivityEdit(activity)}/> : null}
                   {!currentTrip.plan ? <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete("activities", activity.id)}/> : null}
                 </Stack>
+                <p className="activity p">Activity</p>
                 <p className="bold p">{activity.description}</p>
                 <p className="p"><span className="bold">Cost:</span> ${activity.cost}</p>
                 <p className="p"><span className="bold">Start Time:</span> {activity.start_datetime.split("T")[0]} {activity.start_datetime.split("T")[1].split(":")[0]}:{activity.start_datetime.split("T")[1].split(":")[1]}</p>
@@ -133,12 +136,13 @@ function CityDetails() {
       return (
         <>
           {currentCity.start_locations.map((transportation) => (
-            <Stack direction="horizontal" key={transportation.id}>
-              <Stack className="border">
+            <Stack className="city-item" direction="horizontal" key={transportation.id}>
+              <Stack>
                 <Stack className="edit-delete-buttons" direction="horizontal">
-                  {!currentTrip.plan ? <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="18" height="18" onClick={() => handleTransportationEdit(transportation)}/> : null}
+                  {!currentTrip.plan ? <img className="hover" src="/assets/pencil-square.svg" alt="bootstrapEditIcon" width="15" height="15" onClick={() => handleTransportationEdit(transportation)}/> : null}
                   {!currentTrip.plan ? <img className="hover" src="/assets/x.svg" alt="bootstrapXIcon" width="20" height="20" onClick={() => handleDelete("transportations", transportation.id)}/> : null}
                 </Stack>
+                <p className="transportation p">Transportation</p>
                 <p className="p"><span className="bold">{transportation.start_location}</span> to <span className="bold">{transportation.end_location}</span></p>
                 <p className="p"><span className="bold">Description:</span> {transportation.description}</p>
                 <p className="p"><span className="bold">Cost:</span> ${transportation.cost}</p>
@@ -158,7 +162,7 @@ function CityDetails() {
   if (currentCity) {
     return (
       <Stack className="centered city-details">
-        <h3>{currentCity.city}, {currentCity.country} Details</h3>
+        <h5>{currentCity.city}, {currentCity.country} Details</h5>
         <Stack className="city-data xsmall" gap={1}>
           {endLocations()}
           {accommodations()}
@@ -171,7 +175,7 @@ function CityDetails() {
   } else {
     return (
       <Stack className="centered city-details">
-        <h3>City Details</h3>
+        <h5>City Details</h5>
         <Stack className="city-data xsmall" gap={1}></Stack>
       </Stack>
     )

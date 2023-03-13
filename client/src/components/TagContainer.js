@@ -16,7 +16,7 @@ function TagContainer() {
   } else {
   return (
       <Stack className="centered tags">
-        <h3>Tags</h3>
+        <h5>Tags</h5>
         <Stack className="tag-data">
           {!currentTrip.plan ? <TagSearch /> : null}
           <TagsCurrent />

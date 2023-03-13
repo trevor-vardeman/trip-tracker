@@ -54,7 +54,7 @@ function Drafts() {
     .catch(e => alert(e))
   }
 
-  if (user === null || undefined) {
+  if (!user) {
     return (
       <Spinner className="definite-center" animation="border" role="status">
         <span className="visually-hidden">Loading...</span>
@@ -63,14 +63,14 @@ function Drafts() {
   } else if (user.trips.filter(trip => trip.plan === false).length === 0) {
     return (
       <Stack className="centered" gap={3}>
-        <h3>Drafts</h3>
+        <h5>Drafts</h5>
         <p>No drafts have been saved.</p>
       </Stack>
     )
   } else {
     return (
       <Stack className="centered" gap={3}>
-        <h3>Drafts</h3>
+        <h5>Drafts</h5>
         {sortedDrafts().filter(trip => trip.plan === false).map(trip => (
           <Stack className="centered" key={trip.id}>
             <Card className="cards">
@@ -84,7 +84,7 @@ function Drafts() {
               <Stack className="card-buttons" direction="horizontal" gap={3}>
                 <Button size="sm" variant="danger" onClick={() => handleDelete(trip)}>Delete</Button>
                 <Button size="sm" variant="warning" type="submit" onClick={() => handleEdit(trip)}>Edit</Button>
-                <Button size="sm" variant="dark" type="submit" onClick={() => handleFinalize(trip)}>Finalize</Button>
+                <Button size="sm" variant="primary" type="submit" onClick={() => handleFinalize(trip)}>Finalize</Button>
               </Stack>
             </Card>
           </Stack>

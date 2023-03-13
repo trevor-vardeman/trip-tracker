@@ -32,7 +32,8 @@ function TripAddCity() {
       .then(user => {
         setShowModal(false)
         userUpdate(user)
-        setCurrentTrip(user.trips[user.trips.length - 1])
+        const updatedTrip = user.trips.filter(trip => trip.id === currentTrip.id)[0]
+        setCurrentTrip(updatedTrip)
         setCity("")
         setCountry("")
       })
@@ -42,7 +43,7 @@ function TripAddCity() {
 
   return (
     <Stack>
-      <Button size="sm" onClick={() => setShowModal(true)}>Add City</Button>
+      <Button variant="dark" size="sm" onClick={() => setShowModal(true)}>+ City</Button>
       <Modal
         show={showModal}
         onHide={() => setShowModal(false)}

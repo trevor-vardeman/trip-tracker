@@ -18,7 +18,7 @@ function Cities() {
   }
 
   const sortedCities = () => {
-    if (user.cities === null) {
+    if (!user.cities) {
       return 
     } else  {
       let now = new Date()
@@ -36,7 +36,7 @@ function Cities() {
     }
   }
 
-  if (user === null || undefined) {
+  if (!user) {
     return (
       <Spinner className="definite-center" animation="border" role="status">
         <span className="visually-hidden">Loading...</span>
@@ -45,14 +45,14 @@ function Cities() {
   } else if (user.cities.length === 0) {
     return (
       <Stack className="centered" gap={3}>
-        <h3>Cities</h3>
+        <h5>Cities</h5>
         <p>No cities have been added.</p>
       </Stack>
     )
   } else {
     return (
       <Stack className="centered" gap={3}>
-        <h3>Cities</h3>
+        <h5>Cities</h5>
         <Stack className="centered" direction="horizontal">
           <Button size="sm" variant={!past ? "primary" : "secondary"} onClick={() => setPast(!past)}>Upcoming</Button>
           <Button size="sm" variant={past ? "primary" : "secondary"} onClick={() => setPast(!past)}>Past</Button>

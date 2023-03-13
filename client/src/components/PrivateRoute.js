@@ -4,6 +4,7 @@
 // function PrivateRoute({ children, ...rest }) {
 //   const user = useUserContext()
 //   const { authChecked } = useUserAuthCheck()
+//   console.log(authChecked)
 
 //   if (!authChecked) {
 //     return null

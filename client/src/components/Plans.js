@@ -33,7 +33,7 @@ function Plans() {
     }
   }
 
-  if (user === null || undefined) {
+  if (!user) {
     return (
       <Spinner className="definite-center" animation="border" role="status">
         <span className="visually-hidden">Loading...</span>
@@ -42,14 +42,14 @@ function Plans() {
   } else if (user.trips.filter(trip => trip.plan === true).length === 0) {
     return (
       <Stack className="centered" gap={3}>
-        <h3>Plans</h3>
+        <h5>Plans</h5>
         <p>No plans have been finalized.</p>
       </Stack>
     )
   } else {
     return (
       <Stack className="centered" gap={3}>
-        <h3>Plans</h3>
+        <h5>Plans</h5>
         <Stack className="centered" direction="horizontal">
           <Button size="sm" variant={!past ? "primary" : "secondary"} onClick={() => setPast(!past)}>Upcoming</Button>
           <Button size="sm" variant={past ? "primary" : "secondary"} onClick={() => setPast(!past)}>Past</Button>

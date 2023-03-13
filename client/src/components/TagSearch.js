@@ -89,8 +89,8 @@ function TagSearch() {
     )
   }
   return (
-    <Stack>
-      <p>Search and select tags for your trip!</p>
+    <Stack className="center-aligned">
+      <p>Create and select tags for your trip!</p>
       <CreatableSelect
         closeMenuOnSelect={false}
         components={animatedComponents}

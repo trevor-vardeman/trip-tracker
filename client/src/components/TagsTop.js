@@ -6,7 +6,7 @@ import Spinner from 'react-bootstrap/Spinner'
 function TagsTop() {
   const { unformattedTags } = useTagContext()
 
-  if (unformattedTags === null) {
+  if (!unformattedTags) {
     return (
       <Spinner className="definite-center" animation="border" role="status">
         <span className="visually-hidden">Loading...</span>

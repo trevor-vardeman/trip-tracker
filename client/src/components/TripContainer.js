@@ -8,7 +8,7 @@ import Spinner from 'react-bootstrap/Spinner'
 function TripContainer() {
   const user = useUserContext()
 
-  if (user === null || undefined) {
+  if (!user) {
     return (
       <Spinner className="definite-center" animation="border" role="status">
         <span className="visually-hidden">Loading...</span>

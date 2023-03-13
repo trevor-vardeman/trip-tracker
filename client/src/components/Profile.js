@@ -33,7 +33,7 @@ function Profile() {
     )
   } else return (
     <Stack className="centered" gap={3}>
-      <h3>Profile</h3>
+      <h5>Profile</h5>
       <Form>
         <Form.Group controlId="formAvatarUpload">
           <Form.Label>Upload an Avatar</Form.Label>
