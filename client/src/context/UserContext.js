@@ -115,7 +115,7 @@ export function UserProvider({ children }) {
         setUser(null)
         setUserLoggedIn(false)
         // setAuthChecked(false)
-        history.push("/")
+        history.push("/login")
       })
       .catch(err => alert(err.message))
   }
