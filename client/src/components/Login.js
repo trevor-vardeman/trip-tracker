@@ -1,8 +1,8 @@
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
+import Stack from 'react-bootstrap/Stack'
 import { Link } from 'react-router-dom'
 import { useUserLogin } from '../context/UserContext'
-import Stack from 'react-bootstrap/Stack'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
 
 function Login() {
   const login = useUserLogin()
@@ -28,7 +28,7 @@ function Login() {
           </Form.Group><br></br>
           <Button variant="dark" type="submit" onClick={(e) => handleLogin(e)}>Sign In</Button>
         </Form>
-        <p>New to Travel? <Link to="/register">Register</Link></p>
+        <p>New to Trip Tracker? <Link to="/register">Register</Link></p>
       </Stack>
     </Stack>
   )
